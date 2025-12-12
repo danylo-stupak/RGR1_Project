@@ -29,28 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.FlowLayoutPanel MainButtonsFlowLayout;
-            this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.CancelButton = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
+            this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             MainButtonsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.MainTableLayout.SuspendLayout();
             MainButtonsFlowLayout.SuspendLayout();
+            this.MainTableLayout.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // MainTableLayout
-            // 
-            this.MainTableLayout.AutoSize = true;
-            this.MainTableLayout.ColumnCount = 1;
-            this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.MainTableLayout.Controls.Add(MainButtonsFlowLayout, 0, 1);
-            this.MainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTableLayout.Location = new System.Drawing.Point(8, 8);
-            this.MainTableLayout.Name = "MainTableLayout";
-            this.MainTableLayout.RowCount = 2;
-            this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.MainTableLayout.Size = new System.Drawing.Size(409, 286);
-            this.MainTableLayout.TabIndex = 0;
             // 
             // MainButtonsFlowLayout
             // 
@@ -92,13 +77,27 @@
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
+            // MainTableLayout
+            // 
+            this.MainTableLayout.AutoSize = true;
+            this.MainTableLayout.ColumnCount = 1;
+            this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.MainTableLayout.Controls.Add(MainButtonsFlowLayout, 0, 1);
+            this.MainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainTableLayout.Location = new System.Drawing.Point(8, 8);
+            this.MainTableLayout.Name = "MainTableLayout";
+            this.MainTableLayout.RowCount = 2;
+            this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.MainTableLayout.Size = new System.Drawing.Size(409, 286);
+            this.MainTableLayout.TabIndex = 0;
+            // 
             // ItemCreateForm
             // 
             this.AcceptButton = this.CreateButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(425, 302);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -111,10 +110,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create";
             this.Load += new System.EventHandler(this.ItemCreateForm_Load);
-            this.MainTableLayout.ResumeLayout(false);
-            this.MainTableLayout.PerformLayout();
             MainButtonsFlowLayout.ResumeLayout(false);
             MainButtonsFlowLayout.PerformLayout();
+            this.MainTableLayout.ResumeLayout(false);
+            this.MainTableLayout.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

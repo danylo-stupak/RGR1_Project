@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using Organizer_Project.Interfaces;
 using Organizer_Project.User_Controls;
@@ -9,8 +8,6 @@ namespace Organizer_Project
 {
     public partial class OrganizerForm : Form
     {
-        private ItemDetailsForm DetailsForm;
-        private ItemCreateForm CreateForm;
         private readonly IManagerService<OrganizerItem> ManagerService;
 
         public OrganizerForm(IManagerService<OrganizerItem> managerService)
@@ -21,31 +18,28 @@ namespace Organizer_Project
 
         private void RemoveFromDashboardLayout(object sender, EventArgs e)
         {
-            IOrganizerItemControl itemControl = sender as IOrganizerItemControl;
-            if (itemControl != null)
+            ItemDetailsForm detailsForm = sender as ItemDetailsForm;
+            if (detailsForm != null)
             {
-                ManagerService.DeleteItem(itemControl.GetItem());
-                RenderDashboardLayout();
+                ManagerService.DeleteItem(detailsForm.GetItem());
             }
         }
 
         private void UpdateDashboardLayout(object sender, EventArgs e)
         {
-            IOrganizerItemControl itemControl = sender as IOrganizerItemControl;
-            if (itemControl != null)
+            ItemDetailsForm detailsForm = sender as ItemDetailsForm;
+            if (detailsForm != null)
             {
-                ManagerService.UpdateItem(itemControl.GetItem());
-                RenderDashboardLayout();
+                ManagerService.UpdateItem(detailsForm.GetItem());
             }
         }
 
         private void AddToDashboardLayout(object sender, EventArgs e)
         {
-            IOrganizerItemControl itemControl = sender as IOrganizerItemControl;
-            if (itemControl != null)
+            ItemCreateForm createForm = sender as ItemCreateForm;
+            if (createForm != null)
             {
-                ManagerService.AddItem(itemControl.GetItem());
-                RenderDashboardLayout();
+                ManagerService.AddItem(createForm.GetItem());
             }
         }
 
@@ -56,71 +50,82 @@ namespace Organizer_Project
 
         private void AddTaskButton_Click(object sender, EventArgs e)
         {
-            if (CreateForm != null && !CreateForm.IsDisposed)
+            using (var CreateForm = new ItemCreateForm(ItemType.Task))
             {
-                CreateForm.Dispose();
-                return;
+                CreateForm.ItemCreated += AddToDashboardLayout;
+                if(CreateForm.ShowDialog() == DialogResult.OK)
+                {
+                    RenderDashboardLayout();
+                }
             }
-            CreateForm = new ItemCreateForm(ItemType.Task);
-            CreateForm.ItemCreated += AddToDashboardLayout;
-            CreateForm.ShowDialog();
-            CreateForm.Dispose();
-            CreateForm = null;
         }
 
         private void AddEventButton_Click(object sender, EventArgs e)
         {
-            if (CreateForm != null && !CreateForm.IsDisposed)
+            using (var CreateForm = new ItemCreateForm(ItemType.Event))
             {
-                CreateForm.Dispose();
-                return;
+                CreateForm.ItemCreated += AddToDashboardLayout;
+                CreateForm.ShowDialog();
             }
-            CreateForm = new ItemCreateForm(ItemType.Event);
-            CreateForm.ItemCreated += AddToDashboardLayout;
-            CreateForm.ShowDialog();
-            CreateForm.Dispose();
-            CreateForm = null;
+        }
+
+        private void ClearDashboardLayout(bool isHidden)
+        {
+            if (!isHidden)
+            {
+                DashboardTableLayout.Hide();
+                DashboardTableLayout.SuspendLayout();
+            }
+            for (Control control = DashboardTableLayout.GetControlFromPosition(0, 1); control != null; control = DashboardTableLayout.GetControlFromPosition(0, 1))
+            {
+                DashboardTableLayout.Controls.Remove(control);
+                control.Dispose();
+            }
+            DashboardTableLayout.RowStyles.Clear();
+            DashboardTableLayout.RowCount = 1; // Reset to 1 to account for header row
+            if (!isHidden)
+            {
+                DashboardTableLayout.ResumeLayout();
+                DashboardTableLayout.Show();
+            }
         }
 
         private void RenderDashboardLayout()
         {
-            DashboardTableLayout.SuspendLayout();
-            DashboardTableLayout.Controls.Clear();
+            ClearDashboardLayout(false);
 
+            DashboardTableLayout.Hide();
+            DashboardTableLayout.SuspendLayout();
+            int currentRow = DashboardTableLayout.RowCount - 1;
             foreach (var item in ManagerService.GetItems())
             {
                 var control = new OrganizerItemControl(item);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
-                DashboardTableLayout.Controls.Add(control);
+                DashboardTableLayout.Controls.Add(control, 0, currentRow);
                 control.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-
+                DashboardTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                //MessageBox.Show("Loaded item: " + item.Title + " row " + DashboardTableLayout.RowStyles.Count + " styled: " + DashboardTableLayout.RowStyles.Count);
+                currentRow++;
             }
-
-            DashboardTableLayout.ResumeLayout();
         }
         private void ItemDetailsForm_Create(object sender, EventArgs e)
         {
             OrganizerItemControl itemControl = sender as OrganizerItemControl;
-            if (DetailsForm != null && !DetailsForm.IsDisposed)
-            {
-                DetailsForm.Dispose();
-                return;
-            }
             if (itemControl != null)
             {
-                try
+                var item = itemControl.GetItem();
+                using (var detailsForm = new ItemDetailsForm(item))
                 {
-                    var item = itemControl.GetItem();
-                    DetailsForm = new ItemDetailsForm(item);
-                    DetailsForm.ItemSaved += UpdateDashboardLayout;
-                    DetailsForm.ItemDeleted += RemoveFromDashboardLayout;
-                    DetailsForm.ShowDialog();
-                    DetailsForm.Dispose();
-                    DetailsForm = null;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred while opening the item details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        detailsForm.ItemSaved += UpdateDashboardLayout;
+                        detailsForm.ItemDeleted += RemoveFromDashboardLayout;
+                        detailsForm.ShowDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred while opening the item details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

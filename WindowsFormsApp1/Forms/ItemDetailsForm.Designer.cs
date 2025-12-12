@@ -67,6 +67,7 @@
             // EditButtonsFlowLayout
             // 
             this.EditButtonsFlowLayout.AutoSize = true;
+            this.EditButtonsFlowLayout.CausesValidation = false;
             this.EditButtonsFlowLayout.Controls.Add(this.CancelButton);
             this.EditButtonsFlowLayout.Controls.Add(this.SaveButton);
             this.EditButtonsFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -80,6 +81,7 @@
             // 
             this.CancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CancelButton.AutoSize = true;
+            this.CancelButton.CausesValidation = false;
             this.CancelButton.Location = new System.Drawing.Point(170, 3);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Padding = new System.Windows.Forms.Padding(2);
@@ -93,6 +95,7 @@
             // 
             this.SaveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SaveButton.AutoSize = true;
+            this.SaveButton.CausesValidation = false;
             this.SaveButton.Location = new System.Drawing.Point(83, 3);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Padding = new System.Windows.Forms.Padding(2);
@@ -105,6 +108,7 @@
             // MainButtonsFlowLayout
             // 
             this.MainButtonsFlowLayout.AutoSize = true;
+            this.MainButtonsFlowLayout.CausesValidation = false;
             this.MainButtonsFlowLayout.Controls.Add(this.DeleteButton);
             this.MainButtonsFlowLayout.Controls.Add(this.EditButton);
             this.MainButtonsFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -118,6 +122,7 @@
             // 
             this.DeleteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeleteButton.AutoSize = true;
+            this.DeleteButton.CausesValidation = false;
             this.DeleteButton.Location = new System.Drawing.Point(170, 3);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Padding = new System.Windows.Forms.Padding(2);
@@ -130,6 +135,7 @@
             // 
             this.EditButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.EditButton.AutoSize = true;
+            this.EditButton.CausesValidation = false;
             this.EditButton.Location = new System.Drawing.Point(83, 3);
             this.EditButton.Name = "EditButton";
             this.EditButton.Padding = new System.Windows.Forms.Padding(2);

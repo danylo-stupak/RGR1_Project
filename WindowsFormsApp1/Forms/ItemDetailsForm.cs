@@ -12,19 +12,22 @@ namespace Organizer_Project.Forms
         public event EventHandler ItemDeleted;
 
         private IOrganizerItemControl ItemControl;
-        private OrganizerItem Item;
+        private string ItemTypeString;
+        private OrganizerItem OrganizerItem; // The original item being viewed/edited
         public ItemDetailsForm(OrganizerItem organizerItem)
         {
             InitializeComponent();
-            Item = organizerItem;
-            // Depending on the type of OrganizerItem, load the appropriate control
+            OrganizerItem = organizerItem;
+            ItemTypeString = Enum.GetName(typeof(ItemType), organizerItem.Type);
             if (organizerItem is EventItem eventItem)
             {
-                ItemControl = new EventItemControl(eventItem);
+                EventItem eventItemCopy = new EventItem(eventItem);     // Create a copy to avoid modifying the original until saved
+                ItemControl = new EventItemControl(eventItemCopy);
             }
             else if (organizerItem is TaskItem taskItem)
             {
-                ItemControl = new TaskItemControl(taskItem);
+                TaskItem taskItemCopy = new TaskItem(taskItem);     // Create a copy to avoid modifying the original until saved
+                ItemControl = new TaskItemControl(taskItemCopy);
             }
             else
             {
@@ -36,38 +39,39 @@ namespace Organizer_Project.Forms
 
         public OrganizerItem GetItem()
         {
-            return Item;
+            return ItemControl.GetItem();
         }
 
         private void OrganizerItemForm_Load(object sender, EventArgs e)
         {
-            Text = Enum.GetName(typeof(ItemType), Item.Type) + " Details";
-            MainButtonsFlowLayout.Visible = true;
-            EditButtonsFlowLayout.Visible = false;
-            ItemControl.ToggleEditMode(false);
+            ToggleEditMode(false);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            Item = ItemControl.GetItem();
-            ItemSaved?.Invoke(this, EventArgs.Empty);
-            Close();
+            try
+            {
+                if(ValidateChildren())
+                {
+                    OrganizerItem updatedItem = ItemControl.GetItem();
+                    ItemSaved?.Invoke(this, EventArgs.Empty);
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Text = Enum.GetName(typeof(ItemType), Item.Type) + " Details";
-            MainButtonsFlowLayout.Visible = true;
-            EditButtonsFlowLayout.Visible = false;
-            ItemControl.ToggleEditMode(false);
+            ToggleEditMode(false);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            Text = "Edit " + Enum.GetName(typeof(ItemType), Item.Type);
-            MainButtonsFlowLayout.Visible = false;
-            EditButtonsFlowLayout.Visible = true;
-            ItemControl.ToggleEditMode(true);
+            ToggleEditMode(true);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -77,11 +81,13 @@ namespace Organizer_Project.Forms
                 ItemDeleted?.Invoke(this, EventArgs.Empty);
                 Close();
             }
- 
         }
 
         public void ToggleEditMode(bool isEditMode)
         {
+            Text = isEditMode ? "Edit " + ItemTypeString : ItemTypeString + " Details";
+            MainButtonsFlowLayout.Visible = !isEditMode;
+            EditButtonsFlowLayout.Visible = isEditMode;
             ItemControl.ToggleEditMode(isEditMode);
         }
     }

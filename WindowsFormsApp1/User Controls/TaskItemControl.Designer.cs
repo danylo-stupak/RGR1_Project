@@ -44,6 +44,7 @@
             // MainTableLayout
             // 
             this.MainTableLayout.AutoSize = true;
+            this.MainTableLayout.CausesValidation = false;
             this.MainTableLayout.ColumnCount = 4;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -75,6 +76,7 @@
             // MainTimeLabel
             // 
             this.MainTimeLabel.AutoSize = true;
+            this.MainTimeLabel.CausesValidation = false;
             this.MainTimeLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.MainTimeLabel.Location = new System.Drawing.Point(4, 90);
             this.MainTimeLabel.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
@@ -88,6 +90,7 @@
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
+            this.TitleLabel.CausesValidation = false;
             this.TitleLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitleLabel.Location = new System.Drawing.Point(4, 8);
             this.TitleLabel.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
@@ -101,6 +104,7 @@
             // PriorityLabel
             // 
             this.PriorityLabel.AutoSize = true;
+            this.PriorityLabel.CausesValidation = false;
             this.PriorityLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.PriorityLabel.Location = new System.Drawing.Point(4, 49);
             this.PriorityLabel.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
@@ -114,6 +118,7 @@
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
+            this.StatusLabel.CausesValidation = false;
             this.StatusLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.StatusLabel.Location = new System.Drawing.Point(4, 131);
             this.StatusLabel.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
@@ -126,6 +131,7 @@
             // 
             // PriorityComboBox
             // 
+            this.PriorityComboBox.CausesValidation = false;
             this.PriorityComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PriorityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PriorityComboBox.FormattingEnabled = true;
@@ -134,9 +140,11 @@
             this.PriorityComboBox.Name = "PriorityComboBox";
             this.PriorityComboBox.Size = new System.Drawing.Size(200, 29);
             this.PriorityComboBox.TabIndex = 1;
+            this.PriorityComboBox.Validating += new System.ComponentModel.CancelEventHandler(this.TitleTextBox_Validating);
             // 
             // MainTimePicker
             // 
+            this.MainTimePicker.CausesValidation = false;
             this.MainTimePicker.CustomFormat = "ddd, dd MMM";
             this.MainTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -146,10 +154,12 @@
             this.MainTimePicker.ShowUpDown = true;
             this.MainTimePicker.Size = new System.Drawing.Size(200, 29);
             this.MainTimePicker.TabIndex = 2;
+            this.MainTimePicker.Validating += new System.ComponentModel.CancelEventHandler(this.TitleTextBox_Validating);
             // 
             // NotesRichTextBox
             // 
             this.NotesRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NotesRichTextBox.CausesValidation = false;
             this.MainTableLayout.SetColumnSpan(this.NotesRichTextBox, 2);
             this.NotesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NotesRichTextBox.Location = new System.Drawing.Point(3, 172);
@@ -158,6 +168,7 @@
             this.NotesRichTextBox.Size = new System.Drawing.Size(283, 96);
             this.NotesRichTextBox.TabIndex = 4;
             this.NotesRichTextBox.Text = "";
+            this.NotesRichTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TitleTextBox_Validating);
             // 
             // TitleTextBox
             // 
@@ -168,16 +179,21 @@
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.Size = new System.Drawing.Size(200, 29);
             this.TitleTextBox.TabIndex = 0;
+            this.TitleTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TitleTextBox_Validating);
             // 
             // StatusComboBox
             // 
+            this.StatusComboBox.CausesValidation = false;
+            this.StatusComboBox.DisplayMember = "1";
             this.StatusComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatusComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StatusComboBox.FormattingEnabled = true;
             this.StatusComboBox.Location = new System.Drawing.Point(85, 131);
             this.StatusComboBox.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
             this.StatusComboBox.Name = "StatusComboBox";
             this.StatusComboBox.Size = new System.Drawing.Size(200, 29);
             this.StatusComboBox.TabIndex = 3;
+            this.StatusComboBox.Validating += new System.ComponentModel.CancelEventHandler(this.TitleTextBox_Validating);
             // 
             // TaskItemControl
             // 

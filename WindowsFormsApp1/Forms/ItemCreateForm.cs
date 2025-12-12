@@ -20,7 +20,7 @@ namespace Organizer_Project.Forms
             if (itemType == ItemType.Task)
             {
                 Item = new TaskItem();
-                ItemControl = new TaskItemControl(Item as TaskItem);
+                ItemControl = new TaskItemControl(Item as TaskItem, true);
             }
             else if (itemType == ItemType.Event)
             {
@@ -47,9 +47,23 @@ namespace Organizer_Project.Forms
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            Item = ItemControl.GetItem();
-            ItemCreated?.Invoke(this, EventArgs.Empty);
-            Close();
+            try
+            {
+                if (ValidateChildren())
+                {
+                    Item = ItemControl.GetItem();
+                    ItemCreated?.Invoke(this, EventArgs.Empty);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please correct the validation errors before creating the item.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ItemCreateForm_Load(object sender, EventArgs e)

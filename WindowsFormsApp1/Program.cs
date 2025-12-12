@@ -16,24 +16,24 @@ namespace Organizer_Project
         static void Main()
         {
             List<OrganizerItem> items = new List<OrganizerItem>();
-            items.Add(new TaskItem
-            {
-                Id = Guid.NewGuid(),
-                Type = ItemType.Task,
-                Priority = Priority.High,
-                Title = "Finish Project Report",
-                Notes = "Complete the final report for the project and submit it to the manager.",
-                Time = DateTime.Now.AddHours(4)
-            });
-            items.Add(new EventItem
-            {
-                Id = Guid.NewGuid(),
-                Type = ItemType.Event,
-                Priority = Priority.Medium,
-                Title = "Team Meeting",
-                Notes = "Weekly sync-up with the team to discuss project progress.",
-                Time = DateTime.Now.AddHours(2)
-            });
+            //items.Add(new TaskItem
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Type = ItemType.Task,
+            //    Priority = Priority.High,
+            //    Title = "Finish Project Report",
+            //    Notes = "Complete the final report for the project and submit it to the manager.",
+            //    Time = DateTime.Now.AddHours(4)
+            //});
+            //items.Add(new EventItem
+            //{
+            //    Id = Guid.NewGuid(),
+            //    Type = ItemType.Event,
+            //    Priority = Priority.Medium,
+            //    Title = "Team Meeting",
+            //    Notes = "Weekly sync-up with the team to discuss project progress.",
+            //    Time = DateTime.Now.AddHours(2)
+            //});
 
 
             OrganizerManagerService organizerManagerService = new OrganizerManagerService(items);
