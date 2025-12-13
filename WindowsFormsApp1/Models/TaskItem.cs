@@ -9,28 +9,12 @@ namespace Organizer_Project.Models
         // Additional properties for Task
         public TaskStatus Status { get; set; } = TaskStatus.New;
         public string Group { get; set; }
-        public bool IsOverdue
+        public bool IsOverdue 
         {
             get
             {
                 return  Status != TaskStatus.Done &&
                         DateTime.Now > Time;
-            }
-        }
-        public string GetStatusString()
-        {
-            switch (Status)
-            {
-                case TaskStatus.New:
-                    return "New";
-                case TaskStatus.InProgress:
-                    return "In Progress";
-                case TaskStatus.Done:
-                    return "Done";
-                case TaskStatus.Cancelled:
-                    return "Cancelled";
-                default:
-                    return "Unknown";
             }
         }
 
@@ -58,6 +42,16 @@ namespace Organizer_Project.Models
         {
             Status = taskItem.Status;
             Group = taskItem.Group;
+        }
+
+        public override void UpdateFrom(OrganizerItem item)
+        {
+            base.UpdateFrom(item);
+            if (item is TaskItem taskItem)
+            {
+                Status = taskItem.Status;
+                Group = taskItem.Group;
+            }
         }
     }
 }

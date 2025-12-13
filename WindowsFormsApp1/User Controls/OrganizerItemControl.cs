@@ -28,7 +28,7 @@ namespace Organizer_Project.User_Controls
             LoadItemControl((OrganizerItem)ItemSource.Current);
         }
 
-        public void ToggleEditMode(bool isEditMode)
+        public void ToggleMode(bool isEditMode)
         {
             // This control is read-only, so no edit mode functionality is implemented.
         }

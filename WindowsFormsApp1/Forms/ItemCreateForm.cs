@@ -1,6 +1,5 @@
 ﻿using Organizer_Project.Interfaces;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Organizer_Project.User_Controls;
 using Organizer_Project.Models;
@@ -12,20 +11,21 @@ namespace Organizer_Project.Forms
     {
         public event EventHandler ItemCreated;
 
-        private OrganizerItem Item;
         private IOrganizerItemControl ItemControl;
+        private string ItemTypeString;
         public ItemCreateForm(ItemType itemType)
         {
             InitializeComponent();
+            ItemTypeString = Enum.GetName(typeof(ItemType), itemType);
             if (itemType == ItemType.Task)
             {
-                Item = new TaskItem();
-                ItemControl = new TaskItemControl(Item as TaskItem, true);
+                var taskItemCopy = new TaskItem();
+                ItemControl = new TaskItemControl(taskItemCopy, true);
             }
             else if (itemType == ItemType.Event)
             {
-                Item = new EventItem();
-                ItemControl = new EventItemControl(Item as EventItem);
+                var eventItemCopy = new EventItem();
+                ItemControl = new EventItemControl(eventItemCopy, true);
             }
             else
             {
@@ -35,41 +35,29 @@ namespace Organizer_Project.Forms
             ((UserControl)ItemControl).Dock = DockStyle.Fill;
         }
 
-        public void ToggleEditMode(bool isEditMode)
+        public void ToggleMode(bool isEditMode)
         {
-            ItemControl.ToggleEditMode(isEditMode);
+            ItemControl.ToggleMode(isEditMode);
         }
 
         public OrganizerItem GetItem()
         {
-            return Item;
+            return ItemControl.GetItem();
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            try
+            if (ValidateChildren())
             {
-                if (ValidateChildren())
-                {
-                    Item = ItemControl.GetItem();
-                    ItemCreated?.Invoke(this, EventArgs.Empty);
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Please correct the validation errors before creating the item.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ItemCreated?.Invoke(this, EventArgs.Empty);
+                DialogResult = DialogResult.OK;
+                Close();
             }
         }
 
         private void ItemCreateForm_Load(object sender, EventArgs e)
         {
-            Text = "Create New " + Enum.GetName(typeof(ItemType), Item.Type);
-            ItemControl.ToggleEditMode(true);
+            Text = "Create New " + ItemTypeString;
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

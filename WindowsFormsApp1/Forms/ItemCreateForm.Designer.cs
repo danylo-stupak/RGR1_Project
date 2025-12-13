@@ -46,15 +46,16 @@
             MainButtonsFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             MainButtonsFlowLayout.Location = new System.Drawing.Point(3, 226);
             MainButtonsFlowLayout.Name = "MainButtonsFlowLayout";
-            MainButtonsFlowLayout.Size = new System.Drawing.Size(403, 57);
+            MainButtonsFlowLayout.Size = new System.Drawing.Size(262, 57);
             MainButtonsFlowLayout.TabIndex = 2;
             MainButtonsFlowLayout.WrapContents = false;
             // 
             // CancelButton
             // 
             this.CancelButton.AutoSize = true;
+            this.CancelButton.CausesValidation = false;
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(311, 8);
+            this.CancelButton.Location = new System.Drawing.Point(170, 8);
             this.CancelButton.Margin = new System.Windows.Forms.Padding(8, 8, 12, 8);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Padding = new System.Windows.Forms.Padding(4);
@@ -67,7 +68,8 @@
             // CreateButton
             // 
             this.CreateButton.AutoSize = true;
-            this.CreateButton.Location = new System.Drawing.Point(211, 8);
+            this.CreateButton.CausesValidation = false;
+            this.CreateButton.Location = new System.Drawing.Point(70, 8);
             this.CreateButton.Margin = new System.Windows.Forms.Padding(8);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Padding = new System.Windows.Forms.Padding(4);
@@ -89,7 +91,7 @@
             this.MainTableLayout.RowCount = 2;
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.MainTableLayout.Size = new System.Drawing.Size(409, 286);
+            this.MainTableLayout.Size = new System.Drawing.Size(268, 286);
             this.MainTableLayout.TabIndex = 0;
             // 
             // ItemCreateForm
@@ -98,7 +100,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(425, 302);
+            this.CancelButton = this.CreateButton;
+            this.ClientSize = new System.Drawing.Size(284, 302);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

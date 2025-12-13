@@ -15,117 +15,134 @@ namespace Organizer_Project
             InitializeComponent();
             ManagerService = managerService;
         }
-
-        private void RemoveFromDashboardLayout(object sender, EventArgs e)
+        private void ClearDashboardLayout()
         {
-            ItemDetailsForm detailsForm = sender as ItemDetailsForm;
-            if (detailsForm != null)
-            {
-                ManagerService.DeleteItem(detailsForm.GetItem());
-            }
-        }
+            DashboardFlowLayout.Hide();
+            DashboardFlowLayout.SuspendLayout();
 
-        private void UpdateDashboardLayout(object sender, EventArgs e)
-        {
-            ItemDetailsForm detailsForm = sender as ItemDetailsForm;
-            if (detailsForm != null)
+            for(var control = DashboardFlowLayout.Controls.Count - 1; control >= 0; control--)
             {
-                ManagerService.UpdateItem(detailsForm.GetItem());
+                var itemControl = DashboardFlowLayout.Controls[control];
+                DashboardFlowLayout.Controls.RemoveAt(control);
+                itemControl.Dispose();
             }
+            DashboardFlowLayout.ResumeLayout();
+            DashboardFlowLayout.Show();
         }
-
-        private void AddToDashboardLayout(object sender, EventArgs e)
-        {
-            ItemCreateForm createForm = sender as ItemCreateForm;
-            if (createForm != null)
-            {
-                ManagerService.AddItem(createForm.GetItem());
-            }
-        }
-
-        private void OrganizerForm_Load(object sender, EventArgs e)
-        {
-            RenderDashboardLayout();
-        }
-
-        private void AddTaskButton_Click(object sender, EventArgs e)
-        {
-            using (var CreateForm = new ItemCreateForm(ItemType.Task))
-            {
-                CreateForm.ItemCreated += AddToDashboardLayout;
-                if(CreateForm.ShowDialog() == DialogResult.OK)
-                {
-                    RenderDashboardLayout();
-                }
-            }
-        }
-
-        private void AddEventButton_Click(object sender, EventArgs e)
-        {
-            using (var CreateForm = new ItemCreateForm(ItemType.Event))
-            {
-                CreateForm.ItemCreated += AddToDashboardLayout;
-                CreateForm.ShowDialog();
-            }
-        }
-
-        private void ClearDashboardLayout(bool isHidden)
-        {
-            if (!isHidden)
-            {
-                DashboardTableLayout.Hide();
-                DashboardTableLayout.SuspendLayout();
-            }
-            for (Control control = DashboardTableLayout.GetControlFromPosition(0, 1); control != null; control = DashboardTableLayout.GetControlFromPosition(0, 1))
-            {
-                DashboardTableLayout.Controls.Remove(control);
-                control.Dispose();
-            }
-            DashboardTableLayout.RowStyles.Clear();
-            DashboardTableLayout.RowCount = 1; // Reset to 1 to account for header row
-            if (!isHidden)
-            {
-                DashboardTableLayout.ResumeLayout();
-                DashboardTableLayout.Show();
-            }
-        }
-
         private void RenderDashboardLayout()
         {
-            ClearDashboardLayout(false);
+            DashboardFlowLayout.Hide();
+            DashboardFlowLayout.SuspendLayout();
 
-            DashboardTableLayout.Hide();
-            DashboardTableLayout.SuspendLayout();
-            int currentRow = DashboardTableLayout.RowCount - 1;
             foreach (var item in ManagerService.GetItems())
             {
                 var control = new OrganizerItemControl(item);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
-                DashboardTableLayout.Controls.Add(control, 0, currentRow);
-                control.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                DashboardTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                //MessageBox.Show("Loaded item: " + item.Title + " row " + DashboardTableLayout.RowStyles.Count + " styled: " + DashboardTableLayout.RowStyles.Count);
-                currentRow++;
+                DashboardFlowLayout.Controls.Add(control);
+                control.AutoSize = true;
             }
+            DashboardFlowLayout.ResumeLayout();
+            DashboardFlowLayout.Show();
+        }
+
+        private void RerenderDashboardLayout()
+        {
+            ClearDashboardLayout();
+            RenderDashboardLayout();
         }
         private void ItemDetailsForm_Create(object sender, EventArgs e)
         {
-            OrganizerItemControl itemControl = sender as OrganizerItemControl;
-            if (itemControl != null)
+            if (sender is OrganizerItemControl itemControl)
             {
-                var item = itemControl.GetItem();
-                using (var detailsForm = new ItemDetailsForm(item))
+                using (var detailsForm = new ItemDetailsForm(itemControl.GetItem()))
                 {
                     try
                     {
                         detailsForm.ItemSaved += UpdateDashboardLayout;
                         detailsForm.ItemDeleted += RemoveFromDashboardLayout;
-                        detailsForm.ShowDialog();
+                        if(detailsForm.ShowDialog() == DialogResult.OK)
+                        {
+                            RerenderDashboardLayout();
+                        }
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("An error occurred while opening the item details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+            }
+        }
+
+        private void RemoveFromDashboardLayout(object sender, EventArgs e)
+        {
+            if (sender is ItemDetailsForm detailsForm)
+            {
+                ManagerService.DeleteItem(detailsForm.GetItem());
+            }
+            else
+            {
+                throw new ArgumentException("Error: Unable to remove item from dashboard layout.");
+            }
+        }
+        private void UpdateDashboardLayout(object sender, EventArgs e)
+        {
+            if (sender is ItemDetailsForm detailsForm)
+            {
+                ManagerService.UpdateItem(detailsForm.GetItem());
+            }
+            else
+            {
+                throw new ArgumentException("Error: Unable to update item in dashboard layout.");
+            }
+        }
+        private void AddToDashboardLayout(object sender, EventArgs e)
+        {
+            if (sender is ItemCreateForm createForm)
+            {
+                ManagerService.AddItem(createForm.GetItem());
+            }
+            else
+            {
+                throw new ArgumentException("Error: Unable to add item to dashboard layout.");
+            }
+        }
+        private void OrganizerForm_Load(object sender, EventArgs e)
+        {
+            RerenderDashboardLayout();
+        }
+        private void AddTaskButton_Click(object sender, EventArgs e)
+        {
+            using (var CreateForm = new ItemCreateForm(ItemType.Task))
+            {
+                try
+                {
+                    CreateForm.ItemCreated += AddToDashboardLayout;
+                    if (CreateForm.ShowDialog() == DialogResult.OK)
+                    {
+                        RerenderDashboardLayout();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while creating the task: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void AddEventButton_Click(object sender, EventArgs e)
+        {
+            using (var CreateForm = new ItemCreateForm(ItemType.Event))
+            {
+                try
+                {
+                    CreateForm.ItemCreated += AddToDashboardLayout;
+                    if (CreateForm.ShowDialog() == DialogResult.OK)
+                    {
+                        RerenderDashboardLayout();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred while creating the event: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

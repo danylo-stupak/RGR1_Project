@@ -1,6 +1,7 @@
 ﻿using Organizer_Project.Interfaces;
 using Organizer_Project.Models;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Organizer_Project.User_Controls
@@ -8,24 +9,24 @@ namespace Organizer_Project.User_Controls
     public partial class TaskItemControl : UserControl, IOrganizerItemControl
     {
         private BindingSource TaskBindingSource;
-        private TaskItem TaskItem { get; set; } // The copy of the TaskItem being edited
         private bool IsEditMode;
         public TaskItemControl(TaskItem taskItem, bool editMode = false)
         {
-            TaskItem = taskItem;
+            var taskItemCopy = new TaskItem(taskItem); // Create a copy to avoid modifying the original until saved
             InitializeComponent();
             TaskBindingSource = new BindingSource
             {
-                DataSource = TaskItem
+                DataSource = taskItemCopy
             };
             IsEditMode = editMode;
         }
 
         public OrganizerItem GetItem()
         {
-            return TaskItem;
+            TaskBindingSource.EndEdit();
+            return (TaskItem)TaskBindingSource.DataSource;
         }
-        public void ToggleEditMode(bool isEditMode)
+        public void ToggleMode(bool isEditMode)
         {
             IsEditMode = isEditMode;
             ToggleControlsEnabled();
@@ -33,36 +34,69 @@ namespace Organizer_Project.User_Controls
 
         private void ToggleControlsEnabled()
         {
-            TitleTextBox.Enabled = IsEditMode;
-            PriorityComboBox.Enabled = IsEditMode;
-            MainTimePicker.Enabled = IsEditMode;
-            StatusComboBox.Enabled = IsEditMode;
-            NotesRichTextBox.Enabled = IsEditMode;
-                
-            Cursor currentCursor = IsEditMode ? Cursors.IBeam : Cursors.Default;
-            TitleTextBox.Cursor = currentCursor;
-            NotesRichTextBox.Cursor = currentCursor;
+            MainFlowLayout.Hide();
+            MainFlowLayout.SuspendLayout();
+            EditModeLayout.Visible = IsEditMode;
+            EditModeLayout.Enabled = IsEditMode;
+
+            ViewModeLayout.Visible = !IsEditMode;
+            ViewModeLayout.Enabled = !IsEditMode;
+
+            MainFlowLayout.Controls.Clear();
+            MainFlowLayout.Controls.Add(IsEditMode ? EditModeLayout : ViewModeLayout);
+            
+            MainFlowLayout.ResumeLayout();
+            MainFlowLayout.Show();
         }
 
         private void BindData()
         {
-            DataSourceUpdateMode updateMode = DataSourceUpdateMode.OnValidation;
-            if (TaskBindingSource != null)
+            TitleTextBox.DataBindings.Add("Text", TaskBindingSource, "Title", true, DataSourceUpdateMode.OnValidation);
+            PriorityComboBox.DataBindings.Add("SelectedValue", TaskBindingSource, "Priority", true, DataSourceUpdateMode.OnPropertyChanged);
+            MainTimePicker.DataBindings.Add("Value", TaskBindingSource, "Time", true, DataSourceUpdateMode.OnPropertyChanged);
+            StatusComboBox.DataBindings.Add("SelectedValue", TaskBindingSource, "Status", true, DataSourceUpdateMode.OnPropertyChanged);
+            GroupTextBox.DataBindings.Add("Text", TaskBindingSource, "Group", true, DataSourceUpdateMode.OnValidation);
+            NotesRichTextBox.DataBindings.Add("Text", TaskBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            TitleLabel.DataBindings.Add("Text", TaskBindingSource, "Title", true, DataSourceUpdateMode.Never);
+            PriorityLabel.DataBindings.Add("Text", TaskBindingSource, "Priority", true, DataSourceUpdateMode.Never);
+            MainTimeLabel.DataBindings.Add("Text", TaskBindingSource, "Time", true, DataSourceUpdateMode.Never);
+            StatusLabel.DataBindings.Add("Text", TaskBindingSource, "Status", true, DataSourceUpdateMode.Never);
+            GroupLabel.DataBindings.Add("Text", TaskBindingSource, "Group", true, DataSourceUpdateMode.Never);
+            NotesLabel.DataBindings.Add("Text", TaskBindingSource, "Notes", true, DataSourceUpdateMode.Never);
+            
+        }
+
+        private void ConfigureComboBoxes()
+        {
+            var priorities = new List<KeyValuePair<string, Priority>>
             {
-                TitleTextBox.DataBindings.Add("Text", TaskBindingSource, "Title", true, DataSourceUpdateMode.OnValidation);
-                PriorityComboBox.DataBindings.Add("SelectedIndex", TaskBindingSource, "Priority", true, updateMode);
-                MainTimePicker.DataBindings.Add("Value", TaskBindingSource, "Time", true, updateMode);
-                StatusComboBox.DataBindings.Add("SelectedIndex", TaskBindingSource, "Status", true, updateMode);
-                NotesRichTextBox.DataBindings.Add("Text", TaskBindingSource, "Notes", true, updateMode);
-            }
+                new KeyValuePair<string, Priority>("Low", Priority.Low),
+                new KeyValuePair<string, Priority>("Medium", Priority.Medium),
+                new KeyValuePair<string, Priority>("High", Priority.High)
+            };
+            var statuses = new List<KeyValuePair<string, TaskStatus>>
+            {
+                new KeyValuePair<string, TaskStatus>("New", TaskStatus.New),
+                new KeyValuePair<string, TaskStatus>("In Progress", TaskStatus.InProgress),
+                new KeyValuePair<string, TaskStatus>("Done", TaskStatus.Done),
+                new KeyValuePair<string, TaskStatus>("Cancelled", TaskStatus.Cancelled)
+            };
+
+            PriorityComboBox.DataSource = priorities;
+            PriorityComboBox.DisplayMember = "Key";
+            PriorityComboBox.ValueMember = "Value";
+
+            StatusComboBox.DataSource = statuses;
+            StatusComboBox.DisplayMember = "Key";
+            StatusComboBox.ValueMember = "Value";
         }
 
         private void TaskControl_Load(object sender, EventArgs e)
         {
-            PriorityComboBox.Items.AddRange(Enum.GetNames(typeof(Priority)));
-            StatusComboBox.Items.AddRange(Enum.GetNames(typeof(TaskStatus)));
-            ToggleEditMode(IsEditMode);
+            ConfigureComboBoxes();
             BindData();
+            ToggleMode(IsEditMode);
         }
 
         private void TitleTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
@@ -73,7 +107,7 @@ namespace Organizer_Project.User_Controls
                 if (string.IsNullOrEmpty(title))
                 {
                     e.Cancel = true;
-                    throw new InvalidOperationException("Title cannot be empty.");
+                    ErrorProvider.SetError(TitleTextBox, "Title cannot be empty.");
                 }
                 else
                 {

@@ -29,7 +29,7 @@ namespace Organizer_Project.Services
                 var index = Items.IndexOf(sender);
                 if (index >= 0)
                 {
-                    Items[index] = sender;
+                    Items[index].UpdateFrom(sender);
                 }
             }
         }

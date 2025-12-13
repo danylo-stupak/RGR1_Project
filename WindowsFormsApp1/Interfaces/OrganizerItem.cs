@@ -48,6 +48,26 @@ namespace Organizer_Project.Interfaces
             Notes = item.Notes;
         }
 
+        public virtual void UpdateFrom(OrganizerItem item)
+        {
+            if (item == null || item.Id != Id)
+            {
+                throw new ArgumentException("Invalid item to update from.");
+            }
+            Title = item.Title;
+            Priority = item.Priority;
+            Time = item.Time;
+            Notes = item.Notes;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is OrganizerItem other)
+            {
+                return Id.Equals(other.Id);
+            }
+            return false;
+        }
     }
     
 }

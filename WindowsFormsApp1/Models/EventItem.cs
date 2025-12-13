@@ -34,6 +34,16 @@ namespace Organizer_Project.Models
             EndTime = eventItem.EndTime;
             IsAllDay = eventItem.IsAllDay;
         }
+
+        public void UpdateFrom(OrganizerItem item)
+        {
+            base.UpdateFrom(item);
+            if (item is EventItem eventItem)
+            {
+                EndTime = eventItem.EndTime;
+                IsAllDay = eventItem.IsAllDay;
+            }
+        }
     }
 
 }

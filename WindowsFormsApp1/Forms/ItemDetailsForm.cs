@@ -12,13 +12,13 @@ namespace Organizer_Project.Forms
         public event EventHandler ItemDeleted;
 
         private IOrganizerItemControl ItemControl;
+        private OrganizerItem OrganizerItem;
         private string ItemTypeString;
-        private OrganizerItem OrganizerItem; // The original item being viewed/edited
         public ItemDetailsForm(OrganizerItem organizerItem)
         {
             InitializeComponent();
-            OrganizerItem = organizerItem;
             ItemTypeString = Enum.GetName(typeof(ItemType), organizerItem.Type);
+            OrganizerItem = organizerItem;
             if (organizerItem is EventItem eventItem)
             {
                 EventItem eventItemCopy = new EventItem(eventItem);     // Create a copy to avoid modifying the original until saved
@@ -34,6 +34,7 @@ namespace Organizer_Project.Forms
                 throw new ArgumentException("Unsupported OrganizerItem type");
             }
             MainTableLayout.Controls.Add(ItemControl as UserControl, 0, 1);
+            MainTableLayout.SetColumnSpan(ItemControl as UserControl, 2);
             ((UserControl)ItemControl).Dock = DockStyle.Fill;
         }
 
@@ -44,7 +45,7 @@ namespace Organizer_Project.Forms
 
         private void OrganizerItemForm_Load(object sender, EventArgs e)
         {
-            ToggleEditMode(false);
+            ToggleMode(false);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -53,8 +54,8 @@ namespace Organizer_Project.Forms
             {
                 if(ValidateChildren())
                 {
-                    OrganizerItem updatedItem = ItemControl.GetItem();
                     ItemSaved?.Invoke(this, EventArgs.Empty);
+                    DialogResult = DialogResult.OK;
                     Close();
                 }
             }
@@ -66,29 +67,38 @@ namespace Organizer_Project.Forms
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            ToggleEditMode(false);
+            ItemControl.GetItem().UpdateFrom(OrganizerItem); // Revert changes by updating from the original item
+            ToggleMode(false);
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            ToggleEditMode(true);
+            ToggleMode(true);
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                DialogResult = DialogResult.OK;
                 ItemDeleted?.Invoke(this, EventArgs.Empty);
                 Close();
             }
         }
 
-        public void ToggleEditMode(bool isEditMode)
+        public void ToggleMode(bool isEditMode)
         {
             Text = isEditMode ? "Edit " + ItemTypeString : ItemTypeString + " Details";
             MainButtonsFlowLayout.Visible = !isEditMode;
             EditButtonsFlowLayout.Visible = isEditMode;
-            ItemControl.ToggleEditMode(isEditMode);
+            BackButton.Visible = !isEditMode;
+            ItemControl.ToggleMode(isEditMode);
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

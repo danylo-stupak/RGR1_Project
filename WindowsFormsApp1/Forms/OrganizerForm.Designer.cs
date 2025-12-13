@@ -33,7 +33,7 @@ namespace Organizer_Project
             this.ButtonsTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.AddTaskButton = new System.Windows.Forms.Button();
             this.AddEventButton = new System.Windows.Forms.Button();
-            this.DashboardTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.DashboardFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.MainTableLayout.SuspendLayout();
             this.ButtonsTableLayout.SuspendLayout();
             this.SuspendLayout();
@@ -44,7 +44,7 @@ namespace Organizer_Project
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainTableLayout.Controls.Add(this.ButtonsTableLayout, 0, 0);
-            this.MainTableLayout.Controls.Add(this.DashboardTableLayout, 0, 1);
+            this.MainTableLayout.Controls.Add(this.DashboardFlowLayout, 0, 1);
             this.MainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTableLayout.Location = new System.Drawing.Point(0, 0);
             this.MainTableLayout.Name = "MainTableLayout";
@@ -98,23 +98,17 @@ namespace Organizer_Project
             this.AddEventButton.UseVisualStyleBackColor = true;
             this.AddEventButton.Click += new System.EventHandler(this.AddEventButton_Click);
             // 
-            // DashboardTableLayout
+            // DashboardFlowLayout
             // 
-            this.DashboardTableLayout.AutoScroll = true;
-            this.DashboardTableLayout.AutoSize = true;
-            this.DashboardTableLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.DashboardTableLayout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.DashboardTableLayout.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
-            this.DashboardTableLayout.ColumnCount = 1;
-            this.MainTableLayout.SetColumnSpan(this.DashboardTableLayout, 3);
-            this.DashboardTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.DashboardTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DashboardTableLayout.Location = new System.Drawing.Point(15, 121);
-            this.DashboardTableLayout.Name = "DashboardTableLayout";
-            this.DashboardTableLayout.RowCount = 1;
-            this.DashboardTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.DashboardTableLayout.Size = new System.Drawing.Size(454, 325);
-            this.DashboardTableLayout.TabIndex = 1;
+            this.DashboardFlowLayout.AutoScroll = true;
+            this.MainTableLayout.SetColumnSpan(this.DashboardFlowLayout, 3);
+            this.DashboardFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DashboardFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.DashboardFlowLayout.Location = new System.Drawing.Point(15, 121);
+            this.DashboardFlowLayout.Name = "DashboardFlowLayout";
+            this.DashboardFlowLayout.Size = new System.Drawing.Size(454, 325);
+            this.DashboardFlowLayout.TabIndex = 1;
+            this.DashboardFlowLayout.WrapContents = false;
             // 
             // OrganizerForm
             // 
@@ -130,7 +124,6 @@ namespace Organizer_Project
             this.Text = "Dashboard — Tasks & Events";
             this.Load += new System.EventHandler(this.OrganizerForm_Load);
             this.MainTableLayout.ResumeLayout(false);
-            this.MainTableLayout.PerformLayout();
             this.ButtonsTableLayout.ResumeLayout(false);
             this.ButtonsTableLayout.PerformLayout();
             this.ResumeLayout(false);
@@ -143,7 +136,7 @@ namespace Organizer_Project
         private System.Windows.Forms.TableLayoutPanel ButtonsTableLayout;
         private System.Windows.Forms.Button AddTaskButton;
         private System.Windows.Forms.Button AddEventButton;
-        private System.Windows.Forms.TableLayoutPanel DashboardTableLayout;
+        private System.Windows.Forms.FlowLayoutPanel DashboardFlowLayout;
     }
 }
 
