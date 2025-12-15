@@ -61,6 +61,7 @@
             this.CancelButton.Padding = new System.Windows.Forms.Padding(4);
             this.CancelButton.Size = new System.Drawing.Size(80, 41);
             this.CancelButton.TabIndex = 1;
+            this.CancelButton.TabStop = false;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -75,6 +76,7 @@
             this.CreateButton.Padding = new System.Windows.Forms.Padding(4);
             this.CreateButton.Size = new System.Drawing.Size(84, 41);
             this.CreateButton.TabIndex = 0;
+            this.CreateButton.TabStop = false;
             this.CreateButton.Text = "Create";
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
@@ -100,7 +102,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.CancelButton = this.CreateButton;
             this.ClientSize = new System.Drawing.Size(284, 302);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

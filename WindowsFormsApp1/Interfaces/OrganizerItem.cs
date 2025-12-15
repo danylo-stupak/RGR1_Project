@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Organizer_Project.Interfaces
 {
@@ -67,6 +68,11 @@ namespace Organizer_Project.Interfaces
                 return Id.Equals(other.Id);
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
     

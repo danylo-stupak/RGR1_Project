@@ -8,30 +8,33 @@ namespace Organizer_Project.User_Controls
 {
     public partial class TaskItemControl : UserControl, IOrganizerItemControl
     {
-        private BindingSource TaskBindingSource;
-        private bool IsEditMode;
-        public TaskItemControl(TaskItem taskItem, bool editMode = false)
+        public BindingSource ItemSource { get; }
+        public int ItemPosition
         {
-            var taskItemCopy = new TaskItem(taskItem); // Create a copy to avoid modifying the original until saved
+            get => ItemSource.Position;
+            set => ItemSource.Position = value;
+        }
+        private bool IsEditMode;
+        private BindingSource ItemSourceCopy { get; }
+        public TaskItemControl(BindingSource source, int position, bool editMode = false)
+        {
             InitializeComponent();
-            TaskBindingSource = new BindingSource
-            {
-                DataSource = taskItemCopy
-            };
+            ItemSource = source;        // keep original public
+            ItemPosition = position;
+            ItemSourceCopy = new BindingSource();
+            ItemSourceCopy.DataSource = new TaskItem(source.DataSource as TaskItem);     // creating a private copy
             IsEditMode = editMode;
         }
-
         public OrganizerItem GetItem()
         {
-            TaskBindingSource.EndEdit();
-            return (TaskItem)TaskBindingSource.DataSource;
+            ItemSourceCopy.EndEdit();
+            return ItemSourceCopy.DataSource as TaskItem;
         }
         public void ToggleMode(bool isEditMode)
         {
             IsEditMode = isEditMode;
             ToggleControlsEnabled();
         }
-
         private void ToggleControlsEnabled()
         {
             MainFlowLayout.Hide();
@@ -48,25 +51,25 @@ namespace Organizer_Project.User_Controls
             MainFlowLayout.ResumeLayout();
             MainFlowLayout.Show();
         }
-
         private void BindData()
         {
-            TitleTextBox.DataBindings.Add("Text", TaskBindingSource, "Title", true, DataSourceUpdateMode.OnValidation);
-            PriorityComboBox.DataBindings.Add("SelectedValue", TaskBindingSource, "Priority", true, DataSourceUpdateMode.OnPropertyChanged);
-            MainTimePicker.DataBindings.Add("Value", TaskBindingSource, "Time", true, DataSourceUpdateMode.OnPropertyChanged);
-            StatusComboBox.DataBindings.Add("SelectedValue", TaskBindingSource, "Status", true, DataSourceUpdateMode.OnPropertyChanged);
-            GroupTextBox.DataBindings.Add("Text", TaskBindingSource, "Group", true, DataSourceUpdateMode.OnValidation);
-            NotesRichTextBox.DataBindings.Add("Text", TaskBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged);
+            DataSourceUpdateMode updateMode_1 = DataSourceUpdateMode.OnPropertyChanged;
+            DataSourceUpdateMode updateMode_2 = DataSourceUpdateMode.OnValidation;
+            TitleTextBox.DataBindings.Add("Text", ItemSourceCopy, "Title", true, updateMode_2);         // binding copy for free changes
+            PriorityComboBox.DataBindings.Add("SelectedValue", ItemSourceCopy, "Priority", true, updateMode_1);
+            MainTimePicker.DataBindings.Add("Value", ItemSourceCopy, "Time", true, updateMode_1);
+            StatusComboBox.DataBindings.Add("SelectedValue", ItemSourceCopy, "Status", true, updateMode_1);
+            GroupTextBox.DataBindings.Add("Text", ItemSourceCopy, "Group", true, updateMode_1);
+            NotesRichTextBox.DataBindings.Add("Text", ItemSourceCopy, "Notes", true, updateMode_1);
 
-            TitleLabel.DataBindings.Add("Text", TaskBindingSource, "Title", true, DataSourceUpdateMode.Never);
-            PriorityLabel.DataBindings.Add("Text", TaskBindingSource, "Priority", true, DataSourceUpdateMode.Never);
-            MainTimeLabel.DataBindings.Add("Text", TaskBindingSource, "Time", true, DataSourceUpdateMode.Never);
-            StatusLabel.DataBindings.Add("Text", TaskBindingSource, "Status", true, DataSourceUpdateMode.Never);
-            GroupLabel.DataBindings.Add("Text", TaskBindingSource, "Group", true, DataSourceUpdateMode.Never);
-            NotesLabel.DataBindings.Add("Text", TaskBindingSource, "Notes", true, DataSourceUpdateMode.Never);
+            TitleLabel.DataBindings.Add("Text", ItemSource, "Title", true, DataSourceUpdateMode.Never);     // binding original to display only
+            PriorityLabel.DataBindings.Add("Text", ItemSource, "Priority", true, DataSourceUpdateMode.Never);
+            MainTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
+            StatusLabel.DataBindings.Add("Text", ItemSource, "Status", true, DataSourceUpdateMode.Never);
+            GroupLabel.DataBindings.Add("Text", ItemSource, "Group", true, DataSourceUpdateMode.Never);
+            NotesLabel.DataBindings.Add("Text", ItemSource, "Notes", true, DataSourceUpdateMode.Never);
             
         }
-
         private void ConfigureComboBoxes()
         {
             var priorities = new List<KeyValuePair<string, Priority>>
@@ -91,17 +94,15 @@ namespace Organizer_Project.User_Controls
             StatusComboBox.DisplayMember = "Key";
             StatusComboBox.ValueMember = "Value";
         }
-
         private void TaskControl_Load(object sender, EventArgs e)
         {
             ConfigureComboBoxes();
             BindData();
             ToggleMode(IsEditMode);
         }
-
         private void TitleTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (TaskBindingSource != null)
+            if (ItemSource != null)
             {
                 string title = TitleTextBox.Text.Trim();
                 if (string.IsNullOrEmpty(title))

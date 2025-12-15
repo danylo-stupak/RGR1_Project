@@ -40,6 +40,7 @@ namespace Organizer_Project
             // 
             // MainTableLayout
             // 
+            this.MainTableLayout.AutoSize = true;
             this.MainTableLayout.ColumnCount = 2;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -52,11 +53,12 @@ namespace Organizer_Project
             this.MainTableLayout.RowCount = 2;
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayout.Size = new System.Drawing.Size(484, 461);
+            this.MainTableLayout.Size = new System.Drawing.Size(581, 482);
             this.MainTableLayout.TabIndex = 0;
             // 
             // ButtonsTableLayout
             // 
+            this.ButtonsTableLayout.AutoSize = true;
             this.ButtonsTableLayout.ColumnCount = 3;
             this.MainTableLayout.SetColumnSpan(this.ButtonsTableLayout, 2);
             this.ButtonsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -69,14 +71,14 @@ namespace Organizer_Project
             this.ButtonsTableLayout.Name = "ButtonsTableLayout";
             this.ButtonsTableLayout.RowCount = 1;
             this.ButtonsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsTableLayout.Size = new System.Drawing.Size(454, 100);
+            this.ButtonsTableLayout.Size = new System.Drawing.Size(551, 47);
             this.ButtonsTableLayout.TabIndex = 0;
             // 
             // AddTaskButton
             // 
             this.AddTaskButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddTaskButton.AutoSize = true;
-            this.AddTaskButton.Location = new System.Drawing.Point(3, 29);
+            this.AddTaskButton.Location = new System.Drawing.Point(3, 3);
             this.AddTaskButton.Name = "AddTaskButton";
             this.AddTaskButton.Padding = new System.Windows.Forms.Padding(4);
             this.AddTaskButton.Size = new System.Drawing.Size(102, 41);
@@ -89,7 +91,7 @@ namespace Organizer_Project
             // 
             this.AddEventButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AddEventButton.AutoSize = true;
-            this.AddEventButton.Location = new System.Drawing.Point(111, 29);
+            this.AddEventButton.Location = new System.Drawing.Point(111, 3);
             this.AddEventButton.Name = "AddEventButton";
             this.AddEventButton.Padding = new System.Windows.Forms.Padding(4);
             this.AddEventButton.Size = new System.Drawing.Size(108, 41);
@@ -103,18 +105,17 @@ namespace Organizer_Project
             this.DashboardFlowLayout.AutoScroll = true;
             this.MainTableLayout.SetColumnSpan(this.DashboardFlowLayout, 3);
             this.DashboardFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DashboardFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.DashboardFlowLayout.Location = new System.Drawing.Point(15, 121);
+            this.DashboardFlowLayout.Location = new System.Drawing.Point(15, 68);
             this.DashboardFlowLayout.Name = "DashboardFlowLayout";
-            this.DashboardFlowLayout.Size = new System.Drawing.Size(454, 325);
+            this.DashboardFlowLayout.Size = new System.Drawing.Size(551, 399);
             this.DashboardFlowLayout.TabIndex = 1;
-            this.DashboardFlowLayout.WrapContents = false;
             // 
             // OrganizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(581, 482);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
@@ -124,9 +125,11 @@ namespace Organizer_Project
             this.Text = "Dashboard — Tasks & Events";
             this.Load += new System.EventHandler(this.OrganizerForm_Load);
             this.MainTableLayout.ResumeLayout(false);
+            this.MainTableLayout.PerformLayout();
             this.ButtonsTableLayout.ResumeLayout(false);
             this.ButtonsTableLayout.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

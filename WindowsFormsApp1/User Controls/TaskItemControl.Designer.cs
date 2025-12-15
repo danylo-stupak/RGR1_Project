@@ -170,6 +170,8 @@
             this.MainTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.MainTimePicker.Location = new System.Drawing.Point(89, 91);
             this.MainTimePicker.Margin = new System.Windows.Forms.Padding(4, 8, 24, 4);
+            this.MainTimePicker.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.MainTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.MainTimePicker.Name = "MainTimePicker";
             this.MainTimePicker.ShowUpDown = true;
             this.MainTimePicker.Size = new System.Drawing.Size(204, 29);
@@ -184,7 +186,7 @@
             this.NotesRichTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NotesRichTextBox.Name = "NotesRichTextBox";
             this.NotesRichTextBox.Size = new System.Drawing.Size(309, 99);
-            this.NotesRichTextBox.TabIndex = 4;
+            this.NotesRichTextBox.TabIndex = 5;
             this.NotesRichTextBox.Text = "";
             // 
             // TitleTextBox
@@ -234,7 +236,7 @@
             this.GroupTextBox.Multiline = true;
             this.GroupTextBox.Name = "GroupTextBox";
             this.GroupTextBox.Size = new System.Drawing.Size(204, 30);
-            this.GroupTextBox.TabIndex = 6;
+            this.GroupTextBox.TabIndex = 4;
             // 
             // ErrorProvider
             // 

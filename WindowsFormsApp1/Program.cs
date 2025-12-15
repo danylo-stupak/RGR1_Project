@@ -3,7 +3,6 @@ using Organizer_Project.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Organizer_Project.Models;
 
 namespace Organizer_Project
 {

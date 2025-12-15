@@ -1,31 +1,35 @@
 ﻿using Organizer_Project.Interfaces;
 using Organizer_Project.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Organizer_Project.User_Controls
 {
     public partial class EventItemControl : UserControl, IOrganizerItemControl
     {
-        private BindingSource EventBindingSource;
-        private bool IsEditMode = true;
-        public EventItemControl(EventItem eventItem, bool editMode = false)
+        public BindingSource ItemSource { get; }
+        public int ItemPosition
         {
-            var eventItemCopy = new EventItem(eventItem); // Create a copy to avoid modifying the original until saved
+            get => ItemSource.Position;
+            set => ItemSource.Position = value;
+        }
+        private bool IsEditMode;
+        private BindingSource ItemSourceCopy { get; }
+        public EventItemControl(BindingSource source, int position, bool editMode = false)
+        {
             InitializeComponent();
-            EventBindingSource = new BindingSource
-            {
-                DataSource = eventItemCopy
-            };
+            ItemSource = source;        // keep original public
+            ItemPosition = position;
+            ItemSourceCopy = new BindingSource();
+            ItemSourceCopy.DataSource = new EventItem(source.DataSource as EventItem);     // create a private copy
             IsEditMode = editMode;
         }
         public OrganizerItem GetItem()
         {
-            EventBindingSource.EndEdit();
-            return (EventItem)EventBindingSource.DataSource;
+            ItemSourceCopy.EndEdit();
+            return ItemSourceCopy.DataSource as EventItem;
         }
-
         public void ToggleMode(bool isEditMode)
         {
             IsEditMode = isEditMode;
@@ -56,19 +60,21 @@ namespace Organizer_Project.User_Controls
         }
         private void BindData()
         {
-            TitleTextBox.DataBindings.Add("Text", EventBindingSource, "Title", true, DataSourceUpdateMode.OnValidation);
-            PriorityComboBox.DataBindings.Add("SelectedValue", EventBindingSource, "Priority", true, DataSourceUpdateMode.OnPropertyChanged);
-            MainTimePicker.DataBindings.Add("Value", EventBindingSource, "Time", true, DataSourceUpdateMode.OnPropertyChanged);
-            EndTimePicker.DataBindings.Add("Value", EventBindingSource, "EndTime", true, DataSourceUpdateMode.OnValidation);
-            AllDayCheckBox_Edit.DataBindings.Add("Checked", EventBindingSource, "IsAllDay", true, DataSourceUpdateMode.OnPropertyChanged);
-            NotesRichTextBox.DataBindings.Add("Text", EventBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged);
+            DataSourceUpdateMode updateMode_1 = DataSourceUpdateMode.OnPropertyChanged;
+            DataSourceUpdateMode updateMode_2 = DataSourceUpdateMode.OnValidation;
+            TitleTextBox.DataBindings.Add("Text", ItemSourceCopy, "Title", true, updateMode_2);      // binding copy for free changes
+            PriorityComboBox.DataBindings.Add("SelectedValue", ItemSourceCopy, "Priority", true, updateMode_1);
+            MainTimePicker.DataBindings.Add("Value", ItemSourceCopy, "Time", true, updateMode_1);
+            EndTimePicker.DataBindings.Add("Value", ItemSourceCopy, "EndTime", true, updateMode_2);
+            AllDayCheckBox_Edit.DataBindings.Add("Checked", ItemSourceCopy, "IsAllDay", true, updateMode_1);
+            NotesRichTextBox.DataBindings.Add("Text", ItemSourceCopy, "Notes", true, updateMode_1);
 
-            TitleLabel.DataBindings.Add("Text", EventBindingSource, "Title", true, DataSourceUpdateMode.Never);
-            PriorityLabel.DataBindings.Add("Text", EventBindingSource, "Priority", true, DataSourceUpdateMode.Never);
-            MainTimeLabel.DataBindings.Add("Text", EventBindingSource, "Time", true, DataSourceUpdateMode.Never);
-            EndTimeLabel.DataBindings.Add("Text", EventBindingSource, "Time", true, DataSourceUpdateMode.Never);
-            AllDayCheckBox_View.DataBindings.Add("Checked", EventBindingSource, "IsAllDay", true, DataSourceUpdateMode.Never);
-            NotesLabel.DataBindings.Add("Text", EventBindingSource, "Notes", true, DataSourceUpdateMode.Never);
+            TitleLabel.DataBindings.Add("Text", ItemSource, "Title", true, DataSourceUpdateMode.Never);  // binding original to display only
+            PriorityLabel.DataBindings.Add("Text", ItemSource, "Priority", true, DataSourceUpdateMode.Never);
+            MainTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
+            EndTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
+            AllDayCheckBox_View.DataBindings.Add("Checked", ItemSource, "IsAllDay", true, DataSourceUpdateMode.Never);
+            NotesLabel.DataBindings.Add("Text", ItemSource, "Notes", true, DataSourceUpdateMode.Never);
         }
         private void ConfigureComboBoxes()
         {
@@ -97,33 +103,51 @@ namespace Organizer_Project.User_Controls
 
         private void TitleTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (sender is TextBox titleTextBox)
+            if (ItemSource != null)
             {
-                if (string.IsNullOrEmpty(titleTextBox.Text))
+                if (sender is TextBox titleTextBox)
                 {
-                    e.Cancel = true;
-                    ErrorProvider.SetError(titleTextBox, "Title cannot be empty.");
+                    if (string.IsNullOrEmpty(titleTextBox.Text))
+                    {
+                        e.Cancel = true;
+                        ErrorProvider.SetError(titleTextBox, "Title cannot be empty.");
+                    }
+                    else
+                    {
+                        e.Cancel = false;
+                        ErrorProvider.SetError(titleTextBox, ""); // Clear error
+                    }
                 }
-                else
-                {
-                    e.Cancel = false;
-                }
+            }
+            else
+            {
+                e.Cancel = true;
+                throw new InvalidOperationException("TaskBindingSource is null.");
             }
         }
 
         private void EndTimePicker_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(sender is DateTimePicker endTimePicker)
+            if (ItemSource != null)
             {
-                if (endTimePicker.Value > MainTimePicker.Value)
+                if (sender is DateTimePicker endTimePicker)
                 {
-                    e.Cancel = true;
-                    ErrorProvider.SetError(endTimePicker, "End time cannot be bigger than Start time");
+                    if (endTimePicker.Value <= MainTimePicker.Value)
+                    {
+                        e.Cancel = true;
+                        ErrorProvider.SetError(endTimePicker, "End time cannot be smaller than Start time");
+                    }
+                    else
+                    {
+                        e.Cancel= false;
+                        ErrorProvider.SetError(endTimePicker, ""); // Clear error
+                    }
                 }
-                else
-                {
-                    e.Cancel= false;
-                }
+            }
+            else
+            {
+                e.Cancel = true;
+                throw new InvalidOperationException("TaskBindingSource is null.");
             }
         }
     }

@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\ControlFactory.cs" />
+    <Compile Include="Factories\DemoControlFactory.cs" />
     <Compile Include="Forms\ItemCreateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +65,7 @@
     </Compile>
     <Compile Include="Interfaces\IOrganizerItemControl.cs" />
     <Compile Include="Interfaces\IManagerService.cs" />
+    <Compile Include="Interfaces\IOrganizerItemDemoControl.cs" />
     <Compile Include="Interfaces\OrganizerItem.cs" />
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Forms\OrganizerForm.cs">
@@ -81,17 +84,29 @@
     <Compile Include="User Controls\EventItemControl.Designer.cs">
       <DependentUpon>EventItemControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="User Controls\OrganizerItemControl.cs">
+    <Compile Include="User Controls\TaskItemDemoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="User Controls\OrganizerItemControl.Designer.cs">
-      <DependentUpon>OrganizerItemControl.cs</DependentUpon>
+    <Compile Include="User Controls\TaskItemDemoControl.Designer.cs">
+      <DependentUpon>TaskItemDemoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\EventItemDemoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\EventItemDemoControl.Designer.cs">
+      <DependentUpon>EventItemDemoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="User Controls\TaskItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="User Controls\TaskItemControl.Designer.cs">
       <DependentUpon>TaskItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User Controls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User Controls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\ItemCreateForm.resx">
       <DependentUpon>ItemCreateForm.cs</DependentUpon>
@@ -115,11 +130,17 @@
     <EmbeddedResource Include="User Controls\EventItemControl.resx">
       <DependentUpon>EventItemControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User Controls\OrganizerItemControl.resx">
-      <DependentUpon>OrganizerItemControl.cs</DependentUpon>
+    <EmbeddedResource Include="User Controls\TaskItemDemoControl.resx">
+      <DependentUpon>TaskItemDemoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\EventItemDemoControl.resx">
+      <DependentUpon>EventItemDemoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User Controls\TaskItemControl.resx">
       <DependentUpon>TaskItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User Controls\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

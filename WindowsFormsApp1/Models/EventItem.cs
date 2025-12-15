@@ -25,7 +25,7 @@ namespace Organizer_Project.Models
             notes
         )
         {
-            EndTime = endTime ?? DateTime.Today;
+            EndTime = endTime ?? DateTime.Today.AddHours(5);
             IsAllDay = isAllDay;
         }
 
@@ -35,7 +35,7 @@ namespace Organizer_Project.Models
             IsAllDay = eventItem.IsAllDay;
         }
 
-        public void UpdateFrom(OrganizerItem item)
+        public override void UpdateFrom(OrganizerItem item)
         {
             base.UpdateFrom(item);
             if (item is EventItem eventItem)

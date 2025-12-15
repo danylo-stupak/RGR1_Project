@@ -178,7 +178,7 @@
             this.NotesRichTextBox.MinimumSize = new System.Drawing.Size(0, 150);
             this.NotesRichTextBox.Name = "NotesRichTextBox";
             this.NotesRichTextBox.Size = new System.Drawing.Size(303, 150);
-            this.NotesRichTextBox.TabIndex = 4;
+            this.NotesRichTextBox.TabIndex = 5;
             this.NotesRichTextBox.Text = "";
             // 
             // TitleTextBox
@@ -204,7 +204,7 @@
             this.EndTimePicker.Name = "EndTimePicker";
             this.EndTimePicker.ShowUpDown = true;
             this.EndTimePicker.Size = new System.Drawing.Size(200, 29);
-            this.EndTimePicker.TabIndex = 6;
+            this.EndTimePicker.TabIndex = 3;
             this.EndTimePicker.Validating += new System.ComponentModel.CancelEventHandler(this.EndTimePicker_Validating);
             // 
             // AllDayCheckBox_Edit
@@ -218,9 +218,8 @@
             this.AllDayCheckBox_Edit.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
             this.AllDayCheckBox_Edit.Name = "AllDayCheckBox_Edit";
             this.AllDayCheckBox_Edit.Size = new System.Drawing.Size(220, 25);
-            this.AllDayCheckBox_Edit.TabIndex = 7;
+            this.AllDayCheckBox_Edit.TabIndex = 4;
             this.AllDayCheckBox_Edit.Text = "All Day";
-            this.AllDayCheckBox_Edit.UseVisualStyleBackColor = true;
             this.AllDayCheckBox_Edit.CheckedChanged += new System.EventHandler(this.AllDayCheckBox_CheckedChanged);
             // 
             // MainFlowLayout
@@ -329,18 +328,20 @@
             // AllDayCheckBox_View
             // 
             this.AllDayCheckBox_View.AutoSize = true;
+            this.AllDayCheckBox_View.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.AllDayCheckBox_View.CausesValidation = false;
             this.AllDayCheckBox_View.Checked = true;
             this.AllDayCheckBox_View.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AllDayCheckBox_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllDayCheckBox_View.Enabled = false;
             this.AllDayCheckBox_View.FlatAppearance.BorderSize = 0;
             this.AllDayCheckBox_View.Location = new System.Drawing.Point(85, 172);
             this.AllDayCheckBox_View.Margin = new System.Windows.Forms.Padding(4, 8, 4, 4);
             this.AllDayCheckBox_View.Name = "AllDayCheckBox_View";
             this.AllDayCheckBox_View.Size = new System.Drawing.Size(220, 25);
             this.AllDayCheckBox_View.TabIndex = 7;
+            this.AllDayCheckBox_View.TabStop = false;
             this.AllDayCheckBox_View.Text = "All Day";
-            this.AllDayCheckBox_View.UseVisualStyleBackColor = true;
             // 
             // NotesLabel
             // 

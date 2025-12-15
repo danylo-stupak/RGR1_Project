@@ -1,15 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-using Organizer_Project.Interfaces;
-using Organizer_Project.User_Controls;
+﻿using Organizer_Project.Factories;
 using Organizer_Project.Forms;
+using Organizer_Project.Interfaces;
+using System;
+using System.Windows.Forms;
 
 namespace Organizer_Project
 {
     public partial class OrganizerForm : Form
     {
         private readonly IManagerService<OrganizerItem> ManagerService;
-
         public OrganizerForm(IManagerService<OrganizerItem> managerService)
         {
             InitializeComponent();
@@ -33,13 +32,18 @@ namespace Organizer_Project
         {
             DashboardFlowLayout.Hide();
             DashboardFlowLayout.SuspendLayout();
-
-            foreach (var item in ManagerService.GetItems())
+            ManagerService.BindingSource.ResetBindings(false);
+            for (int i = 0; i < ManagerService.BindingSource.Count; i++)
             {
-                var control = new OrganizerItemControl(item);
+                var control = DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
-                DashboardFlowLayout.Controls.Add(control);
-                control.AutoSize = true;
+                control.ItemEdited += UpdateDashboardLayout;
+                control.ItemDeleted += RemoveFromDashboardLayout;
+                if (control is Control winControl)
+                {
+                    winControl.AutoSize = true;
+                    DashboardFlowLayout.Controls.Add(winControl);
+                }
             }
             DashboardFlowLayout.ResumeLayout();
             DashboardFlowLayout.Show();
@@ -52,43 +56,46 @@ namespace Organizer_Project
         }
         private void ItemDetailsForm_Create(object sender, EventArgs e)
         {
-            if (sender is OrganizerItemControl itemControl)
+            if (sender is IOrganizerItemDemoControl itemControl)
             {
-                using (var detailsForm = new ItemDetailsForm(itemControl.GetItem()))
+                try
                 {
-                    try
-                    {
-                        detailsForm.ItemSaved += UpdateDashboardLayout;
-                        detailsForm.ItemDeleted += RemoveFromDashboardLayout;
-                        if(detailsForm.ShowDialog() == DialogResult.OK)
-                        {
-                            RerenderDashboardLayout();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("An error occurred while opening the item details: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    itemControl.Action();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "ItemDetailsForm_Create Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-
         private void RemoveFromDashboardLayout(object sender, EventArgs e)
         {
-            if (sender is ItemDetailsForm detailsForm)
+            if (sender is IOrganizerItemDemoControl itemControl)
             {
-                ManagerService.DeleteItem(detailsForm.GetItem());
-            }
-            else
-            {
-                throw new ArgumentException("Error: Unable to remove item from dashboard layout.");
+                try
+                {
+                    ManagerService.DeleteItem(itemControl.GetItem());
+                    RerenderDashboardLayout();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "RemoveFromDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void UpdateDashboardLayout(object sender, EventArgs e)
         {
             if (sender is ItemDetailsForm detailsForm)
             {
-                ManagerService.UpdateItem(detailsForm.GetItem());
+                try
+                {
+                    ManagerService.UpdateItem(detailsForm.ItemControl.GetItem());
+                    RerenderDashboardLayout();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "UpdateDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -99,11 +106,19 @@ namespace Organizer_Project
         {
             if (sender is ItemCreateForm createForm)
             {
-                ManagerService.AddItem(createForm.GetItem());
+                try
+                {
+                    ManagerService.AddItem(createForm.ItemControl.GetItem());
+                    RerenderDashboardLayout();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "AddToDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                throw new ArgumentException("Error: Unable to add item to dashboard layout.");
+                throw new ArgumentException("Error: Unable to update item in dashboard layout.");
             }
         }
         private void OrganizerForm_Load(object sender, EventArgs e)
@@ -117,14 +132,11 @@ namespace Organizer_Project
                 try
                 {
                     CreateForm.ItemCreated += AddToDashboardLayout;
-                    if (CreateForm.ShowDialog() == DialogResult.OK)
-                    {
-                        RerenderDashboardLayout();
-                    }
+                    CreateForm.ShowDialog();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while creating the task: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "AddTaskButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -135,14 +147,11 @@ namespace Organizer_Project
                 try
                 {
                     CreateForm.ItemCreated += AddToDashboardLayout;
-                    if (CreateForm.ShowDialog() == DialogResult.OK)
-                    {
-                        RerenderDashboardLayout();
-                    }
+                    CreateForm.ShowDialog();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while creating the event: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
