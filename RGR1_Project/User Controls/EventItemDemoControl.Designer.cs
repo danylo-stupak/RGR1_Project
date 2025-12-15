@@ -46,6 +46,7 @@ namespace Organizer_Project.User_Controls
             // MainTableLayout
             // 
             this.MainTableLayout.AutoSize = true;
+            this.MainTableLayout.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.MainTableLayout.ColumnCount = 4;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -69,18 +70,18 @@ namespace Organizer_Project.User_Controls
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayout.Size = new System.Drawing.Size(284, 142);
+            this.MainTableLayout.Size = new System.Drawing.Size(284, 151);
             this.MainTableLayout.TabIndex = 1;
             // 
             // PriorityNameLabel
             // 
             this.PriorityNameLabel.AutoSize = true;
             this.PriorityNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PriorityNameLabel.Location = new System.Drawing.Point(0, 29);
+            this.PriorityNameLabel.Location = new System.Drawing.Point(0, 42);
             this.PriorityNameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.PriorityNameLabel.Name = "PriorityNameLabel";
-            this.PriorityNameLabel.Padding = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.PriorityNameLabel.Size = new System.Drawing.Size(71, 29);
+            this.PriorityNameLabel.Padding = new System.Windows.Forms.Padding(4, 4, 0, 4);
+            this.PriorityNameLabel.Size = new System.Drawing.Size(73, 27);
             this.PriorityNameLabel.TabIndex = 11;
             this.PriorityNameLabel.Text = "Priority:";
             this.PriorityNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -89,11 +90,11 @@ namespace Organizer_Project.User_Controls
             // 
             this.MainTimeNameLabel.AutoSize = true;
             this.MainTimeNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTimeNameLabel.Location = new System.Drawing.Point(152, 29);
+            this.MainTimeNameLabel.Location = new System.Drawing.Point(156, 42);
             this.MainTimeNameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MainTimeNameLabel.Name = "MainTimeNameLabel";
-            this.MainTimeNameLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.MainTimeNameLabel.Size = new System.Drawing.Size(51, 29);
+            this.MainTimeNameLabel.Padding = new System.Windows.Forms.Padding(4, 4, 0, 4);
+            this.MainTimeNameLabel.Size = new System.Drawing.Size(45, 27);
             this.MainTimeNameLabel.TabIndex = 2;
             this.MainTimeNameLabel.Text = "Start:";
             this.MainTimeNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,11 +104,11 @@ namespace Organizer_Project.User_Controls
             this.EndTimeNameLabel.AutoSize = true;
             this.EndTimeNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EndTimeNameLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.EndTimeNameLabel.Location = new System.Drawing.Point(152, 58);
+            this.EndTimeNameLabel.Location = new System.Drawing.Point(156, 69);
             this.EndTimeNameLabel.Margin = new System.Windows.Forms.Padding(0);
             this.EndTimeNameLabel.Name = "EndTimeNameLabel";
-            this.EndTimeNameLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.EndTimeNameLabel.Size = new System.Drawing.Size(51, 29);
+            this.EndTimeNameLabel.Padding = new System.Windows.Forms.Padding(4, 4, 0, 4);
+            this.EndTimeNameLabel.Size = new System.Drawing.Size(45, 27);
             this.EndTimeNameLabel.TabIndex = 3;
             this.EndTimeNameLabel.Text = "End:";
             this.EndTimeNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -115,11 +116,14 @@ namespace Organizer_Project.User_Controls
             // TypeLabel
             // 
             this.TypeLabel.AutoSize = true;
+            this.TypeLabel.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.TypeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TypeLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TypeLabel.Location = new System.Drawing.Point(0, 0);
-            this.TypeLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.TypeLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.TypeLabel.Size = new System.Drawing.Size(53, 29);
+            this.TypeLabel.Size = new System.Drawing.Size(73, 34);
             this.TypeLabel.TabIndex = 0;
             this.TypeLabel.Text = "Event";
             this.TypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -129,21 +133,22 @@ namespace Organizer_Project.User_Controls
             this.TitleLabel.AutoSize = true;
             this.MainTableLayout.SetColumnSpan(this.TitleLabel, 3);
             this.TitleLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TitleLabel.Location = new System.Drawing.Point(75, 0);
-            this.TitleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TitleLabel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Location = new System.Drawing.Point(73, 0);
+            this.TitleLabel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 8);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Padding = new System.Windows.Forms.Padding(5, 5, 10, 5);
-            this.TitleLabel.Size = new System.Drawing.Size(205, 29);
+            this.TitleLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.TitleLabel.Size = new System.Drawing.Size(211, 34);
             this.TitleLabel.TabIndex = 1;
             this.TitleLabel.Text = "Title";
-            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DetailsButton
             // 
             this.DetailsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DetailsButton.AutoSize = true;
             this.MainTableLayout.SetColumnSpan(this.DetailsButton, 4);
-            this.DetailsButton.Location = new System.Drawing.Point(208, 102);
+            this.DetailsButton.Location = new System.Drawing.Point(208, 111);
             this.DetailsButton.Margin = new System.Windows.Forms.Padding(5, 15, 10, 5);
             this.DetailsButton.Name = "DetailsButton";
             this.DetailsButton.Padding = new System.Windows.Forms.Padding(3);
@@ -157,10 +162,11 @@ namespace Organizer_Project.User_Controls
             // 
             this.MainTimeValueLabel.AutoSize = true;
             this.MainTimeValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainTimeValueLabel.Location = new System.Drawing.Point(203, 29);
+            this.MainTimeValueLabel.Location = new System.Drawing.Point(201, 42);
             this.MainTimeValueLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MainTimeValueLabel.Name = "MainTimeValueLabel";
-            this.MainTimeValueLabel.Size = new System.Drawing.Size(81, 29);
+            this.MainTimeValueLabel.Padding = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.MainTimeValueLabel.Size = new System.Drawing.Size(83, 27);
             this.MainTimeValueLabel.TabIndex = 24;
             this.MainTimeValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -168,10 +174,11 @@ namespace Organizer_Project.User_Controls
             // 
             this.EndTimeValueLabel.AutoSize = true;
             this.EndTimeValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EndTimeValueLabel.Location = new System.Drawing.Point(203, 58);
+            this.EndTimeValueLabel.Location = new System.Drawing.Point(201, 69);
             this.EndTimeValueLabel.Margin = new System.Windows.Forms.Padding(0);
             this.EndTimeValueLabel.Name = "EndTimeValueLabel";
-            this.EndTimeValueLabel.Size = new System.Drawing.Size(81, 29);
+            this.EndTimeValueLabel.Padding = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.EndTimeValueLabel.Size = new System.Drawing.Size(83, 27);
             this.EndTimeValueLabel.TabIndex = 25;
             this.EndTimeValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -179,10 +186,11 @@ namespace Organizer_Project.User_Controls
             // 
             this.PriorityValueLabel.AutoSize = true;
             this.PriorityValueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PriorityValueLabel.Location = new System.Drawing.Point(71, 29);
+            this.PriorityValueLabel.Location = new System.Drawing.Point(73, 42);
             this.PriorityValueLabel.Margin = new System.Windows.Forms.Padding(0);
             this.PriorityValueLabel.Name = "PriorityValueLabel";
-            this.PriorityValueLabel.Size = new System.Drawing.Size(81, 29);
+            this.PriorityValueLabel.Padding = new System.Windows.Forms.Padding(0, 4, 4, 4);
+            this.PriorityValueLabel.Size = new System.Drawing.Size(83, 27);
             this.PriorityValueLabel.TabIndex = 26;
             this.PriorityValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -191,14 +199,14 @@ namespace Organizer_Project.User_Controls
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.SteelBlue;
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MinimumSize = new System.Drawing.Size(300, 0);
             this.Name = "EventItemDemoControl";
             this.Padding = new System.Windows.Forms.Padding(8);
-            this.Size = new System.Drawing.Size(300, 158);
+            this.Size = new System.Drawing.Size(300, 167);
             this.Load += new System.EventHandler(this.EventItemDemoControl_Load);
             this.MainTableLayout.ResumeLayout(false);
             this.MainTableLayout.PerformLayout();
