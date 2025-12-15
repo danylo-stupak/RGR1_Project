@@ -155,7 +155,6 @@
             // 
             this.PriorityComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PriorityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PriorityComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PriorityComboBox.FormattingEnabled = true;
             this.PriorityComboBox.Location = new System.Drawing.Point(89, 50);
             this.PriorityComboBox.Margin = new System.Windows.Forms.Padding(4, 8, 24, 4);
@@ -176,6 +175,7 @@
             this.MainTimePicker.ShowUpDown = true;
             this.MainTimePicker.Size = new System.Drawing.Size(204, 29);
             this.MainTimePicker.TabIndex = 2;
+            this.MainTimePicker.Value = new System.DateTime(2025, 11, 1, 0, 0, 0, 0);
             // 
             // NotesRichTextBox
             // 

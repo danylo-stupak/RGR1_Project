@@ -54,7 +54,7 @@ namespace Organizer_Project.User_Controls
 
         private void ConfigureDateTimePickers()
         {
-            string format = AllDayCheckBox_Edit.Checked ? "ddd, dd MMM" : "ddd, dd MMM - HH:mm";
+            string format = AllDayCheckBox_Edit.Checked ? "ddd, dd/MM" : "ddd, dd/MM/yy - HH:mm";
             MainTimePicker.CustomFormat = format;
             EndTimePicker.CustomFormat = format;
         }
@@ -72,7 +72,7 @@ namespace Organizer_Project.User_Controls
             TitleLabel.DataBindings.Add("Text", ItemSource, "Title", true, DataSourceUpdateMode.Never);  // binding original to display only
             PriorityLabel.DataBindings.Add("Text", ItemSource, "Priority", true, DataSourceUpdateMode.Never);
             MainTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
-            EndTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
+            EndTimeLabel.DataBindings.Add("Text", ItemSource, "EndTime", true, DataSourceUpdateMode.Never);
             AllDayCheckBox_View.DataBindings.Add("Checked", ItemSource, "IsAllDay", true, DataSourceUpdateMode.Never);
             NotesLabel.DataBindings.Add("Text", ItemSource, "Notes", true, DataSourceUpdateMode.Never);
         }

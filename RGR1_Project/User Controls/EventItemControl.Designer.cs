@@ -167,6 +167,7 @@
             this.MainTimePicker.ShowUpDown = true;
             this.MainTimePicker.Size = new System.Drawing.Size(200, 29);
             this.MainTimePicker.TabIndex = 2;
+            this.MainTimePicker.Value = new System.DateTime(2025, 11, 3, 0, 0, 0, 0);
             // 
             // NotesRichTextBox
             // 
@@ -205,6 +206,7 @@
             this.EndTimePicker.ShowUpDown = true;
             this.EndTimePicker.Size = new System.Drawing.Size(200, 29);
             this.EndTimePicker.TabIndex = 3;
+            this.EndTimePicker.Value = new System.DateTime(2025, 11, 10, 0, 0, 0, 0);
             this.EndTimePicker.Validating += new System.ComponentModel.CancelEventHandler(this.EndTimePicker_Validating);
             // 
             // AllDayCheckBox_Edit
