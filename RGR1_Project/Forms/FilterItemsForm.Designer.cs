@@ -45,28 +45,28 @@
             this.FilteringTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.FilterByEndTimeGroup = new System.Windows.Forms.GroupBox();
             this.ApplyButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.CancelBtn = new System.Windows.Forms.Button();
+            this.ButtonsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.OperationsTabControl.SuspendLayout();
             this.SortingTabPage.SuspendLayout();
             this.SortingTableLayout.SuspendLayout();
             this.FiltergTabPage.SuspendLayout();
             this.FilteringTableLayout.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.ButtonsFlowLayout.SuspendLayout();
             this.MainTableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // FilterByTypeGroup
             // 
             this.FilterByTypeGroup.AutoSize = true;
+            this.FilterByTypeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByTypeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByTypeGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByTypeGroup.Location = new System.Drawing.Point(4, 12);
-            this.FilterByTypeGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByTypeGroup.Location = new System.Drawing.Point(0, 12);
+            this.FilterByTypeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByTypeGroup.Name = "FilterByTypeGroup";
             this.FilterByTypeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTypeGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByTypeGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByTypeGroup.TabIndex = 0;
             this.FilterByTypeGroup.TabStop = false;
             this.FilterByTypeGroup.Text = "Type";
@@ -74,13 +74,13 @@
             // FilterByTextGroup
             // 
             this.FilterByTextGroup.AutoSize = true;
+            this.FilterByTextGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByTextGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByTextGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByTextGroup.Location = new System.Drawing.Point(4, 27);
-            this.FilterByTextGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByTextGroup.Location = new System.Drawing.Point(0, 23);
+            this.FilterByTextGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByTextGroup.Name = "FilterByTextGroup";
             this.FilterByTextGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTextGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByTextGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByTextGroup.TabIndex = 1;
             this.FilterByTextGroup.TabStop = false;
             this.FilterByTextGroup.Text = "Text";
@@ -88,13 +88,13 @@
             // FilterByPriorityGroup
             // 
             this.FilterByPriorityGroup.AutoSize = true;
+            this.FilterByPriorityGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByPriorityGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByPriorityGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByPriorityGroup.Location = new System.Drawing.Point(4, 42);
-            this.FilterByPriorityGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByPriorityGroup.Location = new System.Drawing.Point(0, 34);
+            this.FilterByPriorityGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByPriorityGroup.Name = "FilterByPriorityGroup";
             this.FilterByPriorityGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByPriorityGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByPriorityGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByPriorityGroup.TabIndex = 2;
             this.FilterByPriorityGroup.TabStop = false;
             this.FilterByPriorityGroup.Text = "Priority";
@@ -102,13 +102,13 @@
             // FilterByStatusGroup
             // 
             this.FilterByStatusGroup.AutoSize = true;
+            this.FilterByStatusGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByStatusGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByStatusGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByStatusGroup.Location = new System.Drawing.Point(4, 57);
-            this.FilterByStatusGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByStatusGroup.Location = new System.Drawing.Point(0, 45);
+            this.FilterByStatusGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByStatusGroup.Name = "FilterByStatusGroup";
             this.FilterByStatusGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByStatusGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByStatusGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByStatusGroup.TabIndex = 3;
             this.FilterByStatusGroup.TabStop = false;
             this.FilterByStatusGroup.Text = "Status";
@@ -116,13 +116,13 @@
             // FilterByTimeGroup
             // 
             this.FilterByTimeGroup.AutoSize = true;
+            this.FilterByTimeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByTimeGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByTimeGroup.Location = new System.Drawing.Point(4, 72);
-            this.FilterByTimeGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByTimeGroup.Location = new System.Drawing.Point(0, 56);
+            this.FilterByTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByTimeGroup.Name = "FilterByTimeGroup";
             this.FilterByTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTimeGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByTimeGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByTimeGroup.TabIndex = 4;
             this.FilterByTimeGroup.TabStop = false;
             this.FilterByTimeGroup.Text = "Time";
@@ -143,6 +143,7 @@
             // SortingTabPage
             // 
             this.SortingTabPage.Controls.Add(this.SortingTableLayout);
+            this.SortingTabPage.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SortingTabPage.Location = new System.Drawing.Point(4, 30);
             this.SortingTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.SortingTabPage.Name = "SortingTabPage";
@@ -163,6 +164,7 @@
             this.SortingTableLayout.Controls.Add(this.SortByTimeGroup, 0, 3);
             this.SortingTableLayout.Controls.Add(this.SortByStatusGroup, 0, 2);
             this.SortingTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SortingTableLayout.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SortingTableLayout.Location = new System.Drawing.Point(8, 8);
             this.SortingTableLayout.Margin = new System.Windows.Forms.Padding(0);
             this.SortingTableLayout.Name = "SortingTableLayout";
@@ -178,70 +180,65 @@
             // 
             // SortByTextGroup
             // 
+            this.SortByTextGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByTextGroup.AutoSize = true;
-            this.SortByTextGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortByTextGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SortByTextGroup.Location = new System.Drawing.Point(4, 12);
-            this.SortByTextGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.SortByTextGroup.Location = new System.Drawing.Point(0, 0);
+            this.SortByTextGroup.Margin = new System.Windows.Forms.Padding(0);
             this.SortByTextGroup.Name = "SortByTextGroup";
             this.SortByTextGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByTextGroup.Size = new System.Drawing.Size(584, 1);
+            this.SortByTextGroup.Size = new System.Drawing.Size(592, 19);
             this.SortByTextGroup.TabIndex = 0;
             this.SortByTextGroup.TabStop = false;
             this.SortByTextGroup.Text = "Text";
             // 
             // SortByEndTimeGroup
             // 
+            this.SortByEndTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByEndTimeGroup.AutoSize = true;
-            this.SortByEndTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortByEndTimeGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SortByEndTimeGroup.Location = new System.Drawing.Point(4, 72);
-            this.SortByEndTimeGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.SortByEndTimeGroup.Location = new System.Drawing.Point(0, 76);
+            this.SortByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0);
             this.SortByEndTimeGroup.Name = "SortByEndTimeGroup";
             this.SortByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByEndTimeGroup.Size = new System.Drawing.Size(584, 1);
+            this.SortByEndTimeGroup.Size = new System.Drawing.Size(592, 19);
             this.SortByEndTimeGroup.TabIndex = 4;
             this.SortByEndTimeGroup.TabStop = false;
             this.SortByEndTimeGroup.Text = "Endtime";
             // 
             // SortByPriorityGroup
             // 
+            this.SortByPriorityGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByPriorityGroup.AutoSize = true;
-            this.SortByPriorityGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortByPriorityGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SortByPriorityGroup.Location = new System.Drawing.Point(4, 27);
-            this.SortByPriorityGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.SortByPriorityGroup.Location = new System.Drawing.Point(0, 19);
+            this.SortByPriorityGroup.Margin = new System.Windows.Forms.Padding(0);
             this.SortByPriorityGroup.Name = "SortByPriorityGroup";
             this.SortByPriorityGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByPriorityGroup.Size = new System.Drawing.Size(584, 1);
+            this.SortByPriorityGroup.Size = new System.Drawing.Size(592, 19);
             this.SortByPriorityGroup.TabIndex = 1;
             this.SortByPriorityGroup.TabStop = false;
             this.SortByPriorityGroup.Text = "Priority";
             // 
             // SortByTimeGroup
             // 
+            this.SortByTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByTimeGroup.AutoSize = true;
-            this.SortByTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortByTimeGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SortByTimeGroup.Location = new System.Drawing.Point(4, 57);
-            this.SortByTimeGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.SortByTimeGroup.Location = new System.Drawing.Point(0, 57);
+            this.SortByTimeGroup.Margin = new System.Windows.Forms.Padding(0);
             this.SortByTimeGroup.Name = "SortByTimeGroup";
             this.SortByTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByTimeGroup.Size = new System.Drawing.Size(584, 1);
+            this.SortByTimeGroup.Size = new System.Drawing.Size(592, 19);
             this.SortByTimeGroup.TabIndex = 3;
             this.SortByTimeGroup.TabStop = false;
             this.SortByTimeGroup.Text = "Time";
             // 
             // SortByStatusGroup
             // 
+            this.SortByStatusGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByStatusGroup.AutoSize = true;
-            this.SortByStatusGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortByStatusGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SortByStatusGroup.Location = new System.Drawing.Point(4, 42);
-            this.SortByStatusGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.SortByStatusGroup.Location = new System.Drawing.Point(0, 38);
+            this.SortByStatusGroup.Margin = new System.Windows.Forms.Padding(0);
             this.SortByStatusGroup.Name = "SortByStatusGroup";
             this.SortByStatusGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByStatusGroup.Size = new System.Drawing.Size(584, 1);
+            this.SortByStatusGroup.Size = new System.Drawing.Size(592, 19);
             this.SortByStatusGroup.TabIndex = 2;
             this.SortByStatusGroup.TabStop = false;
             this.SortByStatusGroup.Text = "Status";
@@ -270,6 +267,7 @@
             this.FilteringTableLayout.Controls.Add(this.FilterByPriorityGroup, 0, 2);
             this.FilteringTableLayout.Controls.Add(this.FilterByStatusGroup, 0, 3);
             this.FilteringTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FilteringTableLayout.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FilteringTableLayout.Location = new System.Drawing.Point(8, 8);
             this.FilteringTableLayout.Margin = new System.Windows.Forms.Padding(0);
             this.FilteringTableLayout.Name = "FilteringTableLayout";
@@ -287,13 +285,13 @@
             // FilterByEndTimeGroup
             // 
             this.FilterByEndTimeGroup.AutoSize = true;
+            this.FilterByEndTimeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.FilterByEndTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByEndTimeGroup.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FilterByEndTimeGroup.Location = new System.Drawing.Point(4, 87);
-            this.FilterByEndTimeGroup.Margin = new System.Windows.Forms.Padding(4, 12, 4, 4);
+            this.FilterByEndTimeGroup.Location = new System.Drawing.Point(0, 67);
+            this.FilterByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
             this.FilterByEndTimeGroup.Name = "FilterByEndTimeGroup";
             this.FilterByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByEndTimeGroup.Size = new System.Drawing.Size(584, 1);
+            this.FilterByEndTimeGroup.Size = new System.Drawing.Size(592, 1);
             this.FilterByEndTimeGroup.TabIndex = 5;
             this.FilterByEndTimeGroup.TabStop = false;
             this.FilterByEndTimeGroup.Text = "Endtime";
@@ -312,41 +310,41 @@
             this.ApplyButton.UseVisualStyleBackColor = true;
             this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
-            // CancelButton
+            // CancelBtn
             // 
-            this.CancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CancelButton.AutoSize = true;
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(97, 0);
-            this.CancelButton.Margin = new System.Windows.Forms.Padding(27, 0, 0, 0);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Padding = new System.Windows.Forms.Padding(2);
-            this.CancelButton.Size = new System.Drawing.Size(75, 36);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CancelBtn.AutoSize = true;
+            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelBtn.Location = new System.Drawing.Point(97, 0);
+            this.CancelBtn.Margin = new System.Windows.Forms.Padding(27, 0, 0, 0);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.CancelBtn.Size = new System.Drawing.Size(75, 36);
+            this.CancelBtn.TabIndex = 1;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // flowLayoutPanel1
+            // ButtonsFlowLayout
             // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.CancelButton);
-            this.flowLayoutPanel1.Controls.Add(this.ApplyButton);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(452, 599);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 18, 16, 18);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(172, 36);
-            this.flowLayoutPanel1.TabIndex = 1;
-            this.flowLayoutPanel1.WrapContents = false;
+            this.ButtonsFlowLayout.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.ButtonsFlowLayout.AutoSize = true;
+            this.ButtonsFlowLayout.Controls.Add(this.CancelBtn);
+            this.ButtonsFlowLayout.Controls.Add(this.ApplyButton);
+            this.ButtonsFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.ButtonsFlowLayout.Location = new System.Drawing.Point(452, 599);
+            this.ButtonsFlowLayout.Margin = new System.Windows.Forms.Padding(4, 18, 16, 18);
+            this.ButtonsFlowLayout.Name = "ButtonsFlowLayout";
+            this.ButtonsFlowLayout.Size = new System.Drawing.Size(172, 36);
+            this.ButtonsFlowLayout.TabIndex = 1;
+            this.ButtonsFlowLayout.WrapContents = false;
             // 
             // MainTableLayout
             // 
             this.MainTableLayout.AutoSize = true;
             this.MainTableLayout.ColumnCount = 1;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayout.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.MainTableLayout.Controls.Add(this.ButtonsFlowLayout, 0, 1);
             this.MainTableLayout.Controls.Add(this.OperationsTabControl, 0, 0);
             this.MainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTableLayout.Location = new System.Drawing.Point(4, 4);
@@ -364,7 +362,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.CancelButton = this.CancelButton;
+            this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(648, 661);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -385,8 +383,8 @@
             this.FiltergTabPage.PerformLayout();
             this.FilteringTableLayout.ResumeLayout(false);
             this.FilteringTableLayout.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.ButtonsFlowLayout.ResumeLayout(false);
+            this.ButtonsFlowLayout.PerformLayout();
             this.MainTableLayout.ResumeLayout(false);
             this.MainTableLayout.PerformLayout();
             this.ResumeLayout(false);
@@ -412,8 +410,8 @@
         private System.Windows.Forms.TabPage SortingTabPage;
         private System.Windows.Forms.TabPage FiltergTabPage;
         private System.Windows.Forms.Button ApplyButton;
-        private System.Windows.Forms.Button CancelButton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.FlowLayoutPanel ButtonsFlowLayout;
         private System.Windows.Forms.TableLayoutPanel MainTableLayout;
     }
 }

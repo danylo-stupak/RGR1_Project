@@ -110,9 +110,10 @@ namespace Organizer_Project
             // 
             this.StatsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.StatsButton.AutoSize = true;
-            this.StatsButton.Location = new System.Drawing.Point(263, 8);
+            this.StatsButton.Location = new System.Drawing.Point(252, 4);
             this.StatsButton.Name = "StatsButton";
-            this.StatsButton.Size = new System.Drawing.Size(105, 31);
+            this.StatsButton.Padding = new System.Windows.Forms.Padding(4);
+            this.StatsButton.Size = new System.Drawing.Size(113, 39);
             this.StatsButton.TabIndex = 2;
             this.StatsButton.Text = "Show Stats";
             this.StatsButton.UseVisualStyleBackColor = true;
@@ -122,9 +123,10 @@ namespace Organizer_Project
             // 
             this.FilterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.FilterButton.AutoSize = true;
-            this.FilterButton.Location = new System.Drawing.Point(374, 8);
+            this.FilterButton.Location = new System.Drawing.Point(371, 4);
             this.FilterButton.Name = "FilterButton";
-            this.FilterButton.Size = new System.Drawing.Size(77, 31);
+            this.FilterButton.Padding = new System.Windows.Forms.Padding(4);
+            this.FilterButton.Size = new System.Drawing.Size(80, 39);
             this.FilterButton.TabIndex = 3;
             this.FilterButton.Text = "Filter...";
             this.FilterButton.UseVisualStyleBackColor = true;

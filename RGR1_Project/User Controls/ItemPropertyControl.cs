@@ -18,23 +18,16 @@ namespace Organizer_Project.User_Controls
         {
             get
             {
-                if(!IsEnabled)
-                    return null;
-                else if (PropertyComboBox.Enabled)
+                switch (Type)
                 {
-                    return PropertyComboBox.SelectedValue;
-                }
-                else if (PropertyTextBox.Enabled)
-                {
-                    return PropertyTextBox.Text;
-                }
-                else if (PropertyTimePicker.Enabled)
-                {
-                    return PropertyTimePicker.Value;
-                }
-                else
-                {
-                    return null;
+                    case PropertyType.Enum:
+                        return PropertyComboBox.SelectedIndex;
+                    case PropertyType.Text:
+                        return PropertyTextBox.Text;
+                    case PropertyType.Date:
+                        return PropertyTimePicker.Value;
+                    default:
+                        return null;
                 }
             }
         }

@@ -61,59 +61,84 @@ namespace Organizer_Project.Forms
             SortByStatusControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(TaskStatus)));
             SortByTimeControl = new ItemPropertyControl(PropertyType.Date);
             SortByEndTimeControl = new ItemPropertyControl(PropertyType.Date);
-
+            
+            //MainTableLayout.SuspendLayout();
             // Adding property filter controls to its appropriate GroupBox
             FilterByTypeGroup.Controls.Add(FilterByTypeControl);
             FilterByTypeControl.Dock = DockStyle.Fill;
             FilterByTypeControl.EnabledToggle += FilterByTypeControl_EnabledChanged;
 
             FilterByTextGroup.Controls.Add(FilterByTextControl);
-            FilterByTextControl.Dock = DockStyle.Fill;
+            //FilterByTextControl.Dock = DockStyle.Fill;
 
             FilterByPriorityGroup.Controls.Add(FilterByPriorityControl);
-            FilterByPriorityControl.Dock = DockStyle.Fill;
+            //FilterByPriorityControl.Dock = DockStyle.Fill;
 
             FilterByStatusGroup.Controls.Add(FilterByStatusControl);
-            FilterByStatusControl.Dock = DockStyle.Fill;
+            //FilterByStatusControl.Dock = DockStyle.Fill;
 
             FilterByTimeGroup.Controls.Add(FilterByTimeControl);
-            FilterByTimeControl.Dock = DockStyle.Fill;
+            //FilterByTimeControl.Dock = DockStyle.Fill;
 
             FilterByEndTimeGroup.Controls.Add(FilterByEndTimeControl);
-            FilterByEndTimeControl.Dock = DockStyle.Fill;
+            //FilterByEndTimeControl.Dock = DockStyle.Fill;
 
 
 
             // Adding property sorter controls to its appropriate GroupBox
+            SortByTextGroup.SuspendLayout();
+            SortByPriorityGroup.SuspendLayout();
+            SortByStatusGroup.SuspendLayout();
+            SortByTimeGroup.SuspendLayout();
+            SortByEndTimeGroup.SuspendLayout();
+
+
             SortByTextGroup.Controls.Add(SortByTextControl);
-            SortByTextControl.Dock = DockStyle.Fill;
+            //SortByTextControl.Dock = DockStyle.Fill;
+            //SortByTextControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
 
             SortByPriorityGroup.Controls.Add(SortByPriorityControl);
-            SortByPriorityControl.Dock = DockStyle.Fill;
+            //SortByPriorityControl.Dock = DockStyle.Fill;
+            //SortByPriorityControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
 
             SortByStatusGroup.Controls.Add(SortByStatusControl);
-            SortByStatusControl.Dock = DockStyle.Fill;
+            //SortByStatusControl.Dock = DockStyle.Fill;
+            //SortByStatusControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;            
 
             SortByTimeGroup.Controls.Add(SortByTimeControl);
-            SortByTimeControl.Dock = DockStyle.Fill;
+            //SortByTimeControl.Dock = DockStyle.Fill;
+            //SortByTimeControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
 
             SortByEndTimeGroup.Controls.Add(SortByEndTimeControl);
-            SortByEndTimeControl.Dock = DockStyle.Fill;
+            //SortByEndTimeControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
+
+            SortByTextGroup.ResumeLayout(false);
+            SortByTextGroup.PerformLayout();
+            SortByPriorityGroup.ResumeLayout(false);
+            SortByPriorityGroup.PerformLayout();
+            SortByStatusGroup.ResumeLayout(false);
+            SortByStatusGroup.PerformLayout();
+            SortByTimeGroup.ResumeLayout(false);
+            SortByTimeGroup.PerformLayout();
+            SortByEndTimeGroup.ResumeLayout(false);
+            SortByEndTimeGroup.PerformLayout();
+
+            MainTableLayout.PerformLayout();
         }
 
         private void FilterByTypeControl_EnabledChanged(object sender, EventArgs e)
         {
-            if(FilterByTypeControl.Value is ItemType item)
+            if(FilterByTypeControl.Value is int item)
             {
-                TaskProperties = item is ItemType.Task;
-                EventProperties = item is ItemType.Event;
+                TaskProperties = item is (int)ItemType.Task;
+                EventProperties = item is (int)ItemType.Event;
             }
         }
 
         private void FilterItemsForm_Load(object sender, EventArgs e)
         {
-            TaskProperties = false;
-            EventProperties = false;
+            //TaskProperties = false;
+            //EventProperties = false;
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
