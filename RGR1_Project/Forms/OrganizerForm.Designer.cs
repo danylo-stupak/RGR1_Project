@@ -30,12 +30,14 @@ namespace Organizer_Project
         private void InitializeComponent()
         {
             this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.ButtonsTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.OperationsTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.AddTaskButton = new System.Windows.Forms.Button();
             this.AddEventButton = new System.Windows.Forms.Button();
+            this.StatsButton = new System.Windows.Forms.Button();
+            this.FilterButton = new System.Windows.Forms.Button();
             this.DashboardFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.MainTableLayout.SuspendLayout();
-            this.ButtonsTableLayout.SuspendLayout();
+            this.OperationsTableLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTableLayout
@@ -44,7 +46,7 @@ namespace Organizer_Project
             this.MainTableLayout.ColumnCount = 2;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.MainTableLayout.Controls.Add(this.ButtonsTableLayout, 0, 0);
+            this.MainTableLayout.Controls.Add(this.OperationsTableLayout, 0, 0);
             this.MainTableLayout.Controls.Add(this.DashboardFlowLayout, 0, 1);
             this.MainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTableLayout.Location = new System.Drawing.Point(0, 0);
@@ -53,26 +55,30 @@ namespace Organizer_Project
             this.MainTableLayout.RowCount = 2;
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.MainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainTableLayout.Size = new System.Drawing.Size(581, 482);
+            this.MainTableLayout.Size = new System.Drawing.Size(484, 482);
             this.MainTableLayout.TabIndex = 0;
             // 
-            // ButtonsTableLayout
+            // OperationsTableLayout
             // 
-            this.ButtonsTableLayout.AutoSize = true;
-            this.ButtonsTableLayout.ColumnCount = 3;
-            this.MainTableLayout.SetColumnSpan(this.ButtonsTableLayout, 2);
-            this.ButtonsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ButtonsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.ButtonsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsTableLayout.Controls.Add(this.AddTaskButton, 0, 0);
-            this.ButtonsTableLayout.Controls.Add(this.AddEventButton, 1, 0);
-            this.ButtonsTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ButtonsTableLayout.Location = new System.Drawing.Point(15, 15);
-            this.ButtonsTableLayout.Name = "ButtonsTableLayout";
-            this.ButtonsTableLayout.RowCount = 1;
-            this.ButtonsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ButtonsTableLayout.Size = new System.Drawing.Size(551, 47);
-            this.ButtonsTableLayout.TabIndex = 0;
+            this.OperationsTableLayout.AutoSize = true;
+            this.OperationsTableLayout.ColumnCount = 4;
+            this.MainTableLayout.SetColumnSpan(this.OperationsTableLayout, 2);
+            this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.OperationsTableLayout.Controls.Add(this.AddTaskButton, 0, 0);
+            this.OperationsTableLayout.Controls.Add(this.AddEventButton, 1, 0);
+            this.OperationsTableLayout.Controls.Add(this.StatsButton, 2, 0);
+            this.OperationsTableLayout.Controls.Add(this.FilterButton, 3, 0);
+            this.OperationsTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OperationsTableLayout.Location = new System.Drawing.Point(15, 15);
+            this.OperationsTableLayout.Name = "OperationsTableLayout";
+            this.OperationsTableLayout.RowCount = 1;
+            this.OperationsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.OperationsTableLayout.Size = new System.Drawing.Size(454, 47);
+            this.OperationsTableLayout.TabIndex = 0;
             // 
             // AddTaskButton
             // 
@@ -100,6 +106,30 @@ namespace Organizer_Project
             this.AddEventButton.UseVisualStyleBackColor = true;
             this.AddEventButton.Click += new System.EventHandler(this.AddEventButton_Click);
             // 
+            // StatsButton
+            // 
+            this.StatsButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.StatsButton.AutoSize = true;
+            this.StatsButton.Location = new System.Drawing.Point(263, 8);
+            this.StatsButton.Name = "StatsButton";
+            this.StatsButton.Size = new System.Drawing.Size(105, 31);
+            this.StatsButton.TabIndex = 2;
+            this.StatsButton.Text = "Show Stats";
+            this.StatsButton.UseVisualStyleBackColor = true;
+            this.StatsButton.Click += new System.EventHandler(this.StatsButton_Click);
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.FilterButton.AutoSize = true;
+            this.FilterButton.Location = new System.Drawing.Point(374, 8);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(77, 31);
+            this.FilterButton.TabIndex = 3;
+            this.FilterButton.Text = "Filter...";
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
+            // 
             // DashboardFlowLayout
             // 
             this.DashboardFlowLayout.AutoScroll = true;
@@ -107,7 +137,7 @@ namespace Organizer_Project
             this.DashboardFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DashboardFlowLayout.Location = new System.Drawing.Point(15, 68);
             this.DashboardFlowLayout.Name = "DashboardFlowLayout";
-            this.DashboardFlowLayout.Size = new System.Drawing.Size(551, 399);
+            this.DashboardFlowLayout.Size = new System.Drawing.Size(454, 399);
             this.DashboardFlowLayout.TabIndex = 1;
             // 
             // OrganizerForm
@@ -115,7 +145,7 @@ namespace Organizer_Project
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(581, 482);
+            this.ClientSize = new System.Drawing.Size(484, 482);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
@@ -126,8 +156,8 @@ namespace Organizer_Project
             this.Load += new System.EventHandler(this.OrganizerForm_Load);
             this.MainTableLayout.ResumeLayout(false);
             this.MainTableLayout.PerformLayout();
-            this.ButtonsTableLayout.ResumeLayout(false);
-            this.ButtonsTableLayout.PerformLayout();
+            this.OperationsTableLayout.ResumeLayout(false);
+            this.OperationsTableLayout.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,10 +166,12 @@ namespace Organizer_Project
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel MainTableLayout;
-        private System.Windows.Forms.TableLayoutPanel ButtonsTableLayout;
+        private System.Windows.Forms.TableLayoutPanel OperationsTableLayout;
         private System.Windows.Forms.Button AddTaskButton;
         private System.Windows.Forms.Button AddEventButton;
         private System.Windows.Forms.FlowLayoutPanel DashboardFlowLayout;
+        private System.Windows.Forms.Button StatsButton;
+        private System.Windows.Forms.Button FilterButton;
     }
 }
 

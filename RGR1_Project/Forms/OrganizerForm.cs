@@ -121,6 +121,13 @@ namespace Organizer_Project
                 throw new ArgumentException("Error: Unable to update item in dashboard layout.");
             }
         }
+        private void FilterItemsForm_Applying(object sender, EventArgs e)
+        {
+            if (sender is FilterItemsForm filterForm)
+            {
+                MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            }
+        }
         private void OrganizerForm_Load(object sender, EventArgs e)
         {
             RerenderDashboardLayout();
@@ -152,6 +159,21 @@ namespace Organizer_Project
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(ManagerService.GetStatistics(), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            using(FilterItemsForm filterItemsForm = new FilterItemsForm())
+            {
+                filterItemsForm.Applying += FilterItemsForm_Applying;
+                if(filterItemsForm.ShowDialog() == DialogResult.OK)
+                {
+                    RerenderDashboardLayout();
                 }
             }
         }
