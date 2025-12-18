@@ -59,7 +59,7 @@ namespace Organizer_Project
         }
 
         private static string GetRandomTopic(Random r) =>
-            (new[] { "Buy groceries", "Fix bug in C++", "Refactor DTOs", "ADHD Research", "Finish Report" })[r.Next(0, 5)];
+            (new[] { "Buy groceries", "Fix bug in C++", "Refactor DTOs", "UI/UX Research", "Finish Report" })[r.Next(0, 5)];
 
         private static string GetRandomMeeting(Random r) =>
             (new[] { "Team Sync", "Dentist", "University Lecture", "Lunch with Friend", "Project Review" })[r.Next(0, 5)];

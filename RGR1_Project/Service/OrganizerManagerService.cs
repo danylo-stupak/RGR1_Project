@@ -123,13 +123,13 @@ namespace Organizer_Project.Services
             // Sort by Time
             if (sieve.SortByTime.IsEnabled && sieve.SortByTime.Value != null)
             {
-                bool isAsc = sieve.SortByTime.Value.ToString() == "Ascending";
-                query = isAsc ? query.OrderBy(i => i.Time) : query.OrderByDescending(i => i.Time);
+                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByTime.Value);
+                query = isAsc? query.OrderBy(i => i.Time) : query.OrderByDescending(i => i.Time);
             }
             // Sort by EndTime (Event-specific property)
             else if (sieve.SortByEndTime.IsEnabled && sieve.SortByEndTime.Value != null)
             {
-                bool isAsc = sieve.SortByEndTime.Value.ToString() == "Ascending";
+                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByTime.Value);
                 // OrderBy needs a value, so we treat non-events as DateTime.MaxValue to push them to the end
                 query = isAsc
                     ? query.OrderBy(i => i is EventItem e ? e.EndTime : DateTime.MaxValue)

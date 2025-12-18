@@ -51,8 +51,8 @@ namespace Organizer_Project.Forms
             FilterByEndTimeControl = new ItemPropertyControl("EndTime", SieveDTO.FilterByEndTime);
             FilterByStatusControl = new ItemPropertyControl("Status", SieveDTO.FilterByStatus, Enum.GetNames(typeof(TaskStatus)));
 
-            SortByTimeControl = new ItemPropertyControl("Time", SieveDTO.SortByTime);
-            SortByEndTimeControl = new ItemPropertyControl("EndTime", SieveDTO.SortByEndTime);
+            SortByTimeControl = new ItemPropertyControl("Time", SieveDTO.SortByTime, Enum.GetNames(typeof(ItemSortOrder)));
+            SortByEndTimeControl = new ItemPropertyControl("EndTime", SieveDTO.SortByEndTime, Enum.GetNames(typeof(ItemSortOrder)));
             
             MainTableLayout.SuspendLayout();
             FilteringTableLayout.SuspendLayout();

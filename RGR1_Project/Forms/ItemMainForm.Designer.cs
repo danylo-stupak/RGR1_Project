@@ -38,15 +38,17 @@ namespace Organizer_Project
             this.SieveButton = new System.Windows.Forms.Button();
             this.ResetSieveButton = new System.Windows.Forms.Button();
             this.DashboardFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
+            this.EmplyListLabel = new System.Windows.Forms.Label();
             this.MainTableLayout.SuspendLayout();
             this.OperationsTableLayout.SuspendLayout();
             this.SieveButtonsLayout.SuspendLayout();
+            this.DashboardFlowLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTableLayout
             // 
             this.MainTableLayout.AutoSize = true;
-            this.MainTableLayout.ColumnCount = 2;
+            this.MainTableLayout.ColumnCount = 1;
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.MainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainTableLayout.Controls.Add(this.OperationsTableLayout, 0, 0);
@@ -65,7 +67,6 @@ namespace Organizer_Project
             // 
             this.OperationsTableLayout.AutoSize = true;
             this.OperationsTableLayout.ColumnCount = 4;
-            this.MainTableLayout.SetColumnSpan(this.OperationsTableLayout, 2);
             this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.OperationsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -162,12 +163,24 @@ namespace Organizer_Project
             // DashboardFlowLayout
             // 
             this.DashboardFlowLayout.AutoScroll = true;
-            this.MainTableLayout.SetColumnSpan(this.DashboardFlowLayout, 3);
+            this.MainTableLayout.SetColumnSpan(this.DashboardFlowLayout, 2);
+            this.DashboardFlowLayout.Controls.Add(this.EmplyListLabel);
             this.DashboardFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DashboardFlowLayout.Location = new System.Drawing.Point(15, 72);
             this.DashboardFlowLayout.Name = "DashboardFlowLayout";
             this.DashboardFlowLayout.Size = new System.Drawing.Size(556, 395);
             this.DashboardFlowLayout.TabIndex = 1;
+            // 
+            // EmplyListLabel
+            // 
+            this.EmplyListLabel.AutoSize = true;
+            this.EmplyListLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.EmplyListLabel.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmplyListLabel.Location = new System.Drawing.Point(3, 0);
+            this.EmplyListLabel.Name = "EmplyListLabel";
+            this.EmplyListLabel.Size = new System.Drawing.Size(119, 31);
+            this.EmplyListLabel.TabIndex = 0;
+            this.EmplyListLabel.Text = "No Items";
             // 
             // ItemMainForm
             // 
@@ -189,6 +202,8 @@ namespace Organizer_Project
             this.OperationsTableLayout.PerformLayout();
             this.SieveButtonsLayout.ResumeLayout(false);
             this.SieveButtonsLayout.PerformLayout();
+            this.DashboardFlowLayout.ResumeLayout(false);
+            this.DashboardFlowLayout.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,6 +220,7 @@ namespace Organizer_Project
         private System.Windows.Forms.Button SieveButton;
         private System.Windows.Forms.FlowLayoutPanel SieveButtonsLayout;
         private System.Windows.Forms.Button ResetSieveButton;
+        private System.Windows.Forms.Label EmplyListLabel;
     }
 }
 

@@ -18,24 +18,18 @@ namespace Organizer_Project
         }
         private void ClearDashboardLayout()
         {
-            DashboardFlowLayout.Hide();
-            DashboardFlowLayout.SuspendLayout();
-
             for(var control = DashboardFlowLayout.Controls.Count - 1; control >= 0; control--)
             {
                 var itemControl = DashboardFlowLayout.Controls[control];
                 DashboardFlowLayout.Controls.RemoveAt(control);
                 itemControl.Dispose();
             }
-            DashboardFlowLayout.ResumeLayout();
-            DashboardFlowLayout.Show();
         }
         private void RenderDashboardLayout()
         {
-            DashboardFlowLayout.Hide();
-            DashboardFlowLayout.SuspendLayout();
+            int bindCount = ManagerService.BindingSource.Count;
             ManagerService.BindingSource.ResetBindings(false);
-            for (int i = 0; i < ManagerService.BindingSource.Count; i++)
+            for (int i = 0; i < bindCount; i++)
             {
                 var control = DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
@@ -47,14 +41,22 @@ namespace Organizer_Project
                     DashboardFlowLayout.Controls.Add(winControl);
                 }
             }
-            DashboardFlowLayout.ResumeLayout();
-            DashboardFlowLayout.Show();
+            if(bindCount == 0)
+            {
+                DashboardFlowLayout.Controls.Add(EmplyListLabel);
+            }
         }
 
         private void RerenderDashboardLayout()
         {
+            MainTableLayout.SuspendLayout();
+            DashboardFlowLayout.SuspendLayout();
             ClearDashboardLayout();
             RenderDashboardLayout();
+            DashboardFlowLayout.ResumeLayout(false);
+            DashboardFlowLayout.PerformLayout();
+            MainTableLayout.ResumeLayout(false);
+            MainTableLayout.PerformLayout();
         }
         private void ItemDetailsForm_Create(object sender, EventArgs e)
         {
@@ -178,11 +180,7 @@ namespace Organizer_Project
                 {
                     ManagerService.ApplySieve(filterItemsForm.SieveDTO);
                     ResetSieveButton.Enabled = true;
-                    if (!SieveDTO.Equals(filterItemsForm.SieveDTO))
-                    {
-                        SieveDTO = filterItemsForm.SieveDTO;
-                        RerenderDashboardLayout();
-                    }
+                    RerenderDashboardLayout();
                 }
             }
         }
@@ -193,6 +191,8 @@ namespace Organizer_Project
             {
                 SieveDTO = null;
             }
+            ManagerService.Reset();
+            RerenderDashboardLayout();
         }
     }
 }

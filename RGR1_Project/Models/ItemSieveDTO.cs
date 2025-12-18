@@ -2,6 +2,11 @@
 
 namespace Organizer_Project.Models
 {
+    public enum ItemSortOrder
+    {
+        Descending,
+        Ascending
+    }
     public class ItemSieveDTO
     {
         public ItemPropertyDTO FilterByType { get; }
