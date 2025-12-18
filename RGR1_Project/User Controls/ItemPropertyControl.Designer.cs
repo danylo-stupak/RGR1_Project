@@ -42,12 +42,12 @@
             // EnableCheckBox
             // 
             this.EnableCheckBox.AutoSize = true;
-            this.EnableCheckBox.Location = new System.Drawing.Point(624, 0);
-            this.EnableCheckBox.Margin = new System.Windows.Forms.Padding(0);
-            this.EnableCheckBox.MinimumSize = new System.Drawing.Size(133, 0);
+            this.EnableCheckBox.Location = new System.Drawing.Point(496, 0);
+            this.EnableCheckBox.Margin = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.EnableCheckBox.MinimumSize = new System.Drawing.Size(100, 0);
             this.EnableCheckBox.Name = "EnableCheckBox";
-            this.EnableCheckBox.Padding = new System.Windows.Forms.Padding(5);
-            this.EnableCheckBox.Size = new System.Drawing.Size(133, 30);
+            this.EnableCheckBox.Padding = new System.Windows.Forms.Padding(4);
+            this.EnableCheckBox.Size = new System.Drawing.Size(100, 25);
             this.EnableCheckBox.TabIndex = 0;
             this.EnableCheckBox.Text = "Enable";
             this.EnableCheckBox.UseVisualStyleBackColor = true;
@@ -62,20 +62,21 @@
             "None"});
             this.PropertyComboBox.Location = new System.Drawing.Point(0, 0);
             this.PropertyComboBox.Margin = new System.Windows.Forms.Padding(0);
-            this.PropertyComboBox.MinimumSize = new System.Drawing.Size(132, 0);
+            this.PropertyComboBox.MinimumSize = new System.Drawing.Size(120, 0);
             this.PropertyComboBox.Name = "PropertyComboBox";
-            this.PropertyComboBox.Size = new System.Drawing.Size(132, 24);
+            this.PropertyComboBox.Size = new System.Drawing.Size(120, 21);
             this.PropertyComboBox.TabIndex = 0;
+            this.PropertyComboBox.SelectedIndexChanged += new System.EventHandler(this.PropertyComboBox_SelectedIndexChanged);
             // 
             // InputNameLabel
             // 
             this.InputNameLabel.AutoSize = true;
             this.InputNameLabel.Location = new System.Drawing.Point(0, 0);
             this.InputNameLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.InputNameLabel.MinimumSize = new System.Drawing.Size(200, 0);
+            this.InputNameLabel.MinimumSize = new System.Drawing.Size(120, 0);
             this.InputNameLabel.Name = "InputNameLabel";
-            this.InputNameLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.InputNameLabel.Size = new System.Drawing.Size(200, 26);
+            this.InputNameLabel.Padding = new System.Windows.Forms.Padding(4);
+            this.InputNameLabel.Size = new System.Drawing.Size(120, 21);
             this.InputNameLabel.TabIndex = 1;
             this.InputNameLabel.Text = "Text";
             this.InputNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -84,24 +85,24 @@
             // 
             this.PropertyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PropertyTextBox.Location = new System.Drawing.Point(132, 4);
+            this.PropertyTextBox.Location = new System.Drawing.Point(120, 4);
             this.PropertyTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.PropertyTextBox.MinimumSize = new System.Drawing.Size(133, 4);
+            this.PropertyTextBox.MinimumSize = new System.Drawing.Size(120, 4);
             this.PropertyTextBox.Name = "PropertyTextBox";
-            this.PropertyTextBox.Size = new System.Drawing.Size(133, 15);
+            this.PropertyTextBox.Size = new System.Drawing.Size(120, 13);
             this.PropertyTextBox.TabIndex = 1;
             // 
             // PropertyTimePicker
             // 
             this.PropertyTimePicker.CustomFormat = "dd/MM/yyyy    HH:mm";
             this.PropertyTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PropertyTimePicker.Location = new System.Drawing.Point(265, 0);
+            this.PropertyTimePicker.Location = new System.Drawing.Point(240, 0);
             this.PropertyTimePicker.Margin = new System.Windows.Forms.Padding(0);
             this.PropertyTimePicker.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.PropertyTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.PropertyTimePicker.MinimumSize = new System.Drawing.Size(159, 4);
+            this.PropertyTimePicker.MinimumSize = new System.Drawing.Size(120, 4);
             this.PropertyTimePicker.Name = "PropertyTimePicker";
-            this.PropertyTimePicker.Size = new System.Drawing.Size(159, 22);
+            this.PropertyTimePicker.Size = new System.Drawing.Size(120, 20);
             this.PropertyTimePicker.TabIndex = 2;
             this.PropertyTimePicker.Value = new System.DateTime(2025, 11, 20, 0, 0, 0, 0);
             this.PropertyTimePicker.Visible = false;
@@ -113,39 +114,39 @@
             this.ControlsFlowLayout.Controls.Add(this.PropertyComboBox);
             this.ControlsFlowLayout.Controls.Add(this.PropertyTextBox);
             this.ControlsFlowLayout.Controls.Add(this.PropertyTimePicker);
-            this.ControlsFlowLayout.Location = new System.Drawing.Point(200, 3);
+            this.ControlsFlowLayout.Location = new System.Drawing.Point(120, 2);
             this.ControlsFlowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.ControlsFlowLayout.Name = "ControlsFlowLayout";
-            this.ControlsFlowLayout.Size = new System.Drawing.Size(424, 24);
+            this.ControlsFlowLayout.Size = new System.Drawing.Size(360, 21);
             this.ControlsFlowLayout.TabIndex = 3;
             this.ControlsFlowLayout.WrapContents = false;
             // 
             // MainFlowLayout
             // 
+            this.MainFlowLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.MainFlowLayout.AutoSize = true;
             this.MainFlowLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.MainFlowLayout.Controls.Add(this.InputNameLabel);
             this.MainFlowLayout.Controls.Add(this.ControlsFlowLayout);
             this.MainFlowLayout.Controls.Add(this.EnableCheckBox);
-            this.MainFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainFlowLayout.Location = new System.Drawing.Point(0, 0);
             this.MainFlowLayout.Margin = new System.Windows.Forms.Padding(0);
-            this.MainFlowLayout.MinimumSize = new System.Drawing.Size(700, 0);
+            this.MainFlowLayout.MinimumSize = new System.Drawing.Size(525, 0);
             this.MainFlowLayout.Name = "MainFlowLayout";
-            this.MainFlowLayout.Size = new System.Drawing.Size(763, 30);
+            this.MainFlowLayout.Size = new System.Drawing.Size(596, 25);
             this.MainFlowLayout.TabIndex = 1;
             this.MainFlowLayout.WrapContents = false;
             // 
             // ItemPropertyControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.MainFlowLayout);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ItemPropertyControl";
-            this.Size = new System.Drawing.Size(763, 30);
+            this.Size = new System.Drawing.Size(598, 25);
             this.Load += new System.EventHandler(this.FilterItemProperty_Load);
             this.ControlsFlowLayout.ResumeLayout(false);
             this.ControlsFlowLayout.PerformLayout();

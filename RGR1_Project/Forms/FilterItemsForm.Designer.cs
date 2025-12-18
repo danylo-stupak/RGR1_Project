@@ -59,70 +59,65 @@
             // 
             // FilterByTypeGroup
             // 
+            this.FilterByTypeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByTypeGroup.AutoSize = true;
-            this.FilterByTypeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByTypeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FilterByTypeGroup.Location = new System.Drawing.Point(0, 12);
-            this.FilterByTypeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByTypeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByTypeGroup.Name = "FilterByTypeGroup";
-            this.FilterByTypeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTypeGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByTypeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByTypeGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByTypeGroup.TabIndex = 0;
             this.FilterByTypeGroup.TabStop = false;
             this.FilterByTypeGroup.Text = "Type";
             // 
             // FilterByTextGroup
             // 
+            this.FilterByTextGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByTextGroup.AutoSize = true;
-            this.FilterByTextGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByTextGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByTextGroup.Location = new System.Drawing.Point(0, 23);
-            this.FilterByTextGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByTextGroup.Location = new System.Drawing.Point(0, 51);
+            this.FilterByTextGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByTextGroup.Name = "FilterByTextGroup";
-            this.FilterByTextGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTextGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByTextGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByTextGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByTextGroup.TabIndex = 1;
             this.FilterByTextGroup.TabStop = false;
             this.FilterByTextGroup.Text = "Text";
             // 
             // FilterByPriorityGroup
             // 
+            this.FilterByPriorityGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByPriorityGroup.AutoSize = true;
-            this.FilterByPriorityGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByPriorityGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByPriorityGroup.Location = new System.Drawing.Point(0, 34);
-            this.FilterByPriorityGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByPriorityGroup.Location = new System.Drawing.Point(0, 90);
+            this.FilterByPriorityGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByPriorityGroup.Name = "FilterByPriorityGroup";
-            this.FilterByPriorityGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByPriorityGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByPriorityGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByPriorityGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByPriorityGroup.TabIndex = 2;
             this.FilterByPriorityGroup.TabStop = false;
             this.FilterByPriorityGroup.Text = "Priority";
             // 
             // FilterByStatusGroup
             // 
+            this.FilterByStatusGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByStatusGroup.AutoSize = true;
-            this.FilterByStatusGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByStatusGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByStatusGroup.Location = new System.Drawing.Point(0, 45);
-            this.FilterByStatusGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByStatusGroup.Location = new System.Drawing.Point(0, 129);
+            this.FilterByStatusGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByStatusGroup.Name = "FilterByStatusGroup";
-            this.FilterByStatusGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByStatusGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByStatusGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByStatusGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByStatusGroup.TabIndex = 3;
             this.FilterByStatusGroup.TabStop = false;
             this.FilterByStatusGroup.Text = "Status";
             // 
             // FilterByTimeGroup
             // 
+            this.FilterByTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByTimeGroup.AutoSize = true;
-            this.FilterByTimeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByTimeGroup.Location = new System.Drawing.Point(0, 56);
-            this.FilterByTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByTimeGroup.Location = new System.Drawing.Point(0, 168);
+            this.FilterByTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByTimeGroup.Name = "FilterByTimeGroup";
-            this.FilterByTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByTimeGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByTimeGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByTimeGroup.TabIndex = 4;
             this.FilterByTimeGroup.TabStop = false;
             this.FilterByTimeGroup.Text = "Time";
@@ -143,7 +138,6 @@
             // SortingTabPage
             // 
             this.SortingTabPage.Controls.Add(this.SortingTableLayout);
-            this.SortingTabPage.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SortingTabPage.Location = new System.Drawing.Point(4, 30);
             this.SortingTabPage.Margin = new System.Windows.Forms.Padding(0);
             this.SortingTabPage.Name = "SortingTabPage";
@@ -164,7 +158,6 @@
             this.SortingTableLayout.Controls.Add(this.SortByTimeGroup, 0, 3);
             this.SortingTableLayout.Controls.Add(this.SortByStatusGroup, 0, 2);
             this.SortingTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SortingTableLayout.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SortingTableLayout.Location = new System.Drawing.Point(8, 8);
             this.SortingTableLayout.Margin = new System.Windows.Forms.Padding(0);
             this.SortingTableLayout.Name = "SortingTableLayout";
@@ -182,11 +175,11 @@
             // 
             this.SortByTextGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByTextGroup.AutoSize = true;
-            this.SortByTextGroup.Location = new System.Drawing.Point(0, 0);
-            this.SortByTextGroup.Margin = new System.Windows.Forms.Padding(0);
+            this.SortByTextGroup.Location = new System.Drawing.Point(0, 12);
+            this.SortByTextGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByTextGroup.Name = "SortByTextGroup";
-            this.SortByTextGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByTextGroup.Size = new System.Drawing.Size(592, 19);
+            this.SortByTextGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.SortByTextGroup.Size = new System.Drawing.Size(592, 15);
             this.SortByTextGroup.TabIndex = 0;
             this.SortByTextGroup.TabStop = false;
             this.SortByTextGroup.Text = "Text";
@@ -195,11 +188,11 @@
             // 
             this.SortByEndTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByEndTimeGroup.AutoSize = true;
-            this.SortByEndTimeGroup.Location = new System.Drawing.Point(0, 76);
-            this.SortByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0);
+            this.SortByEndTimeGroup.Location = new System.Drawing.Point(0, 168);
+            this.SortByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByEndTimeGroup.Name = "SortByEndTimeGroup";
-            this.SortByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByEndTimeGroup.Size = new System.Drawing.Size(592, 19);
+            this.SortByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.SortByEndTimeGroup.Size = new System.Drawing.Size(592, 15);
             this.SortByEndTimeGroup.TabIndex = 4;
             this.SortByEndTimeGroup.TabStop = false;
             this.SortByEndTimeGroup.Text = "Endtime";
@@ -208,11 +201,11 @@
             // 
             this.SortByPriorityGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByPriorityGroup.AutoSize = true;
-            this.SortByPriorityGroup.Location = new System.Drawing.Point(0, 19);
-            this.SortByPriorityGroup.Margin = new System.Windows.Forms.Padding(0);
+            this.SortByPriorityGroup.Location = new System.Drawing.Point(0, 51);
+            this.SortByPriorityGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByPriorityGroup.Name = "SortByPriorityGroup";
-            this.SortByPriorityGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByPriorityGroup.Size = new System.Drawing.Size(592, 19);
+            this.SortByPriorityGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.SortByPriorityGroup.Size = new System.Drawing.Size(592, 15);
             this.SortByPriorityGroup.TabIndex = 1;
             this.SortByPriorityGroup.TabStop = false;
             this.SortByPriorityGroup.Text = "Priority";
@@ -221,11 +214,11 @@
             // 
             this.SortByTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByTimeGroup.AutoSize = true;
-            this.SortByTimeGroup.Location = new System.Drawing.Point(0, 57);
-            this.SortByTimeGroup.Margin = new System.Windows.Forms.Padding(0);
+            this.SortByTimeGroup.Location = new System.Drawing.Point(0, 129);
+            this.SortByTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByTimeGroup.Name = "SortByTimeGroup";
-            this.SortByTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByTimeGroup.Size = new System.Drawing.Size(592, 19);
+            this.SortByTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.SortByTimeGroup.Size = new System.Drawing.Size(592, 15);
             this.SortByTimeGroup.TabIndex = 3;
             this.SortByTimeGroup.TabStop = false;
             this.SortByTimeGroup.Text = "Time";
@@ -234,11 +227,11 @@
             // 
             this.SortByStatusGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByStatusGroup.AutoSize = true;
-            this.SortByStatusGroup.Location = new System.Drawing.Point(0, 38);
-            this.SortByStatusGroup.Margin = new System.Windows.Forms.Padding(0);
+            this.SortByStatusGroup.Location = new System.Drawing.Point(0, 90);
+            this.SortByStatusGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByStatusGroup.Name = "SortByStatusGroup";
-            this.SortByStatusGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.SortByStatusGroup.Size = new System.Drawing.Size(592, 19);
+            this.SortByStatusGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.SortByStatusGroup.Size = new System.Drawing.Size(592, 15);
             this.SortByStatusGroup.TabIndex = 2;
             this.SortByStatusGroup.TabStop = false;
             this.SortByStatusGroup.Text = "Status";
@@ -267,7 +260,6 @@
             this.FilteringTableLayout.Controls.Add(this.FilterByPriorityGroup, 0, 2);
             this.FilteringTableLayout.Controls.Add(this.FilterByStatusGroup, 0, 3);
             this.FilteringTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilteringTableLayout.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FilteringTableLayout.Location = new System.Drawing.Point(8, 8);
             this.FilteringTableLayout.Margin = new System.Windows.Forms.Padding(0);
             this.FilteringTableLayout.Name = "FilteringTableLayout";
@@ -284,14 +276,13 @@
             // 
             // FilterByEndTimeGroup
             // 
+            this.FilterByEndTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.FilterByEndTimeGroup.AutoSize = true;
-            this.FilterByEndTimeGroup.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.FilterByEndTimeGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FilterByEndTimeGroup.Location = new System.Drawing.Point(0, 67);
-            this.FilterByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 0);
+            this.FilterByEndTimeGroup.Location = new System.Drawing.Point(0, 207);
+            this.FilterByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.FilterByEndTimeGroup.Name = "FilterByEndTimeGroup";
-            this.FilterByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0);
-            this.FilterByEndTimeGroup.Size = new System.Drawing.Size(592, 1);
+            this.FilterByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
+            this.FilterByEndTimeGroup.Size = new System.Drawing.Size(592, 15);
             this.FilterByEndTimeGroup.TabIndex = 5;
             this.FilterByEndTimeGroup.TabStop = false;
             this.FilterByEndTimeGroup.Text = "Endtime";

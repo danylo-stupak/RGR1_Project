@@ -25,11 +25,15 @@ namespace Organizer_Project.Forms
         {
             set
             {
+                MainTableLayout.SuspendLayout();
                 FilterByStatusGroup.Enabled = value;
                 FilterByStatusGroup.Visible = value;
 
                 SortByStatusGroup.Enabled = value;
                 SortByStatusGroup.Visible = value;
+
+                MainTableLayout.ResumeLayout(false);
+                MainTableLayout.PerformLayout();
             }
         }
 
@@ -37,11 +41,15 @@ namespace Organizer_Project.Forms
         {
             set
             {
+                MainTableLayout.SuspendLayout();
                 FilterByEndTimeGroup.Enabled = value;
                 FilterByEndTimeGroup.Visible = value;
 
                 SortByEndTimeGroup.Enabled = value;
                 SortByEndTimeGroup.Visible = value;
+
+                MainTableLayout.ResumeLayout(false);
+                MainTableLayout.PerformLayout();
             }
         }
         
@@ -61,27 +69,33 @@ namespace Organizer_Project.Forms
             SortByStatusControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(TaskStatus)));
             SortByTimeControl = new ItemPropertyControl(PropertyType.Date);
             SortByEndTimeControl = new ItemPropertyControl(PropertyType.Date);
-            
-            //MainTableLayout.SuspendLayout();
+
+            MainTableLayout.SuspendLayout();
             // Adding property filter controls to its appropriate GroupBox
+            FilterByTextGroup.SuspendLayout();
+            FilterByPriorityGroup.SuspendLayout();
+            FilterByStatusGroup.SuspendLayout();
+            FilterByTimeGroup.SuspendLayout();
+            FilterByEndTimeGroup.SuspendLayout();
+
             FilterByTypeGroup.Controls.Add(FilterByTypeControl);
             FilterByTypeControl.Dock = DockStyle.Fill;
             FilterByTypeControl.EnabledToggle += FilterByTypeControl_EnabledChanged;
 
             FilterByTextGroup.Controls.Add(FilterByTextControl);
-            //FilterByTextControl.Dock = DockStyle.Fill;
+            FilterByTextControl.Dock = DockStyle.Fill;
 
             FilterByPriorityGroup.Controls.Add(FilterByPriorityControl);
-            //FilterByPriorityControl.Dock = DockStyle.Fill;
+            FilterByPriorityControl.Dock = DockStyle.Fill;
 
             FilterByStatusGroup.Controls.Add(FilterByStatusControl);
-            //FilterByStatusControl.Dock = DockStyle.Fill;
+            FilterByStatusControl.Dock = DockStyle.Fill;
 
             FilterByTimeGroup.Controls.Add(FilterByTimeControl);
-            //FilterByTimeControl.Dock = DockStyle.Fill;
+            FilterByTimeControl.Dock = DockStyle.Fill;
 
             FilterByEndTimeGroup.Controls.Add(FilterByEndTimeControl);
-            //FilterByEndTimeControl.Dock = DockStyle.Fill;
+            FilterByEndTimeControl.Dock = DockStyle.Fill;
 
 
 
@@ -94,23 +108,30 @@ namespace Organizer_Project.Forms
 
 
             SortByTextGroup.Controls.Add(SortByTextControl);
-            //SortByTextControl.Dock = DockStyle.Fill;
-            //SortByTextControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
+            SortByTextControl.Dock = DockStyle.Fill;
 
             SortByPriorityGroup.Controls.Add(SortByPriorityControl);
-            //SortByPriorityControl.Dock = DockStyle.Fill;
-            //SortByPriorityControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
+            SortByPriorityControl.Dock = DockStyle.Fill;
 
             SortByStatusGroup.Controls.Add(SortByStatusControl);
-            //SortByStatusControl.Dock = DockStyle.Fill;
-            //SortByStatusControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;            
+            SortByStatusControl.Dock = DockStyle.Fill;
 
             SortByTimeGroup.Controls.Add(SortByTimeControl);
-            //SortByTimeControl.Dock = DockStyle.Fill;
-            //SortByTimeControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
+            SortByTimeControl.Dock = DockStyle.Fill;
 
             SortByEndTimeGroup.Controls.Add(SortByEndTimeControl);
-            //SortByEndTimeControl.Anchor = AnchorStyles.Bottom | AnchorStyles.Top;
+            SortByEndTimeControl.Dock = DockStyle.Fill;
+
+            FilterByTextGroup.ResumeLayout(false);
+            FilterByTextGroup.PerformLayout();
+            FilterByPriorityGroup.ResumeLayout(false);
+            FilterByPriorityGroup.PerformLayout();
+            FilterByStatusGroup.ResumeLayout(false);
+            FilterByStatusGroup.PerformLayout();
+            FilterByTimeGroup.ResumeLayout(false);
+            FilterByTimeGroup.PerformLayout();
+            FilterByEndTimeGroup.ResumeLayout(false);
+            FilterByEndTimeGroup.PerformLayout();
 
             SortByTextGroup.ResumeLayout(false);
             SortByTextGroup.PerformLayout();
@@ -123,6 +144,7 @@ namespace Organizer_Project.Forms
             SortByEndTimeGroup.ResumeLayout(false);
             SortByEndTimeGroup.PerformLayout();
 
+            MainTableLayout.ResumeLayout(false);
             MainTableLayout.PerformLayout();
         }
 
@@ -130,15 +152,15 @@ namespace Organizer_Project.Forms
         {
             if(FilterByTypeControl.Value is int item)
             {
-                TaskProperties = item is (int)ItemType.Task;
-                EventProperties = item is (int)ItemType.Event;
+                TaskProperties = FilterByTypeControl.IsEnabled && item is (int)ItemType.Task;
+                EventProperties = FilterByTypeControl.IsEnabled && item is (int)ItemType.Event;
             }
         }
 
         private void FilterItemsForm_Load(object sender, EventArgs e)
         {
-            //TaskProperties = false;
-            //EventProperties = false;
+            TaskProperties = false;
+            EventProperties = false;
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)

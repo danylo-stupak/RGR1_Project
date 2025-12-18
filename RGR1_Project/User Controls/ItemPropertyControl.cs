@@ -65,6 +65,9 @@ namespace Organizer_Project.User_Controls
             ControlsFlowLayout.Enabled = IsEnabled;
             EnabledToggle?.Invoke(this, new EventArgs());
         }
+
+        private void PropertyComboBox_SelectedIndexChanged(object sender, EventArgs e) => EnabledToggle?.Invoke(this, new EventArgs());
+
     }
     public enum PropertyType
     {
