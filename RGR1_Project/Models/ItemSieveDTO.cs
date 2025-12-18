@@ -1,5 +1,12 @@
-﻿namespace Organizer_Project.Models
+﻿using System.Collections.Generic;
+
+namespace Organizer_Project.Models
 {
+    public enum ItemSortOrder
+    {
+        Ascending,
+        Descending
+    }
     public class ItemSieveDTO
     {
         public ItemPropertyDTO FilterByType { get; }
@@ -29,6 +36,36 @@
             SortByStatus = new ItemPropertyDTO(PropertyControlType.ComboBox);
             SortByTime = new ItemPropertyDTO(PropertyControlType.ComboBox);
             SortByEndTime = new ItemPropertyDTO(PropertyControlType.ComboBox);
+        }
+
+        public IEnumerable<ItemPropertyDTO> GetItems()
+        {
+            List<ItemPropertyDTO> items = new List<ItemPropertyDTO>();
+            if(FilterByType.Value != null)
+                items.Add(FilterByType);
+            if (FilterByText.Value != null)
+                items.Add(FilterByText);
+            if(FilterByPriority.Value != null)
+                items.Add(FilterByPriority);
+            if(FilterByStatus.Value != null)
+                items.Add(FilterByStatus);
+            if(FilterByTime.Value != null)
+                items.Add(FilterByTime);
+            if(FilterByEndTime.Value != null)
+                items.Add(FilterByEndTime);
+
+            if(SortByText.Value != null)
+                items.Add(SortByText);
+            if(SortByPriority.Value != null)
+                items.Add(SortByPriority);
+            if(SortByStatus.Value != null)
+                items.Add(SortByStatus);
+            if(SortByTime.Value != null)
+                items.Add(SortByTime);
+            if(SortByEndTime.Value != null)
+                items.Add(SortByEndTime);
+            
+            return items;
         }
     }
 }

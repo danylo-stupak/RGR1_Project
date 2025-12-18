@@ -3,6 +3,7 @@ using Organizer_Project.User_Controls;
 using Organizer_Project.Models;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Organizer_Project.Forms
 {
@@ -15,7 +16,6 @@ namespace Organizer_Project.Forms
         private readonly ItemPropertyControl FilterByTimeControl;
         private readonly ItemPropertyControl FilterByEndTimeControl;
 
-        private readonly ItemPropertyControl SortByTextControl;
         private readonly ItemPropertyControl SortByPriorityControl;
         private readonly ItemPropertyControl SortByStatusControl;
         private readonly ItemPropertyControl SortByTimeControl;
@@ -66,11 +66,10 @@ namespace Organizer_Project.Forms
             FilterByTimeControl = new ItemPropertyControl(SieveDTO.FilterByTime);
             FilterByEndTimeControl = new ItemPropertyControl(SieveDTO.FilterByEndTime);
 
-            SortByTextControl = new ItemPropertyControl(SieveDTO.SortByText);
-            SortByPriorityControl = new ItemPropertyControl(SieveDTO.SortByPriority, Enum.GetNames(typeof(Priority)));
-            SortByStatusControl = new ItemPropertyControl(SieveDTO.SortByStatus, Enum.GetNames(typeof(TaskStatus)));
-            SortByTimeControl = new ItemPropertyControl(SieveDTO.SortByTime);
-            SortByEndTimeControl = new ItemPropertyControl(SieveDTO.SortByEndTime);
+            SortByPriorityControl = new ItemPropertyControl(SieveDTO.SortByPriority, Enum.GetNames(typeof(ItemSortOrder)));
+            SortByStatusControl = new ItemPropertyControl(SieveDTO.SortByStatus, Enum.GetNames(typeof(ItemSortOrder)));
+            SortByTimeControl = new ItemPropertyControl(SieveDTO.SortByTime, Enum.GetNames(typeof(ItemSortOrder)));
+            SortByEndTimeControl = new ItemPropertyControl(SieveDTO.SortByEndTime, Enum.GetNames(typeof(ItemSortOrder)));
 
             MainTableLayout.SuspendLayout();
             // Adding property filter controls to its appropriate GroupBox
@@ -102,15 +101,10 @@ namespace Organizer_Project.Forms
 
 
             // Adding property sorter controls to its appropriate GroupBox
-            SortByTextGroup.SuspendLayout();
             SortByPriorityGroup.SuspendLayout();
             SortByStatusGroup.SuspendLayout();
             SortByTimeGroup.SuspendLayout();
             SortByEndTimeGroup.SuspendLayout();
-
-
-            SortByTextGroup.Controls.Add(SortByTextControl);
-            SortByTextControl.Dock = DockStyle.Fill;
 
             SortByPriorityGroup.Controls.Add(SortByPriorityControl);
             SortByPriorityControl.Dock = DockStyle.Fill;
@@ -135,8 +129,6 @@ namespace Organizer_Project.Forms
             FilterByEndTimeGroup.ResumeLayout(false);
             FilterByEndTimeGroup.PerformLayout();
 
-            SortByTextGroup.ResumeLayout(false);
-            SortByTextGroup.PerformLayout();
             SortByPriorityGroup.ResumeLayout(false);
             SortByPriorityGroup.PerformLayout();
             SortByStatusGroup.ResumeLayout(false);
@@ -150,6 +142,10 @@ namespace Organizer_Project.Forms
             MainTableLayout.PerformLayout();
         }
 
+        public IEnumerable<ItemPropertyDTO> GetItemProperties()
+        {
+            return SieveDTO.GetItems();
+        }
 
         private void FilterByTypeControl_EnabledChanged(object sender, EventArgs e)
         {

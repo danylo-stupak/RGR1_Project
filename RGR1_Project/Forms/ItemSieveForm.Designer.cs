@@ -36,7 +36,6 @@
             this.OperationsTabControl = new System.Windows.Forms.TabControl();
             this.SortingTabPage = new System.Windows.Forms.TabPage();
             this.SortingTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.SortByTextGroup = new System.Windows.Forms.GroupBox();
             this.SortByEndTimeGroup = new System.Windows.Forms.GroupBox();
             this.SortByPriorityGroup = new System.Windows.Forms.GroupBox();
             this.SortByTimeGroup = new System.Windows.Forms.GroupBox();
@@ -152,7 +151,6 @@
             this.SortingTableLayout.AutoSize = true;
             this.SortingTableLayout.ColumnCount = 1;
             this.SortingTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.SortingTableLayout.Controls.Add(this.SortByTextGroup, 0, 0);
             this.SortingTableLayout.Controls.Add(this.SortByEndTimeGroup, 0, 4);
             this.SortingTableLayout.Controls.Add(this.SortByPriorityGroup, 0, 1);
             this.SortingTableLayout.Controls.Add(this.SortByTimeGroup, 0, 3);
@@ -171,24 +169,11 @@
             this.SortingTableLayout.Size = new System.Drawing.Size(592, 507);
             this.SortingTableLayout.TabIndex = 11;
             // 
-            // SortByTextGroup
-            // 
-            this.SortByTextGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SortByTextGroup.AutoSize = true;
-            this.SortByTextGroup.Location = new System.Drawing.Point(0, 12);
-            this.SortByTextGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
-            this.SortByTextGroup.Name = "SortByTextGroup";
-            this.SortByTextGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
-            this.SortByTextGroup.Size = new System.Drawing.Size(592, 15);
-            this.SortByTextGroup.TabIndex = 0;
-            this.SortByTextGroup.TabStop = false;
-            this.SortByTextGroup.Text = "Text";
-            // 
             // SortByEndTimeGroup
             // 
             this.SortByEndTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByEndTimeGroup.AutoSize = true;
-            this.SortByEndTimeGroup.Location = new System.Drawing.Point(0, 168);
+            this.SortByEndTimeGroup.Location = new System.Drawing.Point(0, 129);
             this.SortByEndTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByEndTimeGroup.Name = "SortByEndTimeGroup";
             this.SortByEndTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
@@ -201,7 +186,7 @@
             // 
             this.SortByPriorityGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByPriorityGroup.AutoSize = true;
-            this.SortByPriorityGroup.Location = new System.Drawing.Point(0, 51);
+            this.SortByPriorityGroup.Location = new System.Drawing.Point(0, 12);
             this.SortByPriorityGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByPriorityGroup.Name = "SortByPriorityGroup";
             this.SortByPriorityGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
@@ -214,7 +199,7 @@
             // 
             this.SortByTimeGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByTimeGroup.AutoSize = true;
-            this.SortByTimeGroup.Location = new System.Drawing.Point(0, 129);
+            this.SortByTimeGroup.Location = new System.Drawing.Point(0, 90);
             this.SortByTimeGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByTimeGroup.Name = "SortByTimeGroup";
             this.SortByTimeGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
@@ -227,7 +212,7 @@
             // 
             this.SortByStatusGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SortByStatusGroup.AutoSize = true;
-            this.SortByStatusGroup.Location = new System.Drawing.Point(0, 90);
+            this.SortByStatusGroup.Location = new System.Drawing.Point(0, 51);
             this.SortByStatusGroup.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
             this.SortByStatusGroup.Name = "SortByStatusGroup";
             this.SortByStatusGroup.Padding = new System.Windows.Forms.Padding(0, 8, 0, 8);
@@ -346,7 +331,7 @@
             this.MainTableLayout.Size = new System.Drawing.Size(640, 653);
             this.MainTableLayout.TabIndex = 4;
             // 
-            // FilterItemsForm
+            // ItemSieveForm
             // 
             this.AcceptButton = this.ApplyButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -359,7 +344,7 @@
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.MinimumSize = new System.Drawing.Size(550, 700);
-            this.Name = "FilterItemsForm";
+            this.Name = "ItemSieveForm";
             this.Padding = new System.Windows.Forms.Padding(4);
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -392,7 +377,6 @@
         private System.Windows.Forms.GroupBox FilterByEndTimeGroup;
         private System.Windows.Forms.GroupBox SortByStatusGroup;
         private System.Windows.Forms.GroupBox SortByPriorityGroup;
-        private System.Windows.Forms.GroupBox SortByTextGroup;
         private System.Windows.Forms.GroupBox SortByEndTimeGroup;
         private System.Windows.Forms.GroupBox SortByTimeGroup;
         private System.Windows.Forms.TableLayoutPanel SortingTableLayout;
