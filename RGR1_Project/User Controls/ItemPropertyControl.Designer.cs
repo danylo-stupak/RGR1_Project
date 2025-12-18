@@ -47,7 +47,6 @@
             this.EnableCheckBox.TabIndex = 0;
             this.EnableCheckBox.Text = "Enable";
             this.EnableCheckBox.UseVisualStyleBackColor = true;
-            this.EnableCheckBox.CheckedChanged += new System.EventHandler(this.EnableCheckBox_CheckedChanged);
             // 
             // InputNameLabel
             // 

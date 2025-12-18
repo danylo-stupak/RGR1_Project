@@ -18,7 +18,7 @@ namespace Organizer_Project.Forms
         private readonly ItemPropertyControl SortByTimeControl;
         private readonly ItemPropertyControl SortByEndTimeControl;
 
-        private readonly ItemSieveDTO SieveDTO;
+        public readonly ItemSieveDTO SieveDTO;
         private bool TaskProperties
         {
             set
@@ -38,23 +38,21 @@ namespace Organizer_Project.Forms
                 SortByEndTimeControl.Visible = value;
             }
         }
-        
-        public event EventHandler Applying;
-        public ItemSieveForm()
+        public ItemSieveForm(ItemSieveDTO sieveDTO = null)
         {
             InitializeComponent();
-            SieveDTO = new ItemSieveDTO();
+            SieveDTO = sieveDTO ?? new ItemSieveDTO();
 
-            FilterByTypeControl = new ItemPropertyControl(SieveDTO.FilterByType, Enum.GetNames(typeof(ItemType)));
-            FilterByTextControl = new ItemPropertyControl(SieveDTO.FilterByText);
-            FilterByPriorityControl = new ItemPropertyControl(SieveDTO.FilterByPriority, Enum.GetNames(typeof(Priority)));
-            FilterByTimeControl = new ItemPropertyControl(SieveDTO.FilterByTime);
+            FilterByTypeControl = new ItemPropertyControl("Type", SieveDTO.FilterByType, Enum.GetNames(typeof(ItemType)));
+            FilterByTextControl = new ItemPropertyControl("Text", SieveDTO.FilterByText);
+            FilterByPriorityControl = new ItemPropertyControl("Priority", SieveDTO.FilterByPriority, Enum.GetNames(typeof(Priority)));
+            FilterByTimeControl = new ItemPropertyControl("Time", SieveDTO.FilterByTime);
 
-            FilterByEndTimeControl = new ItemPropertyControl(SieveDTO.FilterByEndTime);
-            FilterByStatusControl = new ItemPropertyControl(SieveDTO.FilterByStatus, Enum.GetNames(typeof(TaskStatus)));
+            FilterByEndTimeControl = new ItemPropertyControl("EndTime", SieveDTO.FilterByEndTime);
+            FilterByStatusControl = new ItemPropertyControl("Status", SieveDTO.FilterByStatus, Enum.GetNames(typeof(TaskStatus)));
 
-            SortByTimeControl = new ItemPropertyControl(SieveDTO.SortByTime);
-            SortByEndTimeControl = new ItemPropertyControl(SieveDTO.SortByEndTime);
+            SortByTimeControl = new ItemPropertyControl("Time", SieveDTO.SortByTime);
+            SortByEndTimeControl = new ItemPropertyControl("EndTime", SieveDTO.SortByEndTime);
             
             MainTableLayout.SuspendLayout();
             FilteringTableLayout.SuspendLayout();
@@ -105,7 +103,7 @@ namespace Organizer_Project.Forms
             MainTableLayout.SuspendLayout();
             FilteringTableLayout.SuspendLayout();
             SortingTableLayout.SuspendLayout();
-            if (SieveDTO.FilterByType.Value is int item)
+            if (SieveDTO.FilterByType.IsEnabled && SieveDTO.FilterByType.Value is int item)
             {
                 TaskProperties = item is (int)ItemType.Task;
                 EventProperties = item is (int)ItemType.Event;
@@ -133,12 +131,14 @@ namespace Organizer_Project.Forms
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            Applying?.Invoke(this, EventArgs.Empty);
+            SieveDTO.Update();
+            DialogResult = DialogResult.OK;
             Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            DialogResult= DialogResult.Cancel;
             Close();
         }
     }

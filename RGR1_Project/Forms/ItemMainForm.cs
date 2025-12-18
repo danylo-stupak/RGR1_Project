@@ -1,6 +1,7 @@
 ﻿using Organizer_Project.Factories;
 using Organizer_Project.Forms;
 using Organizer_Project.Interfaces;
+using Organizer_Project.Models;
 using System;
 using System.Windows.Forms;
 
@@ -9,6 +10,7 @@ namespace Organizer_Project
     public partial class ItemMainForm : Form
     {
         private readonly IManagerService<OrganizerItem> ManagerService;
+        private ItemSieveDTO SieveDTO = null;
         public ItemMainForm(IManagerService<OrganizerItem> managerService)
         {
             InitializeComponent();
@@ -125,6 +127,7 @@ namespace Organizer_Project
         {
             if (sender is ItemSieveForm filterForm)
             {
+                ManagerService.ApplySieve(filterForm.SieveDTO);
                 MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             }
         }
@@ -168,13 +171,27 @@ namespace Organizer_Project
         }
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            using(ItemSieveForm filterItemsForm = new ItemSieveForm())
+            SieveDTO = SieveDTO ?? new ItemSieveDTO();
+            using (ItemSieveForm filterItemsForm = new ItemSieveForm(SieveDTO))
             {
-                filterItemsForm.Applying += FilterItemsForm_Applying;
                 if(filterItemsForm.ShowDialog() == DialogResult.OK)
                 {
-                    RerenderDashboardLayout();
+                    ManagerService.ApplySieve(filterItemsForm.SieveDTO);
+                    ResetSieveButton.Enabled = true;
+                    if (!SieveDTO.Equals(filterItemsForm.SieveDTO))
+                    {
+                        SieveDTO = filterItemsForm.SieveDTO;
+                        RerenderDashboardLayout();
+                    }
                 }
+            }
+        }
+        private void ResetSieveButton_Click(object sender, EventArgs e)
+        {
+            ResetSieveButton.Enabled = false;
+            if(SieveDTO != null)
+            {
+                SieveDTO = null;
             }
         }
     }

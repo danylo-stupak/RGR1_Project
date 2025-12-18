@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Organizer_Project.Models;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Organizer_Project.Interfaces
@@ -13,10 +14,8 @@ namespace Organizer_Project.Interfaces
         IEnumerable<T> GetItems();
 
         // LINQ operations
-        void FilterItems(string filterText, IEnumerable<T> items = null);
-        void SortItems(bool IsAscOrder, IEnumerable<T> items = null);
+        void ApplySieve(ItemSieveDTO sieve);
         void Reset();
-        void Reset(IEnumerable<T> items);
         string GetStatistics();
     }
 }

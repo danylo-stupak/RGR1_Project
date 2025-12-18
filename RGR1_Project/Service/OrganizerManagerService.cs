@@ -80,66 +80,65 @@ namespace Organizer_Project.Services
 
 
         // LINQ Operations
-        // 1. LINQ Where: Filter by Text (Case insensitive search in Title or Notes)
-        public void FilterItems(string filterText, IEnumerable<OrganizerItem> items = null)
+        public void ApplySieve(ItemSieveDTO sieve)
         {
-            // Start with passed or full list
-            IEnumerable<OrganizerItem> query = items ?? Items;
-            if (!string.IsNullOrWhiteSpace(filterText))
+            // Start with the full list of items
+            IEnumerable<OrganizerItem> query = Items;
+
+            // --- 1. FILTERING (Sequential LINQ Where) ---
+
+            // Filter by Text (Title/Notes)
+            if (sieve.FilterByText.IsEnabled && sieve.FilterByText.Value != null)
             {
-                string lowerText = filterText.ToLower();
-                query = query.Where(item =>
-                    (item.Title != null && item.Title.ToLower().Contains(lowerText)) ||
-                    (item.Notes != null && item.Notes.ToLower().Contains(lowerText))
-                );
+                string text = sieve.FilterByText.Value.ToString().ToLower();
+                query = query.Where(i =>
+                    (i.Title != null && i.Title.ToLower().Contains(text)) ||
+                    (i.Notes != null && i.Notes.ToLower().Contains(text)));
             }
-        }
-        // 2. LINQ Where: Filter by Type (Task vs Event)
-        public void FilterItems(ItemType? typeFilter, IEnumerable<OrganizerItem> items = null)
-        {
-            // Start with passed ot full list
-            IEnumerable<OrganizerItem> query = items ?? Items.ToList();
-            if (typeFilter.HasValue)
+
+            // Filter by Type (Task vs Event)
+            if (sieve.FilterByType.IsEnabled && sieve.FilterByType.Value != null)
             {
-                items = query.Where(item => item.Type == typeFilter.Value);
+                var type = (ItemType)sieve.FilterByType.Value;
+                query = query.Where(i => i.Type == type);
             }
-        }
-        // 3. LINQ Where: Filter by Priority
-        public void FilterItems(Priority? priorityFilter, IEnumerable<OrganizerItem> items = null)
-        {
-            // Start with passed ot full list
-            IEnumerable<OrganizerItem> query = items ?? Items.ToList();
-            if (priorityFilter.HasValue)
+
+            // Filter by Priority
+            if (sieve.FilterByPriority.IsEnabled && sieve.FilterByPriority.Value != null)
             {
-                items = query.Where(item => item.Priority == priorityFilter.Value);
+                var priority = (Priority)sieve.FilterByPriority.Value;
+                query = query.Where(i => i.Priority == priority);
             }
-        }
-        // 3. LINQ Where: Filter by Status (Only for TaskItem)
-        public void FilterItems(TaskStatus? statusFilter, IEnumerable<TaskItem> items = null)
-        {
-            // Start with passed ot full list
-            IEnumerable<TaskItem> query = items;
-            if (query != null && statusFilter.HasValue)
+
+            // Filter by Task Status (Task-specific property)
+            if (sieve.FilterByStatus.IsEnabled && sieve.FilterByStatus.Value != null)
             {
-                items = query.Where(item => item.Status == statusFilter.Value);
+                var status = (TaskStatus)sieve.FilterByStatus.Value;
+                // We check if it's a TaskItem before comparing status
+                query = query.Where(i => i is TaskItem task && task.Status == status);
             }
-        }
-        // 4.1 LINQ OrderBy: Sort by Time
-        public void SortItems(bool IsAscOrder, IEnumerable<OrganizerItem> items = null)
-        {
-            // Start with passed ot full list
-            IEnumerable<OrganizerItem> query = items ?? Items.ToList();
-            items = IsAscOrder ? query.OrderBy(item => item.Time) : query.OrderByDescending(item => item.Time);
-        }
-        // 4.2 LINQ OrderBy: Sort by EndTime (Only for EventItems)
-        public void SortItems(bool IsAscOrder, IEnumerable<EventItem> items = null)
-        {
-            // Start with passed ot full list
-            IEnumerable<EventItem> query = items;
-            if (query != null && query.Any())
+
+            // --- 2. SORTING (LINQ OrderBy) ---
+
+            // Sort by Time
+            if (sieve.SortByTime.IsEnabled && sieve.SortByTime.Value != null)
             {
-                items = IsAscOrder ? query.OrderBy(item => item.EndTime) : query.OrderByDescending(item => item.EndTime);
+                bool isAsc = sieve.SortByTime.Value.ToString() == "Ascending";
+                query = isAsc ? query.OrderBy(i => i.Time) : query.OrderByDescending(i => i.Time);
             }
+            // Sort by EndTime (Event-specific property)
+            else if (sieve.SortByEndTime.IsEnabled && sieve.SortByEndTime.Value != null)
+            {
+                bool isAsc = sieve.SortByEndTime.Value.ToString() == "Ascending";
+                // OrderBy needs a value, so we treat non-events as DateTime.MaxValue to push them to the end
+                query = isAsc
+                    ? query.OrderBy(i => i is EventItem e ? e.EndTime : DateTime.MaxValue)
+                    : query.OrderByDescending(i => i is EventItem e ? e.EndTime : DateTime.MinValue);
+            }
+
+            // --- 3. APPLY TO UI ---
+            // Update the BindingSource to refresh the dashboard
+            BindingSource.DataSource = query.ToList();
         }
         // Reset back to the original full list
         public void Reset()
