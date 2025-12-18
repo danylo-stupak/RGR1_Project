@@ -15,6 +15,9 @@ namespace Organizer_Project.Forms
         private readonly ItemPropertyControl FilterByTimeControl;
         private readonly ItemPropertyControl FilterByEndTimeControl;
 
+        private readonly ItemPropertyControl SortByTextControl;
+        private readonly ItemPropertyControl SortByPriorityControl;
+        private readonly ItemPropertyControl SortByStatusControl;
         private readonly ItemPropertyControl SortByTimeControl;
         private readonly ItemPropertyControl SortByEndTimeControl;
 
@@ -23,19 +26,31 @@ namespace Organizer_Project.Forms
         {
             set
             {
-                FilterByStatusControl.Enabled = value;
-                FilterByStatusControl.Visible = value;
+                MainTableLayout.SuspendLayout();
+                FilterByStatusGroup.Enabled = value;
+                FilterByStatusGroup.Visible = value;
+
+                SortByStatusGroup.Enabled = value;
+                SortByStatusGroup.Visible = value;
+
+                MainTableLayout.ResumeLayout(false);
+                MainTableLayout.PerformLayout();
             }
         }
+
         private bool EventProperties
         {
             set
             {
-                FilterByEndTimeControl.Enabled = value;
-                FilterByEndTimeControl.Visible = value;
+                MainTableLayout.SuspendLayout();
+                FilterByEndTimeGroup.Enabled = value;
+                FilterByEndTimeGroup.Visible = value;
 
-                SortByEndTimeControl.Enabled = value;
-                SortByEndTimeControl.Visible = value;
+                SortByEndTimeGroup.Enabled = value;
+                SortByEndTimeGroup.Visible = value;
+
+                MainTableLayout.ResumeLayout(false);
+                MainTableLayout.PerformLayout();
             }
         }
         
@@ -44,57 +59,93 @@ namespace Organizer_Project.Forms
         {
             InitializeComponent();
             SieveDTO = new ItemSieveDTO();
-
             FilterByTypeControl = new ItemPropertyControl(SieveDTO.FilterByType, Enum.GetNames(typeof(ItemType)));
             FilterByTextControl = new ItemPropertyControl(SieveDTO.FilterByText);
             FilterByPriorityControl = new ItemPropertyControl(SieveDTO.FilterByPriority, Enum.GetNames(typeof(Priority)));
-            FilterByTimeControl = new ItemPropertyControl(SieveDTO.FilterByTime);
-
-            FilterByEndTimeControl = new ItemPropertyControl(SieveDTO.FilterByEndTime);
             FilterByStatusControl = new ItemPropertyControl(SieveDTO.FilterByStatus, Enum.GetNames(typeof(TaskStatus)));
+            FilterByTimeControl = new ItemPropertyControl(SieveDTO.FilterByTime);
+            FilterByEndTimeControl = new ItemPropertyControl(SieveDTO.FilterByEndTime);
 
+            SortByTextControl = new ItemPropertyControl(SieveDTO.SortByText);
+            SortByPriorityControl = new ItemPropertyControl(SieveDTO.SortByPriority, Enum.GetNames(typeof(Priority)));
+            SortByStatusControl = new ItemPropertyControl(SieveDTO.SortByStatus, Enum.GetNames(typeof(TaskStatus)));
             SortByTimeControl = new ItemPropertyControl(SieveDTO.SortByTime);
             SortByEndTimeControl = new ItemPropertyControl(SieveDTO.SortByEndTime);
-            
-            MainTableLayout.SuspendLayout();
-            FilteringTableLayout.SuspendLayout();
-            SortingTableLayout.SuspendLayout();
-            // Adding property filter controls to its appropriate GroupBox
 
-            FilteringTableLayout.Controls.Add(FilterByTypeControl);
-            //FilterByTypeControl.Dock = DockStyle.Fill;
-            FilterByTypeControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            MainTableLayout.SuspendLayout();
+            // Adding property filter controls to its appropriate GroupBox
+            FilterByTextGroup.SuspendLayout();
+            FilterByPriorityGroup.SuspendLayout();
+            FilterByStatusGroup.SuspendLayout();
+            FilterByTimeGroup.SuspendLayout();
+            FilterByEndTimeGroup.SuspendLayout();
+            
+            FilterByTypeGroup.Controls.Add(FilterByTypeControl);
+            FilterByTypeControl.Dock = DockStyle.Fill;
             FilterByTypeControl.EnabledToggle += FilterByTypeControl_EnabledChanged;
 
-            FilteringTableLayout.Controls.Add(FilterByTextControl);
-            //FilterByTextControl.Dock = DockStyle.Fill;
-            FilterByTextControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            FilterByTextGroup.Controls.Add(FilterByTextControl);
+            FilterByTextControl.Dock = DockStyle.Fill;
 
-            FilteringTableLayout.Controls.Add(FilterByPriorityControl);
-            FilterByPriorityControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            FilterByPriorityGroup.Controls.Add(FilterByPriorityControl);
+            FilterByPriorityControl.Dock = DockStyle.Fill;
 
-            FilteringTableLayout.Controls.Add(FilterByStatusControl);
-            FilterByStatusControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            FilterByStatusGroup.Controls.Add(FilterByStatusControl);
+            FilterByStatusControl.Dock = DockStyle.Fill;
 
-            FilteringTableLayout.Controls.Add(FilterByTimeControl);
-            FilterByTimeControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            FilterByTimeGroup.Controls.Add(FilterByTimeControl);
+            FilterByTimeControl.Dock = DockStyle.Fill;
 
-            FilteringTableLayout.Controls.Add(FilterByEndTimeControl);
-            FilterByEndTimeControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            FilterByEndTimeGroup.Controls.Add(FilterByEndTimeControl);
+            FilterByEndTimeControl.Dock = DockStyle.Fill;
 
 
 
             // Adding property sorter controls to its appropriate GroupBox
-            SortingTableLayout.Controls.Add(SortByTimeControl);
-            SortByTimeControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            SortByTextGroup.SuspendLayout();
+            SortByPriorityGroup.SuspendLayout();
+            SortByStatusGroup.SuspendLayout();
+            SortByTimeGroup.SuspendLayout();
+            SortByEndTimeGroup.SuspendLayout();
 
-            SortingTableLayout.Controls.Add(SortByEndTimeControl);
-            SortByEndTimeControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
-            FilteringTableLayout.ResumeLayout(false);
-            FilteringTableLayout.PerformLayout();
-            SortingTableLayout.ResumeLayout(false);
-            SortingTableLayout.PerformLayout();
+            SortByTextGroup.Controls.Add(SortByTextControl);
+            SortByTextControl.Dock = DockStyle.Fill;
+
+            SortByPriorityGroup.Controls.Add(SortByPriorityControl);
+            SortByPriorityControl.Dock = DockStyle.Fill;
+
+            SortByStatusGroup.Controls.Add(SortByStatusControl);
+            SortByStatusControl.Dock = DockStyle.Fill;
+
+            SortByTimeGroup.Controls.Add(SortByTimeControl);
+            SortByTimeControl.Dock = DockStyle.Fill;
+
+            SortByEndTimeGroup.Controls.Add(SortByEndTimeControl);
+            SortByEndTimeControl.Dock = DockStyle.Fill;
+
+            FilterByTextGroup.ResumeLayout(false);
+            FilterByTextGroup.PerformLayout();
+            FilterByPriorityGroup.ResumeLayout(false);
+            FilterByPriorityGroup.PerformLayout();
+            FilterByStatusGroup.ResumeLayout(false);
+            FilterByStatusGroup.PerformLayout();
+            FilterByTimeGroup.ResumeLayout(false);
+            FilterByTimeGroup.PerformLayout();
+            FilterByEndTimeGroup.ResumeLayout(false);
+            FilterByEndTimeGroup.PerformLayout();
+
+            SortByTextGroup.ResumeLayout(false);
+            SortByTextGroup.PerformLayout();
+            SortByPriorityGroup.ResumeLayout(false);
+            SortByPriorityGroup.PerformLayout();
+            SortByStatusGroup.ResumeLayout(false);
+            SortByStatusGroup.PerformLayout();
+            SortByTimeGroup.ResumeLayout(false);
+            SortByTimeGroup.PerformLayout();
+            SortByEndTimeGroup.ResumeLayout(false);
+            SortByEndTimeGroup.PerformLayout();
+
             MainTableLayout.ResumeLayout(false);
             MainTableLayout.PerformLayout();
         }
@@ -102,9 +153,6 @@ namespace Organizer_Project.Forms
 
         private void FilterByTypeControl_EnabledChanged(object sender, EventArgs e)
         {
-            MainTableLayout.SuspendLayout();
-            FilteringTableLayout.SuspendLayout();
-            SortingTableLayout.SuspendLayout();
             if (SieveDTO.FilterByType.Value is int item)
             {
                 TaskProperties = item is (int)ItemType.Task;
@@ -115,14 +163,6 @@ namespace Organizer_Project.Forms
                 TaskProperties = false;
                 EventProperties = false;
             }
-            SortingTableLayout.ResumeLayout(false);
-            SortingTableLayout.PerformLayout();
-
-            FilteringTableLayout.ResumeLayout(false);
-            FilteringTableLayout.PerformLayout();
-
-            MainTableLayout.ResumeLayout(false);
-            MainTableLayout.PerformLayout();
         }
 
         private void FilterItemsForm_Load(object sender, EventArgs e)

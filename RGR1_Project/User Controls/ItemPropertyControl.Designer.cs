@@ -64,6 +64,7 @@
             // 
             // MainFlowLayout
             // 
+            this.MainFlowLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.MainFlowLayout.AutoSize = true;
             this.MainFlowLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.MainFlowLayout.Controls.Add(this.InputNameLabel);
@@ -71,8 +72,9 @@
             this.MainFlowLayout.Controls.Add(this.EnableCheckBox);
             this.MainFlowLayout.Location = new System.Drawing.Point(0, 6);
             this.MainFlowLayout.Margin = new System.Windows.Forms.Padding(0);
+            this.MainFlowLayout.MinimumSize = new System.Drawing.Size(525, 0);
             this.MainFlowLayout.Name = "MainFlowLayout";
-            this.MainFlowLayout.Size = new System.Drawing.Size(362, 25);
+            this.MainFlowLayout.Size = new System.Drawing.Size(525, 25);
             this.MainFlowLayout.TabIndex = 1;
             this.MainFlowLayout.WrapContents = false;
             // 
@@ -90,12 +92,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.MainFlowLayout);
-            this.Margin = new System.Windows.Forms.Padding(0, 12, 0, 12);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ItemPropertyControl";
-            this.Size = new System.Drawing.Size(362, 31);
+            this.Size = new System.Drawing.Size(598, 36);
             this.Load += new System.EventHandler(this.ItemPropertyControl_Load);
             this.MainFlowLayout.ResumeLayout(false);
             this.MainFlowLayout.PerformLayout();
