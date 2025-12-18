@@ -1,7 +1,7 @@
 ﻿
 namespace Organizer_Project
 {
-    partial class OrganizerForm
+    partial class ItemMainForm
     {
         /// <summary>
         /// Required designer variable.

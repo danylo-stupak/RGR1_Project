@@ -38,7 +38,7 @@ namespace Organizer_Project
             OrganizerManagerService organizerManagerService = new OrganizerManagerService(items);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new OrganizerForm(organizerManagerService));
+            Application.Run(new ItemMainForm(organizerManagerService));
         }
     }
 }

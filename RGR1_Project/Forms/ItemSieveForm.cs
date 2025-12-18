@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Organizer_Project.Forms
 {
-    public partial class FilterItemsForm : Form
+    public partial class ItemSieveForm : Form
     {
         private readonly ItemPropertyControl FilterByTypeControl;
         private readonly ItemPropertyControl FilterByTextControl;
@@ -21,6 +21,7 @@ namespace Organizer_Project.Forms
         private readonly ItemPropertyControl SortByTimeControl;
         private readonly ItemPropertyControl SortByEndTimeControl;
 
+        private readonly ItemSieveDTO SieveDTO;
         private bool TaskProperties
         {
             set
@@ -54,21 +55,22 @@ namespace Organizer_Project.Forms
         }
         
         public event EventHandler Applying;
-        public FilterItemsForm()
+        public ItemSieveForm()
         {
             InitializeComponent();
-            FilterByTypeControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(ItemType)));
-            FilterByTextControl = new ItemPropertyControl(PropertyType.Text);
-            FilterByPriorityControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(Priority)));
-            FilterByStatusControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(TaskStatus)));
-            FilterByTimeControl = new ItemPropertyControl(PropertyType.Date);
-            FilterByEndTimeControl = new ItemPropertyControl(PropertyType.Date);
+            SieveDTO = new ItemSieveDTO();
+            FilterByTypeControl = new ItemPropertyControl(SieveDTO.FilterByType, Enum.GetNames(typeof(ItemType)));
+            FilterByTextControl = new ItemPropertyControl(SieveDTO.FilterByText);
+            FilterByPriorityControl = new ItemPropertyControl(SieveDTO.FilterByPriority, Enum.GetNames(typeof(Priority)));
+            FilterByStatusControl = new ItemPropertyControl(SieveDTO.FilterByStatus, Enum.GetNames(typeof(TaskStatus)));
+            FilterByTimeControl = new ItemPropertyControl(SieveDTO.FilterByTime);
+            FilterByEndTimeControl = new ItemPropertyControl(SieveDTO.FilterByEndTime);
 
-            SortByTextControl = new ItemPropertyControl(PropertyType.Text);
-            SortByPriorityControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(Priority)));
-            SortByStatusControl = new ItemPropertyControl(PropertyType.Enum, Enum.GetNames(typeof(TaskStatus)));
-            SortByTimeControl = new ItemPropertyControl(PropertyType.Date);
-            SortByEndTimeControl = new ItemPropertyControl(PropertyType.Date);
+            SortByTextControl = new ItemPropertyControl(SieveDTO.SortByText);
+            SortByPriorityControl = new ItemPropertyControl(SieveDTO.SortByPriority, Enum.GetNames(typeof(Priority)));
+            SortByStatusControl = new ItemPropertyControl(SieveDTO.SortByStatus, Enum.GetNames(typeof(TaskStatus)));
+            SortByTimeControl = new ItemPropertyControl(SieveDTO.SortByTime);
+            SortByEndTimeControl = new ItemPropertyControl(SieveDTO.SortByEndTime);
 
             MainTableLayout.SuspendLayout();
             // Adding property filter controls to its appropriate GroupBox
@@ -77,7 +79,7 @@ namespace Organizer_Project.Forms
             FilterByStatusGroup.SuspendLayout();
             FilterByTimeGroup.SuspendLayout();
             FilterByEndTimeGroup.SuspendLayout();
-
+            
             FilterByTypeGroup.Controls.Add(FilterByTypeControl);
             FilterByTypeControl.Dock = DockStyle.Fill;
             FilterByTypeControl.EnabledToggle += FilterByTypeControl_EnabledChanged;
@@ -148,12 +150,18 @@ namespace Organizer_Project.Forms
             MainTableLayout.PerformLayout();
         }
 
+
         private void FilterByTypeControl_EnabledChanged(object sender, EventArgs e)
         {
-            if(FilterByTypeControl.Value is int item)
+            if (SieveDTO.FilterByType.Value is int item)
             {
-                TaskProperties = FilterByTypeControl.IsEnabled && item is (int)ItemType.Task;
-                EventProperties = FilterByTypeControl.IsEnabled && item is (int)ItemType.Event;
+                TaskProperties = item is (int)ItemType.Task;
+                EventProperties = item is (int)ItemType.Event;
+            }
+            else
+            {
+                TaskProperties = false;
+                EventProperties = false;
             }
         }
 

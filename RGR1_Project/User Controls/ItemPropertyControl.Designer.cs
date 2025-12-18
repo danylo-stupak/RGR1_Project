@@ -29,20 +29,16 @@
         private void InitializeComponent()
         {
             this.EnableCheckBox = new System.Windows.Forms.CheckBox();
-            this.PropertyComboBox = new System.Windows.Forms.ComboBox();
             this.InputNameLabel = new System.Windows.Forms.Label();
-            this.PropertyTextBox = new System.Windows.Forms.TextBox();
-            this.PropertyTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.ControlsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.MainFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.ControlsFlowLayout.SuspendLayout();
+            this.PropertyControlPanel = new System.Windows.Forms.Panel();
             this.MainFlowLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // EnableCheckBox
             // 
             this.EnableCheckBox.AutoSize = true;
-            this.EnableCheckBox.Location = new System.Drawing.Point(496, 0);
+            this.EnableCheckBox.Location = new System.Drawing.Point(262, 0);
             this.EnableCheckBox.Margin = new System.Windows.Forms.Padding(16, 0, 0, 0);
             this.EnableCheckBox.MinimumSize = new System.Drawing.Size(100, 0);
             this.EnableCheckBox.Name = "EnableCheckBox";
@@ -52,21 +48,6 @@
             this.EnableCheckBox.Text = "Enable";
             this.EnableCheckBox.UseVisualStyleBackColor = true;
             this.EnableCheckBox.CheckedChanged += new System.EventHandler(this.EnableCheckBox_CheckedChanged);
-            // 
-            // PropertyComboBox
-            // 
-            this.PropertyComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.PropertyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PropertyComboBox.FormattingEnabled = true;
-            this.PropertyComboBox.Items.AddRange(new object[] {
-            "None"});
-            this.PropertyComboBox.Location = new System.Drawing.Point(0, 0);
-            this.PropertyComboBox.Margin = new System.Windows.Forms.Padding(0);
-            this.PropertyComboBox.MinimumSize = new System.Drawing.Size(120, 0);
-            this.PropertyComboBox.Name = "PropertyComboBox";
-            this.PropertyComboBox.Size = new System.Drawing.Size(120, 21);
-            this.PropertyComboBox.TabIndex = 0;
-            this.PropertyComboBox.SelectedIndexChanged += new System.EventHandler(this.PropertyComboBox_SelectedIndexChanged);
             // 
             // InputNameLabel
             // 
@@ -81,61 +62,30 @@
             this.InputNameLabel.Text = "Text";
             this.InputNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // PropertyTextBox
-            // 
-            this.PropertyTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.PropertyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PropertyTextBox.Location = new System.Drawing.Point(120, 4);
-            this.PropertyTextBox.Margin = new System.Windows.Forms.Padding(0);
-            this.PropertyTextBox.MinimumSize = new System.Drawing.Size(120, 4);
-            this.PropertyTextBox.Name = "PropertyTextBox";
-            this.PropertyTextBox.Size = new System.Drawing.Size(120, 13);
-            this.PropertyTextBox.TabIndex = 1;
-            // 
-            // PropertyTimePicker
-            // 
-            this.PropertyTimePicker.CustomFormat = "dd/MM/yyyy    HH:mm";
-            this.PropertyTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.PropertyTimePicker.Location = new System.Drawing.Point(240, 0);
-            this.PropertyTimePicker.Margin = new System.Windows.Forms.Padding(0);
-            this.PropertyTimePicker.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
-            this.PropertyTimePicker.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.PropertyTimePicker.MinimumSize = new System.Drawing.Size(120, 4);
-            this.PropertyTimePicker.Name = "PropertyTimePicker";
-            this.PropertyTimePicker.Size = new System.Drawing.Size(120, 20);
-            this.PropertyTimePicker.TabIndex = 2;
-            this.PropertyTimePicker.Value = new System.DateTime(2025, 11, 20, 0, 0, 0, 0);
-            this.PropertyTimePicker.Visible = false;
-            // 
-            // ControlsFlowLayout
-            // 
-            this.ControlsFlowLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.ControlsFlowLayout.AutoSize = true;
-            this.ControlsFlowLayout.Controls.Add(this.PropertyComboBox);
-            this.ControlsFlowLayout.Controls.Add(this.PropertyTextBox);
-            this.ControlsFlowLayout.Controls.Add(this.PropertyTimePicker);
-            this.ControlsFlowLayout.Location = new System.Drawing.Point(120, 2);
-            this.ControlsFlowLayout.Margin = new System.Windows.Forms.Padding(0);
-            this.ControlsFlowLayout.Name = "ControlsFlowLayout";
-            this.ControlsFlowLayout.Size = new System.Drawing.Size(360, 21);
-            this.ControlsFlowLayout.TabIndex = 3;
-            this.ControlsFlowLayout.WrapContents = false;
-            // 
             // MainFlowLayout
             // 
             this.MainFlowLayout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.MainFlowLayout.AutoSize = true;
             this.MainFlowLayout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.MainFlowLayout.Controls.Add(this.InputNameLabel);
-            this.MainFlowLayout.Controls.Add(this.ControlsFlowLayout);
+            this.MainFlowLayout.Controls.Add(this.PropertyControlPanel);
             this.MainFlowLayout.Controls.Add(this.EnableCheckBox);
-            this.MainFlowLayout.Location = new System.Drawing.Point(0, 0);
+            this.MainFlowLayout.Location = new System.Drawing.Point(0, 6);
             this.MainFlowLayout.Margin = new System.Windows.Forms.Padding(0);
             this.MainFlowLayout.MinimumSize = new System.Drawing.Size(525, 0);
             this.MainFlowLayout.Name = "MainFlowLayout";
-            this.MainFlowLayout.Size = new System.Drawing.Size(596, 25);
+            this.MainFlowLayout.Size = new System.Drawing.Size(525, 25);
             this.MainFlowLayout.TabIndex = 1;
             this.MainFlowLayout.WrapContents = false;
+            // 
+            // PropertyControlPanel
+            // 
+            this.PropertyControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PropertyControlPanel.Location = new System.Drawing.Point(123, 3);
+            this.PropertyControlPanel.MinimumSize = new System.Drawing.Size(120, 0);
+            this.PropertyControlPanel.Name = "PropertyControlPanel";
+            this.PropertyControlPanel.Size = new System.Drawing.Size(120, 19);
+            this.PropertyControlPanel.TabIndex = 4;
             // 
             // ItemPropertyControl
             // 
@@ -146,10 +96,8 @@
             this.Controls.Add(this.MainFlowLayout);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ItemPropertyControl";
-            this.Size = new System.Drawing.Size(598, 25);
-            this.Load += new System.EventHandler(this.FilterItemProperty_Load);
-            this.ControlsFlowLayout.ResumeLayout(false);
-            this.ControlsFlowLayout.PerformLayout();
+            this.Size = new System.Drawing.Size(598, 36);
+            this.Load += new System.EventHandler(this.ItemPropertyControl_Load);
             this.MainFlowLayout.ResumeLayout(false);
             this.MainFlowLayout.PerformLayout();
             this.ResumeLayout(false);
@@ -160,10 +108,7 @@
         #endregion
         private System.Windows.Forms.CheckBox EnableCheckBox;
         private System.Windows.Forms.Label InputNameLabel;
-        private System.Windows.Forms.ComboBox PropertyComboBox;
-        private System.Windows.Forms.TextBox PropertyTextBox;
-        private System.Windows.Forms.DateTimePicker PropertyTimePicker;
-        private System.Windows.Forms.FlowLayoutPanel ControlsFlowLayout;
         private System.Windows.Forms.FlowLayoutPanel MainFlowLayout;
+        private System.Windows.Forms.Panel PropertyControlPanel;
     }
 }

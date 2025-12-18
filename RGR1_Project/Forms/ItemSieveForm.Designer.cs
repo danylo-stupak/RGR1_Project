@@ -1,6 +1,6 @@
 ﻿namespace Organizer_Project.Forms
 {
-    partial class FilterItemsForm
+    partial class ItemSieveForm
     {
         /// <summary>
         /// Required designer variable.

@@ -6,10 +6,10 @@ using System.Windows.Forms;
 
 namespace Organizer_Project
 {
-    public partial class OrganizerForm : Form
+    public partial class ItemMainForm : Form
     {
         private readonly IManagerService<OrganizerItem> ManagerService;
-        public OrganizerForm(IManagerService<OrganizerItem> managerService)
+        public ItemMainForm(IManagerService<OrganizerItem> managerService)
         {
             InitializeComponent();
             ManagerService = managerService;
@@ -123,7 +123,7 @@ namespace Organizer_Project
         }
         private void FilterItemsForm_Applying(object sender, EventArgs e)
         {
-            if (sender is FilterItemsForm filterForm)
+            if (sender is ItemSieveForm filterForm)
             {
                 MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             }
@@ -168,7 +168,7 @@ namespace Organizer_Project
         }
         private void FilterButton_Click(object sender, EventArgs e)
         {
-            using(FilterItemsForm filterItemsForm = new FilterItemsForm())
+            using(ItemSieveForm filterItemsForm = new ItemSieveForm())
             {
                 filterItemsForm.Applying += FilterItemsForm_Applying;
                 if(filterItemsForm.ShowDialog() == DialogResult.OK)
