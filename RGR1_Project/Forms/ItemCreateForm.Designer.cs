@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.FlowLayoutPanel MainButtonsFlowLayout;
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CancelBtn = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
             this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             MainButtonsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,7 +40,7 @@
             // MainButtonsFlowLayout
             // 
             MainButtonsFlowLayout.AutoSize = true;
-            MainButtonsFlowLayout.Controls.Add(this.CancelButton);
+            MainButtonsFlowLayout.Controls.Add(this.CancelBtn);
             MainButtonsFlowLayout.Controls.Add(this.CreateButton);
             MainButtonsFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             MainButtonsFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -50,21 +50,21 @@
             MainButtonsFlowLayout.TabIndex = 2;
             MainButtonsFlowLayout.WrapContents = false;
             // 
-            // CancelButton
+            // CancelBtn
             // 
-            this.CancelButton.AutoSize = true;
-            this.CancelButton.CausesValidation = false;
-            this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Location = new System.Drawing.Point(170, 8);
-            this.CancelButton.Margin = new System.Windows.Forms.Padding(8, 8, 12, 8);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Padding = new System.Windows.Forms.Padding(4);
-            this.CancelButton.Size = new System.Drawing.Size(80, 41);
-            this.CancelButton.TabIndex = 1;
-            this.CancelButton.TabStop = false;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelBtn.AutoSize = true;
+            this.CancelBtn.CausesValidation = false;
+            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelBtn.Location = new System.Drawing.Point(170, 8);
+            this.CancelBtn.Margin = new System.Windows.Forms.Padding(8, 8, 12, 8);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Padding = new System.Windows.Forms.Padding(4);
+            this.CancelBtn.Size = new System.Drawing.Size(80, 41);
+            this.CancelBtn.TabIndex = 1;
+            this.CancelBtn.TabStop = false;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // CreateButton
             // 
@@ -102,6 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(284, 302);
             this.Controls.Add(this.MainTableLayout);
             this.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -127,6 +128,6 @@
 
         private System.Windows.Forms.TableLayoutPanel MainTableLayout;
         private System.Windows.Forms.Button CreateButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelBtn;
     }
 }

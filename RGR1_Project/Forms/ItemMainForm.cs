@@ -1,39 +1,38 @@
 ﻿using Organizer_Project.Factories;
 using Organizer_Project.Forms;
 using Organizer_Project.Interfaces;
+using Organizer_Project.Models;
 using System;
 using System.Windows.Forms;
 
 namespace Organizer_Project
 {
-    public partial class OrganizerForm : Form
+    public partial class ItemMainForm : Form
     {
         private readonly IManagerService<OrganizerItem> ManagerService;
-        public OrganizerForm(IManagerService<OrganizerItem> managerService)
+        private ItemSieveDTO SieveDTO = null;
+        public ItemMainForm(IManagerService<OrganizerItem> managerService)
         {
             InitializeComponent();
             ManagerService = managerService;
         }
         private void ClearDashboardLayout()
         {
-            DashboardFlowLayout.Hide();
-            DashboardFlowLayout.SuspendLayout();
-
             for(var control = DashboardFlowLayout.Controls.Count - 1; control >= 0; control--)
             {
                 var itemControl = DashboardFlowLayout.Controls[control];
                 DashboardFlowLayout.Controls.RemoveAt(control);
-                itemControl.Dispose();
+                if(!(itemControl is Label))
+                {
+                    itemControl.Dispose();
+                }
             }
-            DashboardFlowLayout.ResumeLayout();
-            DashboardFlowLayout.Show();
         }
         private void RenderDashboardLayout()
         {
-            DashboardFlowLayout.Hide();
-            DashboardFlowLayout.SuspendLayout();
+            int bindCount = ManagerService.BindingSource.Count;
             ManagerService.BindingSource.ResetBindings(false);
-            for (int i = 0; i < ManagerService.BindingSource.Count; i++)
+            for (int i = 0; i < bindCount; i++)
             {
                 var control = DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
@@ -45,14 +44,22 @@ namespace Organizer_Project
                     DashboardFlowLayout.Controls.Add(winControl);
                 }
             }
-            DashboardFlowLayout.ResumeLayout();
-            DashboardFlowLayout.Show();
+            if(bindCount == 0)
+            {
+                DashboardFlowLayout.Controls.Add(EmplyListLabel);
+            }
         }
 
         private void RerenderDashboardLayout()
         {
+            MainTableLayout.SuspendLayout();
+            DashboardFlowLayout.SuspendLayout();
             ClearDashboardLayout();
             RenderDashboardLayout();
+            DashboardFlowLayout.ResumeLayout(false);
+            DashboardFlowLayout.PerformLayout();
+            MainTableLayout.ResumeLayout(false);
+            MainTableLayout.PerformLayout();
         }
         private void ItemDetailsForm_Create(object sender, EventArgs e)
         {
@@ -121,6 +128,14 @@ namespace Organizer_Project
                 throw new ArgumentException("Error: Unable to update item in dashboard layout.");
             }
         }
+        private void FilterItemsForm_Applying(object sender, EventArgs e)
+        {
+            if (sender is ItemSieveForm filterForm)
+            {
+                ManagerService.ApplySieve(filterForm.SieveDTO);
+                MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
+            }
+        }
         private void OrganizerForm_Load(object sender, EventArgs e)
         {
             RerenderDashboardLayout();
@@ -154,6 +169,33 @@ namespace Organizer_Project
                     MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        private void StatsButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(ManagerService.GetStatistics(), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        }
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            SieveDTO = SieveDTO ?? new ItemSieveDTO();
+            using (ItemSieveForm filterItemsForm = new ItemSieveForm(SieveDTO))
+            {
+                if(filterItemsForm.ShowDialog() == DialogResult.OK)
+                {
+                    ManagerService.ApplySieve(filterItemsForm.SieveDTO);
+                    ResetSieveButton.Enabled = true;
+                    RerenderDashboardLayout();
+                }
+            }
+        }
+        private void ResetSieveButton_Click(object sender, EventArgs e)
+        {
+            ResetSieveButton.Enabled = false;
+            if(SieveDTO != null)
+            {
+                SieveDTO = null;
+            }
+            ManagerService.Reset();
+            RerenderDashboardLayout();
         }
     }
 }
