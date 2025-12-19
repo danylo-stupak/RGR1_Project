@@ -22,7 +22,10 @@ namespace Organizer_Project
             {
                 var itemControl = DashboardFlowLayout.Controls[control];
                 DashboardFlowLayout.Controls.RemoveAt(control);
-                itemControl.Dispose();
+                if(!(itemControl is Label))
+                {
+                    itemControl.Dispose();
+                }
             }
         }
         private void RenderDashboardLayout()

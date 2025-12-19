@@ -174,7 +174,6 @@ namespace Organizer_Project
             // EmplyListLabel
             // 
             this.EmplyListLabel.AutoSize = true;
-            this.EmplyListLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.EmplyListLabel.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmplyListLabel.Location = new System.Drawing.Point(3, 0);
             this.EmplyListLabel.Name = "EmplyListLabel";
