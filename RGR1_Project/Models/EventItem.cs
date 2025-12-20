@@ -5,7 +5,7 @@ namespace Organizer_Project.Models
     public class EventItem : OrganizerItem
     {
         // Additional properties for Event
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
         public bool IsAllDay { get; set; }
 
         // Constructor
