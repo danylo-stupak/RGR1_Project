@@ -115,7 +115,7 @@ namespace Organizer_Project.Services
         public async Task ClearAsync()
         {
             // Efficiently truncates the table
-            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");
+            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerDatabase]");
             await OrganizerContext.SaveChangesAsync();
             await RefreshBindingAsync();
         }
