@@ -112,7 +112,7 @@ namespace Organizer_Project.Services
             BindingSource.DataSource = await query.ToListAsync();
         }
         public async Task ResetAsync() => await RefreshBindingAsync();
-        public async void ClearAsync()
+        public async Task ClearAsync()
         {
             // Efficiently truncates the table
             OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");

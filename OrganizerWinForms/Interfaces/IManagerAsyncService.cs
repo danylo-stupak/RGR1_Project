@@ -16,6 +16,7 @@ namespace Organizer_Project.Interfaces
         // LINQ operations
         Task ApplySieveAsync(Models.ItemSieveDTO sieve);
         Task ResetAsync();
+        Task ClearAsync();
         Task<string> GetStatisticsAsync();
     }
 }
