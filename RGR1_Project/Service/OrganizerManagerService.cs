@@ -142,7 +142,7 @@ namespace Organizer_Project.Services
             // Sort by EndTime (Event-specific property)
             else if (sieve.SortByEndTime.IsEnabled && sieve.SortByEndTime.Value != null)
             {
-                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByTime.Value);
+                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByEndTime.Value);
                 // OrderBy needs a value, so we treat non-events as DateTime.MaxValue to push them to the end
                 query = isAsc
                     ? query.OrderBy(i => i is EventItem e ? e.EndTime : DateTime.MaxValue)
