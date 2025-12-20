@@ -1,4 +1,4 @@
-﻿namespace Organizer_Project.User_Controls
+﻿namespace Organizer_Project.UserControls
 {
     partial class EventItemControl
     {

@@ -1,12 +1,9 @@
-﻿using Organizer_Project.Interfaces;
-using Organizer_Project.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Organizer_Project.User_Controls
+namespace Organizer_Project.UserControls
 {
-    public partial class EventItemControl : UserControl, IOrganizerItemControl
+    public partial class EventItemControl : UserControl, Interfaces.IOrganizerItemControl
     {
         public BindingSource ItemSource { get; }
         public int ItemPosition
@@ -22,13 +19,13 @@ namespace Organizer_Project.User_Controls
             ItemSource = source;        // keep original public
             ItemPosition = position;
             ItemSourceCopy = new BindingSource();
-            ItemSourceCopy.DataSource = new EventItem(source.DataSource as EventItem);     // create a private copy
+            ItemSourceCopy.DataSource = new Models.EventItem(source.DataSource as Models.EventItem);     // create a private copy
             IsEditMode = editMode;
         }
-        public OrganizerItem GetItem()
+        public Interfaces.OrganizerItem GetItem()
         {
             ItemSourceCopy.EndEdit();
-            return ItemSourceCopy.DataSource as EventItem;
+            return ItemSourceCopy.DataSource as Models.EventItem;
         }
         public void ToggleMode(bool isEditMode)
         {
@@ -37,21 +34,21 @@ namespace Organizer_Project.User_Controls
         }
         private void ToggleControlsEnabled()
         {
-            MainFlowLayout.Hide();
+            // stop layout logic
             MainFlowLayout.SuspendLayout();
+            // Togge edit mode
             EditModeLayout.Visible = IsEditMode;
             EditModeLayout.Enabled = IsEditMode;
-
+            // toogle view mode
             ViewModeLayout.Visible = !IsEditMode;
             ViewModeLayout.Enabled = !IsEditMode;
-
+            // remove all edit and view layouts
             MainFlowLayout.Controls.Clear();
             MainFlowLayout.Controls.Add(IsEditMode ? EditModeLayout : ViewModeLayout);
-
-            MainFlowLayout.ResumeLayout();
-            MainFlowLayout.Show();
+            // resume layout logic
+            MainFlowLayout.ResumeLayout(false);
+            MainFlowLayout.PerformLayout();
         }
-
         private void ConfigureDateTimePickers()
         {
             string format = AllDayCheckBox_Edit.Checked ? "ddd, dd/MM" : "ddd, dd/MM/yy - HH:mm";
@@ -62,13 +59,14 @@ namespace Organizer_Project.User_Controls
         {
             DataSourceUpdateMode updateMode_1 = DataSourceUpdateMode.OnPropertyChanged;
             DataSourceUpdateMode updateMode_2 = DataSourceUpdateMode.OnValidation;
+            // edit layout bindings
             TitleTextBox.DataBindings.Add("Text", ItemSourceCopy, "Title", true, updateMode_2);      // binding copy for free changes
             PriorityComboBox.DataBindings.Add("SelectedValue", ItemSourceCopy, "Priority", true, updateMode_1);
             MainTimePicker.DataBindings.Add("Value", ItemSourceCopy, "Time", true, updateMode_1);
             EndTimePicker.DataBindings.Add("Value", ItemSourceCopy, "EndTime", true, updateMode_2);
             AllDayCheckBox_Edit.DataBindings.Add("Checked", ItemSourceCopy, "IsAllDay", true, updateMode_1);
             NotesRichTextBox.DataBindings.Add("Text", ItemSourceCopy, "Notes", true, updateMode_1);
-
+            // view layout bindings
             TitleLabel.DataBindings.Add("Text", ItemSource, "Title", true, DataSourceUpdateMode.Never);  // binding original to display only
             PriorityLabel.DataBindings.Add("Text", ItemSource, "Priority", true, DataSourceUpdateMode.Never);
             MainTimeLabel.DataBindings.Add("Text", ItemSource, "Time", true, DataSourceUpdateMode.Never);
@@ -78,13 +76,12 @@ namespace Organizer_Project.User_Controls
         }
         private void ConfigureComboBoxes()
         {
-            var priorities = new List<KeyValuePair<string, Priority>>
+            var priorities = new List<KeyValuePair<string, Interfaces.Priority>>
             {
-                new KeyValuePair<string, Priority>("Low", Priority.Low),
-                new KeyValuePair<string, Priority>("Medium", Priority.Medium),
-                new KeyValuePair<string, Priority>("High", Priority.High)
+                new KeyValuePair<string, Interfaces.Priority>("Low", Interfaces.Priority.Low),
+                new KeyValuePair<string, Interfaces.Priority>("Medium", Interfaces.Priority.Medium),
+                new KeyValuePair<string, Interfaces.Priority>("High", Interfaces.Priority.High)
             };
-
             PriorityComboBox.DataSource = priorities;
             PriorityComboBox.DisplayMember = "Key";
             PriorityComboBox.ValueMember = "Value";
@@ -95,12 +92,10 @@ namespace Organizer_Project.User_Controls
             BindData();
             ToggleMode(IsEditMode);
         }
-
         private void AllDayCheckBox_CheckedChanged(object sender, System.EventArgs e)
         {
             ConfigureDateTimePickers();
         }
-
         private void TitleTextBox_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ItemSource != null)
@@ -122,10 +117,9 @@ namespace Organizer_Project.User_Controls
             else
             {
                 e.Cancel = true;
-                throw new InvalidOperationException("TaskBindingSource is null.");
+                throw new System.InvalidOperationException("TaskBindingSource is null.");
             }
         }
-
         private void EndTimePicker_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (ItemSource != null)
@@ -147,7 +141,7 @@ namespace Organizer_Project.User_Controls
             else
             {
                 e.Cancel = true;
-                throw new InvalidOperationException("TaskBindingSource is null.");
+                throw new System.InvalidOperationException("TaskBindingSource is null.");
             }
         }
     }

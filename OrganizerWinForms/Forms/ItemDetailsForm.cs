@@ -1,19 +1,16 @@
-﻿using Organizer_Project.Interfaces;
-using Organizer_Project.Factories;
-using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Organizer_Project.Forms
 {
     internal partial class ItemDetailsForm : Form
     {
-        public IOrganizerItemControl ItemControl;
+        public Interfaces.IOrganizerItemControl ItemControl;
         private string ItemTypeString;
         public ItemDetailsForm(BindingSource source, int position)
         {
             InitializeComponent();
-            ItemControl = ControlFactory.CreateControl(source, position);
-            ItemTypeString = Enum.GetName(typeof(ItemType), ItemControl.GetItem().Type);
+            ItemControl = Factories.ControlFactory.CreateControl(source, position);
+            ItemTypeString = System.Enum.GetName(typeof(Interfaces.ItemType), ItemControl.GetItem().Type);
 
             MainTableLayout.Controls.Add(ItemControl as UserControl, 0, 1);
             MainTableLayout.SetColumnSpan(ItemControl as UserControl, 2);
@@ -27,13 +24,11 @@ namespace Organizer_Project.Forms
             BackButton.Visible = !isEditMode;
             ItemControl.ToggleMode(isEditMode);
         }
-
-        private void OrganizerItemForm_Load(object sender, EventArgs e)
+        private void OrganizerItemForm_Load(object sender, System.EventArgs e)
         {
             ToggleMode(false);
         }
-
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, System.EventArgs e)
         {
             try
             {
@@ -43,24 +38,21 @@ namespace Organizer_Project.Forms
                     Close();
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, System.EventArgs e)
         {
             ItemControl.ItemSource.ResetBindings(false);
             ToggleMode(false);
         }
-
-        private void EditButton_Click(object sender, EventArgs e)
+        private void EditButton_Click(object sender, System.EventArgs e)
         {
             ToggleMode(true);
         }
-
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, System.EventArgs e)
         {
             if(MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -68,8 +60,7 @@ namespace Organizer_Project.Forms
                 Close();
             }
         }
-
-        private void BackButton_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();

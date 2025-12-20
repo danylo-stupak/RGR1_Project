@@ -1,12 +1,9 @@
-﻿using Organizer_Project.Forms;
-using Organizer_Project.Interfaces;
-using Organizer_Project.Models;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
-namespace Organizer_Project.User_Controls
+namespace Organizer_Project.UserControls
 {
-    public partial class EventItemDemoControl : UserControl, IOrganizerItemDemoControl
+    public partial class EventItemDemoControl : UserControl, Interfaces.IOrganizerItemDemoControl
     {
         public event EventHandler ItemDetailsRequested;
         public event EventHandler ItemEdited;

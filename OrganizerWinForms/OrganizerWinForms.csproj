@@ -84,6 +84,7 @@
       <DependentUpon>ItemDetailsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IDataGenerator.cs" />
+    <Compile Include="Interfaces\IManagerAsyncService.cs" />
     <Compile Include="Interfaces\IOrganizerItemControl.cs" />
     <Compile Include="Interfaces\IManagerService.cs" />
     <Compile Include="Interfaces\IOrganizerItemDemoControl.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TaskItem.cs" />
+    <Compile Include="Service\OrganizerSqlAsyncService.cs" />
     <Compile Include="Service\OrganizerSqlService.cs" />
     <Compile Include="User Controls\EventItemControl.cs">
       <SubType>UserControl</SubType>

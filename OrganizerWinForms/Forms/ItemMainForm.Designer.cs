@@ -1,5 +1,5 @@
 ﻿
-namespace Organizer_Project
+namespace Organizer_Project.Forms
 {
     partial class ItemMainForm
     {

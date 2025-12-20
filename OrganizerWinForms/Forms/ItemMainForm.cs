@@ -1,17 +1,12 @@
-﻿using Organizer_Project.Factories;
-using Organizer_Project.Forms;
-using Organizer_Project.Interfaces;
-using Organizer_Project.Models;
-using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace Organizer_Project
+namespace Organizer_Project.Forms
 {
     public partial class ItemMainForm : Form
     {
-        private readonly IManagerService<OrganizerItem> ManagerService;
-        private ItemSieveDTO SieveDTO = null;
-        public ItemMainForm(IManagerService<OrganizerItem> managerService)
+        private readonly Interfaces.IManagerService<Interfaces.OrganizerItem> ManagerService;
+        private Models.ItemSieveDTO SieveDTO = null;
+        public ItemMainForm(Interfaces.IManagerService<Interfaces.OrganizerItem> managerService)
         {
             InitializeComponent();
             ManagerService = managerService;
@@ -34,7 +29,7 @@ namespace Organizer_Project
             ManagerService.BindingSource.ResetBindings(false);
             for (int i = 0; i < bindCount; i++)
             {
-                var control = DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
+                var control = Factories.DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
                 control.ItemEdited += UpdateDashboardLayout;
                 control.ItemDeleted += RemoveFromDashboardLayout;
@@ -49,7 +44,6 @@ namespace Organizer_Project
                 DashboardFlowLayout.Controls.Add(EmplyListLabel);
             }
         }
-
         private void RerenderDashboardLayout()
         {
             MainTableLayout.SuspendLayout();
@@ -61,123 +55,123 @@ namespace Organizer_Project
             MainTableLayout.ResumeLayout(false);
             MainTableLayout.PerformLayout();
         }
-        private void ItemDetailsForm_Create(object sender, EventArgs e)
+        private void ItemDetailsForm_Create(object sender, System.EventArgs e)
         {
-            if (sender is IOrganizerItemDemoControl itemControl)
+            if (sender is Interfaces.IOrganizerItemDemoControl itemControl)
             {
                 try
                 {
                     itemControl.Action();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "ItemDetailsForm_Create Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-        private void RemoveFromDashboardLayout(object sender, EventArgs e)
+        private void RemoveFromDashboardLayout(object sender, System.EventArgs e)
         {
-            if (sender is IOrganizerItemDemoControl itemControl)
+            if (sender is Interfaces.IOrganizerItemDemoControl itemControl)
             {
                 try
                 {
                     ManagerService.DeleteItem(itemControl.GetItem());
                     RerenderDashboardLayout();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "RemoveFromDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-        private void UpdateDashboardLayout(object sender, EventArgs e)
+        private void UpdateDashboardLayout(object sender, System.EventArgs e)
         {
-            if (sender is ItemDetailsForm detailsForm)
+            if (sender is Forms.ItemDetailsForm detailsForm)
             {
                 try
                 {
                     ManagerService.UpdateItem(detailsForm.ItemControl.GetItem());
                     RerenderDashboardLayout();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "UpdateDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                throw new ArgumentException("Error: Unable to update item in dashboard layout.");
+                throw new System.ArgumentException("Error: Unable to update item in dashboard layout.");
             }
         }
-        private void AddToDashboardLayout(object sender, EventArgs e)
+        private void AddToDashboardLayout(object sender, System.EventArgs e)
         {
-            if (sender is ItemCreateForm createForm)
+            if (sender is Forms.ItemCreateForm createForm)
             {
                 try
                 {
                     ManagerService.AddItem(createForm.ItemControl.GetItem());
                     RerenderDashboardLayout();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "AddToDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                throw new ArgumentException("Error: Unable to update item in dashboard layout.");
+                throw new System.ArgumentException("Error: Unable to update item in dashboard layout.");
             }
         }
-        private void FilterItemsForm_Applying(object sender, EventArgs e)
+        private void FilterItemsForm_Applying(object sender, System.EventArgs e)
         {
-            if (sender is ItemSieveForm filterForm)
+            if (sender is Forms.ItemSieveForm filterForm)
             {
                 ManagerService.ApplySieve(filterForm.SieveDTO);
                 MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             }
         }
-        private void OrganizerForm_Load(object sender, EventArgs e)
+        private void OrganizerForm_Load(object sender, System.EventArgs e)
         {
             RerenderDashboardLayout();
         }
-        private void AddTaskButton_Click(object sender, EventArgs e)
+        private void AddTaskButton_Click(object sender, System.EventArgs e)
         {
-            using (var CreateForm = new ItemCreateForm(ItemType.Task))
+            using (var CreateForm = new Forms.ItemCreateForm(Interfaces.ItemType.Task))
             {
                 try
                 {
                     CreateForm.ItemCreated += AddToDashboardLayout;
                     CreateForm.ShowDialog();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "AddTaskButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-        private void AddEventButton_Click(object sender, EventArgs e)
+        private void AddEventButton_Click(object sender, System.EventArgs e)
         {
-            using (var CreateForm = new ItemCreateForm(ItemType.Event))
+            using (var CreateForm = new Forms.ItemCreateForm(Interfaces.ItemType.Event))
             {
                 try
                 {
                     CreateForm.ItemCreated += AddToDashboardLayout;
                     CreateForm.ShowDialog();
                 }
-                catch (Exception ex)
+                catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
-        private void StatsButton_Click(object sender, EventArgs e)
+        private void StatsButton_Click(object sender, System.EventArgs e)
         {
             MessageBox.Show(ManagerService.GetStatistics(), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
-        private void FilterButton_Click(object sender, EventArgs e)
+        private void FilterButton_Click(object sender, System.EventArgs e)
         {
-            SieveDTO = SieveDTO ?? new ItemSieveDTO();
-            using (ItemSieveForm filterItemsForm = new ItemSieveForm(SieveDTO))
+            SieveDTO = SieveDTO ?? new Models.ItemSieveDTO();
+            using (Forms.ItemSieveForm filterItemsForm = new Forms.ItemSieveForm(SieveDTO))
             {
                 if(filterItemsForm.ShowDialog() == DialogResult.OK)
                 {
@@ -187,7 +181,7 @@ namespace Organizer_Project
                 }
             }
         }
-        private void ResetSieveButton_Click(object sender, EventArgs e)
+        private void ResetSieveButton_Click(object sender, System.EventArgs e)
         {
             ResetSieveButton.Enabled = false;
             if(SieveDTO != null)

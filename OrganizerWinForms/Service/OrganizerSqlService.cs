@@ -1,19 +1,14 @@
-﻿using Organizer_Project.Data;
-using Organizer_Project.Interfaces;
-using Organizer_Project.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Organizer_Project.Service
+namespace Organizer_Project.Services
 {
-    public class OrganizerSqlService : IManagerService<OrganizerItem>
+    public class OrganizerSqlService : Interfaces.IManagerService<Interfaces.OrganizerItem>
     {
-        private readonly OrganizerDbContext _context = new OrganizerDbContext();
+        private readonly Data.OrganizerDbContext _context = new Data.OrganizerDbContext();
         public BindingSource BindingSource { get; private set; }
-
         public OrganizerSqlService()
         {
             BindingSource = new BindingSource();
@@ -24,13 +19,13 @@ namespace Organizer_Project.Service
             // Fetch everything from DB and put into the BindingSource
             BindingSource.DataSource = _context.Items.ToList();
         }
-        public void AddItem(OrganizerItem item)
+        public void AddItem(Interfaces.OrganizerItem item)
         {
             _context.Items.Add(item);
             _context.SaveChanges(); // Writes to SQL
             RefreshBinding();
         }
-        public void UpdateItem(OrganizerItem item)
+        public void UpdateItem(Interfaces.OrganizerItem item)
         {
             var existing = _context.Items.Find(item.Id);
             if (existing != null)
@@ -40,7 +35,7 @@ namespace Organizer_Project.Service
                 RefreshBinding();
             }
         }
-        public void DeleteItem(OrganizerItem item)
+        public void DeleteItem(Interfaces.OrganizerItem item)
         {
             var existing = _context.Items.Find(item.Id);
             if (existing != null)
@@ -50,12 +45,11 @@ namespace Organizer_Project.Service
                 RefreshBinding();
             }
         }
-        public IEnumerable<OrganizerItem> GetItems() => _context.Items.AsNoTracking().ToList();
-        public void ApplySieve(ItemSieveDTO sieve)
+        public IEnumerable<Interfaces.OrganizerItem> GetItems() => _context.Items.AsNoTracking().ToList();
+        public void ApplySieve(Models.ItemSieveDTO sieve)
         {
-            IQueryable<OrganizerItem> query = _context.Items;
+            IQueryable<Interfaces.OrganizerItem> query = _context.Items;
             // --- 1. FILTERING (Sequential LINQ Where) ---
-
             // Filter by Text (Title/Notes)
             if (sieve.FilterByText.IsEnabled && sieve.FilterByText.Value != null)
             {
@@ -67,62 +61,61 @@ namespace Organizer_Project.Service
             // Filter by Type (Task vs Event)
             if (sieve.FilterByType.IsEnabled && sieve.FilterByType.Value != null)
             {
-                var type = (ItemType)sieve.FilterByType.Value;
+                var type = (Interfaces.ItemType)sieve.FilterByType.Value;
                 query = query.Where(i => i.Type == type);
             }
             // Filtex by Priority
             if (sieve.FilterByPriority.IsEnabled && sieve.FilterByPriority.Value != null)
             {
-                var priority = (Priority)sieve.FilterByPriority.Value;
+                var priority = (Interfaces.Priority)sieve.FilterByPriority.Value;
                 query = query.Where(i => i.Priority == priority);
             }
             // Filter by Task Status (Task-specific property)
             if (sieve.FilterByStatus.IsEnabled && sieve.FilterByStatus.Value != null)
             {
-                var status = (TaskStatus)sieve.FilterByStatus.Value;
+                var status = (Models.TaskStatus)sieve.FilterByStatus.Value;
                 // We check if it's a TaskItem before comparing status
-                query = query.Where(i => (i as TaskItem).Status == status);
+                query = query.Where(i => (i as Models.TaskItem).Status == status);
             }
             // Filter by Time
-            if (sieve.FilterByTime.IsEnabled && sieve.FilterByTime.Value is DateTime filterTime)
+            if (sieve.FilterByTime.IsEnabled && sieve.FilterByTime.Value is System.DateTime filterTime)
             {
                 var time = filterTime.Date;
                 query = query.Where(i => DbFunctions.TruncateTime(i.Time) == time);
             }
             // Filter by EndTime (Event-specific property)
-            if (sieve.FilterByEndTime.IsEnabled && sieve.FilterByEndTime.Value is DateTime filterEndTime)
+            if (sieve.FilterByEndTime.IsEnabled && sieve.FilterByEndTime.Value is System.DateTime filterEndTime)
             {
                 var endTime = filterEndTime.Date;
                 // We check if it's a EventItem before comparing status
-                query = query.Where(i => i is EventItem && DbFunctions.TruncateTime(((EventItem)i).EndTime) == endTime);
+                query = query.Where(i => i is Models.EventItem && DbFunctions.TruncateTime(((Models.EventItem)i).EndTime) == endTime);
             }
             // --- 2. SORTING (LINQ OrderBy) ---
             // Sort by Time
             if (sieve.SortByTime.IsEnabled && sieve.SortByTime.Value != null)
             {
-                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByTime.Value);
+                bool isAsc = System.Convert.ToBoolean((Models.ItemSortOrder)sieve.SortByTime.Value);
                 query = isAsc ? query.OrderBy(i => i.Time) : query.OrderByDescending(i => i.Time);
             }
             // Sort by EndTime (Event-specific property)
             else if (sieve.SortByEndTime.IsEnabled && sieve.SortByEndTime.Value != null)
             {
-                bool isAsc = Convert.ToBoolean((ItemSortOrder)sieve.SortByEndTime.Value);
+                bool isAsc = System.Convert.ToBoolean((Models.ItemSortOrder)sieve.SortByEndTime.Value);
                 // OrderBy needs a value, so we treat non-events as DateTime.MaxValue to push them to the end
                 query = isAsc
-                    ? query.OrderBy(i => (i as EventItem).EndTime ?? DateTime.MaxValue)
-                    : query.OrderByDescending(i => (i as EventItem).EndTime ?? DateTime.MinValue);
+                    ? query.OrderBy(i => (i as Models.EventItem).EndTime ?? System.DateTime.MaxValue)
+                    : query.OrderByDescending(i => (i as Models.EventItem).EndTime ?? System.DateTime.MinValue);
             }
             // --- 3. APPLY TO UI ---
             // Update the BindingSource to refresh the dashboard
             BindingSource.DataSource = query.ToList();
         }
         public void Reset() => RefreshBinding();
-
         public string GetStatistics()
         {
             // Use the context for stats to avoid loading everything into memory
-            int tasks = _context.Items.OfType<TaskItem>().Count();
-            int events = _context.Items.OfType<EventItem>().Count();
+            int tasks = _context.Items.OfType<Models.TaskItem>().Count();
+            int events = _context.Items.OfType<Models.EventItem>().Count();
             return $"Tasks: {tasks}\nEvents: {events}";
         }
     }
