@@ -18,8 +18,10 @@ namespace Organizer_Project.UserControls
             InitializeComponent();
             ItemSource = source;        // keep original public
             ItemPosition = position;
-            ItemSourceCopy = new BindingSource();
-            ItemSourceCopy.DataSource = new Models.TaskItem(source.DataSource as Models.TaskItem);     // creating a private copy
+            ItemSourceCopy = new BindingSource
+            {
+                DataSource = new Models.TaskItem(source.DataSource as Models.TaskItem)     // creating a private copy
+            };
             IsEditMode = editMode;
         }
         public Interfaces.OrganizerItem GetItem()
