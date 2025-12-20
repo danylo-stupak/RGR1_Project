@@ -10,10 +10,10 @@ namespace Organizer_Project
         [System.STAThread]
         static void Main()
         {
-            Services.OrganizerSqlService organizerManagerService = new Services.OrganizerSqlService();
+            Services.OrganizerSqlAsyncService organizerSqlAsyncService = new Services.OrganizerSqlAsyncService();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.ItemMainForm(organizerManagerService));
+            Application.Run(new Forms.ItemMainForm(organizerSqlAsyncService));
         }
     }
 }

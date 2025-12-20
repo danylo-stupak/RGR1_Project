@@ -4,12 +4,12 @@ namespace Organizer_Project.Forms
 {
     public partial class ItemMainForm : Form
     {
-        private readonly Interfaces.IManagerService<Interfaces.OrganizerItem> ManagerService;
+        private readonly Interfaces.IManagerAsyncService<Interfaces.OrganizerItem> ManagerAsyncService;
         private Models.ItemSieveDTO SieveDTO = null;
-        public ItemMainForm(Interfaces.IManagerService<Interfaces.OrganizerItem> managerService)
+        public ItemMainForm(Interfaces.IManagerAsyncService<Interfaces.OrganizerItem> managerService)
         {
             InitializeComponent();
-            ManagerService = managerService;
+            ManagerAsyncService = managerService;
         }
         private void ClearDashboardLayout()
         {
@@ -25,11 +25,11 @@ namespace Organizer_Project.Forms
         }
         private void RenderDashboardLayout()
         {
-            int bindCount = ManagerService.BindingSource.Count;
-            ManagerService.BindingSource.ResetBindings(false);
+            int bindCount = ManagerAsyncService.BindingSource.Count;
+            ManagerAsyncService.BindingSource.ResetBindings(false);
             for (int i = 0; i < bindCount; i++)
             {
-                var control = Factories.DemoControlFactory.CreateDemoControl(ManagerService.BindingSource, i);
+                var control = Factories.DemoControlFactory.CreateDemoControl(ManagerAsyncService.BindingSource, i);
                 control.ItemDetailsRequested += ItemDetailsForm_Create;
                 control.ItemEdited += UpdateDashboardLayout;
                 control.ItemDeleted += RemoveFromDashboardLayout;
@@ -69,127 +69,144 @@ namespace Organizer_Project.Forms
                 }
             }
         }
-        private void RemoveFromDashboardLayout(object sender, System.EventArgs e)
+        private async void RemoveFromDashboardLayout(object sender, System.EventArgs e)
         {
             if (sender is Interfaces.IOrganizerItemDemoControl itemControl)
             {
+                UseWaitCursor = true;
                 try
                 {
-                    ManagerService.DeleteItem(itemControl.GetItem());
+                    await ManagerAsyncService.DeleteItemAsync(itemControl.GetItem());
                     RerenderDashboardLayout();
                 }
                 catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "RemoveFromDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                finally
+                {
+                    UseWaitCursor = false;
+                }
             }
         }
-        private void UpdateDashboardLayout(object sender, System.EventArgs e)
+        private async void UpdateDashboardLayout(object sender, System.EventArgs e)
         {
             if (sender is Forms.ItemDetailsForm detailsForm)
             {
+                UseWaitCursor = true;
                 try
                 {
-                    ManagerService.UpdateItem(detailsForm.ItemControl.GetItem());
+                    await ManagerAsyncService.UpdateItemAsync(detailsForm.ItemControl.GetItem());
                     RerenderDashboardLayout();
                 }
                 catch (System.Exception ex)
                 {
                     MessageBox.Show(ex.Message, "UpdateDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
-                throw new System.ArgumentException("Error: Unable to update item in dashboard layout.");
-            }
-        }
-        private void AddToDashboardLayout(object sender, System.EventArgs e)
-        {
-            if (sender is Forms.ItemCreateForm createForm)
-            {
-                try
+                finally
                 {
-                    ManagerService.AddItem(createForm.ItemControl.GetItem());
-                    RerenderDashboardLayout();
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "AddToDashboardLayout Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UseWaitCursor = false;
                 }
             }
             else
             {
                 throw new System.ArgumentException("Error: Unable to update item in dashboard layout.");
-            }
-        }
-        private void FilterItemsForm_Applying(object sender, System.EventArgs e)
-        {
-            if (sender is Forms.ItemSieveForm filterForm)
-            {
-                ManagerService.ApplySieve(filterForm.SieveDTO);
-                MessageBox.Show("Success!", "Apply Result", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button2);
             }
         }
         private void OrganizerForm_Load(object sender, System.EventArgs e)
         {
             RerenderDashboardLayout();
         }
-        private void AddTaskButton_Click(object sender, System.EventArgs e)
+        private async void AddTaskButton_Click(object sender, System.EventArgs e)
         {
-            using (var CreateForm = new Forms.ItemCreateForm(Interfaces.ItemType.Task))
+            using (var createForm = new Forms.ItemCreateForm(Interfaces.ItemType.Task))
             {
-                try
+                if(createForm.ShowDialog() == DialogResult.OK)
                 {
-                    CreateForm.ItemCreated += AddToDashboardLayout;
-                    CreateForm.ShowDialog();
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "AddTaskButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UseWaitCursor = true;
+                    try
+                    {
+                        var item = createForm.ItemControl.GetItem();
+                        await ManagerAsyncService.AddItemAsync(item);
+                        RerenderDashboardLayout();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "AddTaskButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        UseWaitCursor = false;
+                    }
                 }
             }
         }
-        private void AddEventButton_Click(object sender, System.EventArgs e)
+        private async void AddEventButton_Click(object sender, System.EventArgs e)
         {
-            using (var CreateForm = new Forms.ItemCreateForm(Interfaces.ItemType.Event))
+            using (var createForm = new Forms.ItemCreateForm(Interfaces.ItemType.Event))
             {
-                try
+                if (createForm.ShowDialog() == DialogResult.OK)
                 {
-                    CreateForm.ItemCreated += AddToDashboardLayout;
-                    CreateForm.ShowDialog();
-                }
-                catch (System.Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UseWaitCursor = true;
+                    try
+                    {
+                        var item = createForm.ItemControl.GetItem();
+                        await ManagerAsyncService.AddItemAsync(item);
+                        RerenderDashboardLayout();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "AddEventButton_Click Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        UseWaitCursor = false;
+                    }
                 }
             }
         }
-        private void StatsButton_Click(object sender, System.EventArgs e)
+        private async void StatsButton_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(ManagerService.GetStatistics(), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            MessageBox.Show(await ManagerAsyncService.GetStatisticsAsync(), "Statistics", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
-        private void FilterButton_Click(object sender, System.EventArgs e)
+        private async void FilterButton_Click(object sender, System.EventArgs e)
         {
             SieveDTO = SieveDTO ?? new Models.ItemSieveDTO();
             using (Forms.ItemSieveForm filterItemsForm = new Forms.ItemSieveForm(SieveDTO))
             {
                 if(filterItemsForm.ShowDialog() == DialogResult.OK)
                 {
-                    ManagerService.ApplySieve(filterItemsForm.SieveDTO);
-                    ResetSieveButton.Enabled = true;
-                    RerenderDashboardLayout();
+                    UseWaitCursor = true;
+                    try
+                    {
+                        ResetSieveButton.Enabled = true;
+                        await ManagerAsyncService.ApplySieveAsync(filterItemsForm.SieveDTO);
+                        RerenderDashboardLayout();
+                    }
+                    finally
+                    {
+                        UseWaitCursor = false;
+                    }
                 }
             }
         }
-        private void ResetSieveButton_Click(object sender, System.EventArgs e)
+        private async void ResetSieveButton_Click(object sender, System.EventArgs e)
         {
             ResetSieveButton.Enabled = false;
             if(SieveDTO != null)
             {
                 SieveDTO = null;
             }
-            ManagerService.Reset();
-            RerenderDashboardLayout();
+            UseWaitCursor = true;
+            try
+            {
+                await ManagerAsyncService.ResetAsync();
+                RerenderDashboardLayout();
+            }
+            finally
+            {
+                UseWaitCursor = false;
+            }
         }
     }
 }
