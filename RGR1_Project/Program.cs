@@ -1,6 +1,6 @@
 ﻿using Organizer_Project.Interfaces;
 using Organizer_Project.Models;
-using Organizer_Project.Services;
+using Organizer_Project.Service;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
