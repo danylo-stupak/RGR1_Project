@@ -17,13 +17,20 @@ namespace Organizer_Project.Interfaces
     public abstract class OrganizerItem
     {
         public Guid Id { get; set; }
-        public ItemType Type { get; set; }
+        public ItemType? Type { get; set; }
         public Priority Priority { get; set; }
         public string Title { get; set; }
         public string Notes { get; set; }
         public DateTime Time { get; set; }
-
-
+        // Constructors
+        public OrganizerItem()
+        {
+            Type = null;
+            Priority = Priority.Low;
+            Title = null;
+            Notes = null;
+            Time = DateTime.MinValue.Date;
+        }
         public OrganizerItem(
             ItemType type,
             string title = null,
@@ -48,7 +55,6 @@ namespace Organizer_Project.Interfaces
             Time = item.Time;
             Notes = item.Notes;
         }
-
         public virtual void UpdateFrom(OrganizerItem item)
         {
             if (item == null || item.Id != Id)
@@ -60,7 +66,6 @@ namespace Organizer_Project.Interfaces
             Time = item.Time;
             Notes = item.Notes;
         }
-
         public override bool Equals(object obj)
         {
             if (obj is OrganizerItem other)
@@ -69,7 +74,6 @@ namespace Organizer_Project.Interfaces
             }
             return false;
         }
-
         public override int GetHashCode()
         {
             return base.GetHashCode();

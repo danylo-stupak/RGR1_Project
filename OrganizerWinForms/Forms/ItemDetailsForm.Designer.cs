@@ -30,12 +30,12 @@
         {
             this.MainTableLayout = new System.Windows.Forms.TableLayoutPanel();
             this.EditButtonsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.BackButton = new System.Windows.Forms.Button();
+            this.CancelBtn = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.MainButtonsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.EditButton = new System.Windows.Forms.Button();
+            this.BackButton = new System.Windows.Forms.Button();
             this.MainTableLayout.SuspendLayout();
             this.EditButtonsFlowLayout.SuspendLayout();
             this.MainButtonsFlowLayout.SuspendLayout();
@@ -64,7 +64,7 @@
             // 
             this.EditButtonsFlowLayout.AutoSize = true;
             this.EditButtonsFlowLayout.CausesValidation = false;
-            this.EditButtonsFlowLayout.Controls.Add(this.CancelButton);
+            this.EditButtonsFlowLayout.Controls.Add(this.CancelBtn);
             this.EditButtonsFlowLayout.Controls.Add(this.SaveButton);
             this.EditButtonsFlowLayout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditButtonsFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -74,36 +74,20 @@
             this.EditButtonsFlowLayout.TabIndex = 0;
             this.EditButtonsFlowLayout.WrapContents = false;
             // 
-            // CancelButton
+            // CancelBtn
             // 
-            this.CancelButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.CancelButton.AutoSize = true;
-            this.CancelButton.CausesValidation = false;
-            this.CancelButton.Location = new System.Drawing.Point(94, 3);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Padding = new System.Windows.Forms.Padding(2);
-            this.CancelButton.Size = new System.Drawing.Size(81, 35);
-            this.CancelButton.TabIndex = 0;
-            this.CancelButton.TabStop = false;
-            this.CancelButton.Text = "Cancel";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-            // 
-            // BackButton
-            // 
-            this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.BackButton.AutoSize = true;
-            this.BackButton.CausesValidation = false;
-            this.BackButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.BackButton.Location = new System.Drawing.Point(12, 6);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Padding = new System.Windows.Forms.Padding(2);
-            this.BackButton.Size = new System.Drawing.Size(62, 35);
-            this.BackButton.TabIndex = 2;
-            this.BackButton.TabStop = false;
-            this.BackButton.Text = "Back";
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            this.CancelBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CancelBtn.AutoSize = true;
+            this.CancelBtn.CausesValidation = false;
+            this.CancelBtn.Location = new System.Drawing.Point(94, 3);
+            this.CancelBtn.Name = "CancelBtn";
+            this.CancelBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.CancelBtn.Size = new System.Drawing.Size(81, 35);
+            this.CancelBtn.TabIndex = 0;
+            this.CancelBtn.TabStop = false;
+            this.CancelBtn.Text = "Cancel";
+            this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SaveButton
             // 
@@ -164,6 +148,22 @@
             this.EditButton.UseVisualStyleBackColor = true;
             this.EditButton.Click += new System.EventHandler(this.EditButton_Click);
             // 
+            // BackButton
+            // 
+            this.BackButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.BackButton.AutoSize = true;
+            this.BackButton.CausesValidation = false;
+            this.BackButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.BackButton.Location = new System.Drawing.Point(12, 6);
+            this.BackButton.Margin = new System.Windows.Forms.Padding(12, 3, 3, 3);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Padding = new System.Windows.Forms.Padding(2);
+            this.BackButton.Size = new System.Drawing.Size(62, 35);
+            this.BackButton.TabIndex = 2;
+            this.BackButton.TabStop = false;
+            this.BackButton.Text = "Back";
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
             // ItemDetailsForm
             // 
             this.AcceptButton = this.SaveButton;
@@ -201,7 +201,7 @@
         #endregion
         private System.Windows.Forms.TableLayoutPanel MainTableLayout;
         private System.Windows.Forms.FlowLayoutPanel EditButtonsFlowLayout;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelBtn;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.FlowLayoutPanel MainButtonsFlowLayout;
         private System.Windows.Forms.Button DeleteButton;
