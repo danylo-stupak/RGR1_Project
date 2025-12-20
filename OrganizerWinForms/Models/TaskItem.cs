@@ -17,6 +17,7 @@
         // Constructors
         public TaskItem() : base()
         {
+            Type = Interfaces.ItemType.Task;
             Status = TaskStatus.New;
             Group = null;
         }
