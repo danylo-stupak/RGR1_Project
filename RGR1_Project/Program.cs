@@ -15,13 +15,13 @@ namespace Organizer_Project
         [STAThread]
         static void Main()
         {
-            List<OrganizerItem> testItems = GenerateTestData(20);
+            //List<OrganizerItem> testItems = GenerateTestData(20);
+            //OrganizerManagerService organizerManagerService = new OrganizerManagerService(testItems);
+            var organizerSqlService = new OrganizerSqlService();
 
-
-            OrganizerManagerService organizerManagerService = new OrganizerManagerService(testItems);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ItemMainForm(organizerManagerService));
+            Application.Run(new ItemMainForm(organizerSqlService));
         }
         private static List<OrganizerItem> GenerateTestData(int count)
         {
