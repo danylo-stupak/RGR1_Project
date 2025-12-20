@@ -59,7 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EventItemGenerator.cs" />
+    <Compile Include="Data\OrganizerItemGenerator.cs" />
     <Compile Include="Data\OrganizerDbContext.cs" />
+    <Compile Include="Data\TaskItemGenerator.cs" />
     <Compile Include="Factories\ControlFactory.cs" />
     <Compile Include="Factories\DemoControlFactory.cs" />
     <Compile Include="Forms\ItemSieveForm.cs">
@@ -80,10 +83,16 @@
     <Compile Include="Forms\ItemDetailsForm.Designer.cs">
       <DependentUpon>ItemDetailsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IDataGenerator.cs" />
     <Compile Include="Interfaces\IOrganizerItemControl.cs" />
     <Compile Include="Interfaces\IManagerService.cs" />
     <Compile Include="Interfaces\IOrganizerItemDemoControl.cs" />
     <Compile Include="Interfaces\OrganizerItem.cs" />
+    <Compile Include="Migrations\202512201206403_InitialCreate.cs" />
+    <Compile Include="Migrations\202512201206403_InitialCreate.Designer.cs">
+      <DependentUpon>202512201206403_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EventItem.cs" />
     <Compile Include="Forms\ItemMainForm.cs">
       <SubType>Form</SubType>
@@ -140,6 +149,9 @@
     <EmbeddedResource Include="Forms\ItemMainForm.resx">
       <DependentUpon>ItemMainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512201206403_InitialCreate.resx">
+      <DependentUpon>202512201206403_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -178,6 +190,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OrganizerDatabase\OrganizerDatabase.sqlproj">
+      <Project>{9e217a98-8827-43b5-b168-efcd605db691}</Project>
+      <Name>OrganizerDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
