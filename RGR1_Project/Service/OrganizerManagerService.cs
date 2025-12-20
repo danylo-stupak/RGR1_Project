@@ -1,12 +1,9 @@
 ﻿using Organizer_Project.Interfaces;
 using Organizer_Project.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 
 namespace Organizer_Project.Services
@@ -117,21 +114,21 @@ namespace Organizer_Project.Services
             {
                 var status = (TaskStatus)sieve.FilterByStatus.Value;
                 // We check if it's a TaskItem before comparing status
-                query = query.Where(i => i is TaskItem task && task.Status == status);
+                query = query.Where(i => i is TaskItem taskItem && taskItem.Status == status);
             }
 
             // Filter by Time
-            if (sieve.FilterByTime.IsEnabled && sieve.FilterByTime.Value != null)
+            if (sieve.FilterByTime.IsEnabled && sieve.FilterByTime.Value is DateTime filterTime)
             {
-                var time = (DateTime)sieve.FilterByTime.Value;
-                query = query.Where(i => i.Time.ToLongDateString().ToLower().Equals(time.ToLongDateString().ToLower()));
+                var time = filterTime.Date;
+                query = query.Where(i => i.Time.Date == time);
             }
             // Filter by EndTime (Event-specific property)
-            if (sieve.FilterByEndTime.IsEnabled && sieve.FilterByEndTime.Value != null)
+            if (sieve.FilterByEndTime.IsEnabled && sieve.FilterByEndTime.Value is DateTime filterEndTime)
             {
-                var endTime = (DateTime)sieve.FilterByEndTime.Value;
+                var endTime = filterEndTime.Date;
                 // We check if it's a EventItem before comparing status
-                query = query.Where(i => i is EventItem eventItem && eventItem.EndTime.ToLongDateString().ToLower().Equals(endTime.ToLongDateString().ToLower()));
+                query = query.Where(i => i is EventItem eventItem && eventItem.EndTime?.Date == endTime);
             }
 
             // --- 2. SORTING (LINQ OrderBy) ---
