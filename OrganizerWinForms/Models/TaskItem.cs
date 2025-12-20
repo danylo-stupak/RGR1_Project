@@ -17,7 +17,12 @@ namespace Organizer_Project.Models
                         DateTime.Now > Time;
             }
         }
-
+        // Constructors
+        public TaskItem() : base()
+        {
+            Status = TaskStatus.New;
+            Group = null;
+        }
         public TaskItem(
             string title = null,
             Priority priority = Priority.Medium,
@@ -37,13 +42,11 @@ namespace Organizer_Project.Models
             Group = group;
             Notes = notes;
         }
-
         public TaskItem(TaskItem taskItem) : base(taskItem)
         {
             Status = taskItem.Status;
             Group = taskItem.Group;
         }
-
         public override void UpdateFrom(OrganizerItem item)
         {
             base.UpdateFrom(item);

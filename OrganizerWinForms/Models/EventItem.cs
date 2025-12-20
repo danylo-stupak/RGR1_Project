@@ -7,9 +7,13 @@ namespace Organizer_Project.Models
         // Additional properties for Event
         public DateTime? EndTime { get; set; }
         public bool IsAllDay { get; set; }
-
-        // Constructor
-
+        // Constructors
+        public EventItem() : base()
+        {
+            Type = ItemType.Event;
+            EndTime = DateTime.Now.Date;
+            IsAllDay = true;
+        }
         public EventItem(
             string title = null, 
             Priority priority = Priority.Medium, 
@@ -21,20 +25,18 @@ namespace Organizer_Project.Models
             ItemType.Event, 
             title, 
             priority,
-            endTime, 
+            startTime, 
             notes
         )
         {
             EndTime = endTime ?? DateTime.Today.AddHours(5);
             IsAllDay = isAllDay;
         }
-
         public EventItem(EventItem eventItem) : base(eventItem)
         {
             EndTime = eventItem.EndTime;
             IsAllDay = eventItem.IsAllDay;
         }
-
         public override void UpdateFrom(OrganizerItem item)
         {
             base.UpdateFrom(item);
@@ -45,5 +47,4 @@ namespace Organizer_Project.Models
             }
         }
     }
-
 }
