@@ -1,8 +1,4 @@
-﻿using Organizer_Project.Interfaces;
-using Organizer_Project.Models;
-using Organizer_Project.Service;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Organizer_Project
@@ -17,11 +13,11 @@ namespace Organizer_Project
         {
             //List<OrganizerItem> testItems = GenerateTestData(20);
             //OrganizerManagerService organizerManagerService = new OrganizerManagerService(testItems);
-            var organizerSqlService = new OrganizerSqlService();
+            var organizerSqlAsyncService = new Service.OrganizerSqlAsyncService();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ItemMainForm(organizerSqlService));
+            Application.Run(new Forms.ItemMainForm(organizerSqlAsyncService));
         }
     }
 }
