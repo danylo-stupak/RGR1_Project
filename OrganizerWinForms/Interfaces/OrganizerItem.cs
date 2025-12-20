@@ -24,6 +24,7 @@ namespace Organizer_Project.Interfaces
         // Constructors
         public OrganizerItem()
         {
+            Id = Guid.NewGuid();
             Type = null;
             Priority = Priority.Low;
             Title = null;
