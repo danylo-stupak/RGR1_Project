@@ -8,48 +8,48 @@ namespace Organizer_Project.Services
 {
     public class OrganizerSqlAsyncService : Interfaces.IManagerAsyncService<Interfaces.OrganizerItem>
     {
-        private readonly Data.OrganizerDbContext _context = new Data.OrganizerDbContext();
+        private readonly Data.OrganizerDbContext OrganizerContext = new Data.OrganizerDbContext();
         public BindingSource BindingSource { get; private set; }
         public OrganizerSqlAsyncService()
         {
             BindingSource = new BindingSource();
-            BindingSource.DataSource = _context.Items.ToList();
+            BindingSource.DataSource = OrganizerContext.Items.ToList();
         }
         private async Task RefreshBindingAsync()
         {
             // Fetch everything from DB and put into the BindingSource
-            BindingSource.DataSource = await _context.Items.ToListAsync();
+            BindingSource.DataSource = await OrganizerContext.Items.ToListAsync();
         }
         public async Task AddItemAsync(Interfaces.OrganizerItem item)
         {
-            _context.Items.Add(item);
-            await _context.SaveChangesAsync(); // Writes to SQL
+            OrganizerContext.Items.Add(item);
+            await OrganizerContext.SaveChangesAsync(); // Writes to SQL
             await RefreshBindingAsync();
         }
         public async Task UpdateItemAsync(Interfaces.OrganizerItem item)
         {
-            var existing = _context.Items.Find(item.Id);
+            var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
-                _context.Entry(existing).CurrentValues.SetValues(item);
-                await _context.SaveChangesAsync();
+                OrganizerContext.Entry(existing).CurrentValues.SetValues(item);
+                await OrganizerContext.SaveChangesAsync();
                 await RefreshBindingAsync();
             }
         }
         public async Task DeleteItemAsync(Interfaces.OrganizerItem item)
         {
-            var existing = _context.Items.Find(item.Id);
+            var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
-                _context.Items.Remove(existing);
-                await _context.SaveChangesAsync();
+                OrganizerContext.Items.Remove(existing);
+                await OrganizerContext.SaveChangesAsync();
                 await RefreshBindingAsync();
             }
         }
-        public async Task<IEnumerable<Interfaces.OrganizerItem>> GetItemsAsync() => await _context.Items.AsNoTracking().ToListAsync();
+        public async Task<IEnumerable<Interfaces.OrganizerItem>> GetItemsAsync() => await OrganizerContext.Items.AsNoTracking().ToListAsync();
         public async Task ApplySieveAsync(Models.ItemSieveDTO sieve)
         {
-            IQueryable<Interfaces.OrganizerItem> query = _context.Items;
+            IQueryable<Interfaces.OrganizerItem> query = OrganizerContext.Items;
             // --- 1. FILTERING (Sequential LINQ Where) ---
             // Filter by Text (Title/Notes)
             if (sieve.FilterByText.IsEnabled && sieve.FilterByText.Value != null)
@@ -112,11 +112,18 @@ namespace Organizer_Project.Services
             BindingSource.DataSource = await query.ToListAsync();
         }
         public async Task ResetAsync() => await RefreshBindingAsync();
+        public async void ClearAsync()
+        {
+            // Efficiently truncates the table
+            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");
+            await OrganizerContext.SaveChangesAsync();
+            await RefreshBindingAsync();
+        }
         public async Task<string> GetStatisticsAsync()
         {
             // Use the context for stats to avoid loading everything into memory
-            int tasks = await _context.Items.OfType<Models.TaskItem>().CountAsync();
-            int events = await _context.Items.OfType<Models.EventItem>().CountAsync();
+            int tasks = await OrganizerContext.Items.OfType<Models.TaskItem>().CountAsync();
+            int events = await OrganizerContext.Items.OfType<Models.EventItem>().CountAsync();
             return $"Tasks: {tasks}\nEvents: {events}";
         }
     }

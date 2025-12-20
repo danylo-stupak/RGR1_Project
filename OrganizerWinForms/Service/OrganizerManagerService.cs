@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Organizer_Project.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -144,9 +145,11 @@ namespace Organizer_Project.Services
             BindingSource.DataSource = Items;
         }
         // Reset to the sorted/filtered list
-        public void Reset(IEnumerable<Interfaces.OrganizerItem> items)
+        public void Reset(IEnumerable<Interfaces.OrganizerItem> items) => BindingSource.DataSource = items;
+        public void Clear()
         {
-            BindingSource.DataSource = items;
+            Items.Clear();
+            BindingSource.DataSource = null;
         }
         // Extra LINQ: Get Statistics
         public string GetStatistics()

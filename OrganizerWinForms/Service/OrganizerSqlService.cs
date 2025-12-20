@@ -7,7 +7,7 @@ namespace Organizer_Project.Services
 {
     public class OrganizerSqlService : Interfaces.IManagerService<Interfaces.OrganizerItem>
     {
-        private readonly Data.OrganizerDbContext _context = new Data.OrganizerDbContext();
+        private readonly Data.OrganizerDbContext OrganizerContext = new Data.OrganizerDbContext();
         public BindingSource BindingSource { get; private set; }
         public OrganizerSqlService()
         {
@@ -17,38 +17,38 @@ namespace Organizer_Project.Services
         private void RefreshBinding()
         {
             // Fetch everything from DB and put into the BindingSource
-            BindingSource.DataSource = _context.Items.ToList();
+            BindingSource.DataSource = OrganizerContext.Items.ToList();
         }
         public void AddItem(Interfaces.OrganizerItem item)
         {
-            _context.Items.Add(item);
-            _context.SaveChanges(); // Writes to SQL
+            OrganizerContext.Items.Add(item);
+            OrganizerContext.SaveChanges(); // Writes to SQL
             RefreshBinding();
         }
         public void UpdateItem(Interfaces.OrganizerItem item)
         {
-            var existing = _context.Items.Find(item.Id);
+            var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
-                _context.Entry(existing).CurrentValues.SetValues(item);
-                _context.SaveChanges();
+                OrganizerContext.Entry(existing).CurrentValues.SetValues(item);
+                OrganizerContext.SaveChanges();
                 RefreshBinding();
             }
         }
         public void DeleteItem(Interfaces.OrganizerItem item)
         {
-            var existing = _context.Items.Find(item.Id);
+            var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
-                _context.Items.Remove(existing);
-                _context.SaveChanges();
+                OrganizerContext.Items.Remove(existing);
+                OrganizerContext.SaveChanges();
                 RefreshBinding();
             }
         }
-        public IEnumerable<Interfaces.OrganizerItem> GetItems() => _context.Items.AsNoTracking().ToList();
+        public IEnumerable<Interfaces.OrganizerItem> GetItems() => OrganizerContext.Items.AsNoTracking().ToList();
         public void ApplySieve(Models.ItemSieveDTO sieve)
         {
-            IQueryable<Interfaces.OrganizerItem> query = _context.Items;
+            IQueryable<Interfaces.OrganizerItem> query = OrganizerContext.Items;
             // --- 1. FILTERING (Sequential LINQ Where) ---
             // Filter by Text (Title/Notes)
             if (sieve.FilterByText.IsEnabled && sieve.FilterByText.Value != null)
@@ -111,11 +111,18 @@ namespace Organizer_Project.Services
             BindingSource.DataSource = query.ToList();
         }
         public void Reset() => RefreshBinding();
+        public void Clear()
+        {
+            // Efficiently truncates the table
+            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");
+            OrganizerContext.SaveChanges();
+            RefreshBinding();
+        }
         public string GetStatistics()
         {
             // Use the context for stats to avoid loading everything into memory
-            int tasks = _context.Items.OfType<Models.TaskItem>().Count();
-            int events = _context.Items.OfType<Models.EventItem>().Count();
+            int tasks = OrganizerContext.Items.OfType<Models.TaskItem>().Count();
+            int events = OrganizerContext.Items.OfType<Models.EventItem>().Count();
             return $"Tasks: {tasks}\nEvents: {events}";
         }
     }
