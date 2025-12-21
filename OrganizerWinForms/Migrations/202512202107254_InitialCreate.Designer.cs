@@ -13,7 +13,7 @@ namespace Organizer_Project.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202512201206403_InitialCreate"; }
+            get { return "202512202107254_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
