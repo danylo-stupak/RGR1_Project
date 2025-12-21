@@ -23,8 +23,18 @@ namespace Organizer_Project.Services
         public async Task AddItemAsync(Interfaces.OrganizerItem item)
         {
             OrganizerContext.Items.Add(item);
-            await OrganizerContext.SaveChangesAsync(); // Writes to SQL
-            await RefreshBindingAsync();
+            try
+            {
+                await OrganizerContext.SaveChangesAsync(); // Writes to SQL
+                await RefreshBindingAsync();
+            }
+            catch (System.Exception)
+            {
+                // IMPORTANT: Remove the failed item from memory, 
+                // otherwise the next save will try to insert it again and fail.
+                OrganizerContext.Entry(item).State = EntityState.Detached;
+                throw; // Re-throw to let the UI handle the error message
+            }
         }
         public async Task UpdateItemAsync(Interfaces.OrganizerItem item)
         {
@@ -115,7 +125,7 @@ namespace Organizer_Project.Services
         public async Task ClearAsync()
         {
             // Efficiently truncates the table
-            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerDatabase]");
+            OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");
             await OrganizerContext.SaveChangesAsync();
             await RefreshBindingAsync();
         }
