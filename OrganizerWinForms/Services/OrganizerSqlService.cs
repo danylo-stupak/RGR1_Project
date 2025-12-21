@@ -7,7 +7,7 @@ namespace Organizer_Project.Services
 {
     public class OrganizerSqlService : Interfaces.IManagerService<Interfaces.OrganizerItem>
     {
-        private readonly Data.OrganizerDbContext OrganizerContext = new Data.OrganizerDbContext();
+        private readonly Datas.OrganizerDbContext OrganizerContext = new Datas.OrganizerDbContext();
         public BindingSource BindingSource { get; private set; }
         public OrganizerSqlService()
         {

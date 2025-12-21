@@ -59,10 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\EventItemGenerator.cs" />
-    <Compile Include="Data\OrganizerItemGenerator.cs" />
-    <Compile Include="Data\OrganizerDbContext.cs" />
-    <Compile Include="Data\TaskItemGenerator.cs" />
+    <Compile Include="Datas\EventItemDataGenerator.cs" />
+    <Compile Include="Datas\OrganizerItemDataGenerator.cs" />
+    <Compile Include="Datas\OrganizerDbContext.cs" />
+    <Compile Include="Datas\TaskItemDataGenerator.cs" />
     <Compile Include="Factories\ControlFactory.cs" />
     <Compile Include="Factories\DemoControlFactory.cs" />
     <Compile Include="Forms\ItemSieveForm.cs">
@@ -103,12 +103,12 @@
     </Compile>
     <Compile Include="Models\ItemSieveDTO.cs" />
     <Compile Include="Models\ItemPropertyDTO.cs" />
-    <Compile Include="Service\OrganizerManagerService.cs" />
+    <Compile Include="Services\OrganizerManagerService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\TaskItem.cs" />
-    <Compile Include="Service\OrganizerSqlAsyncService.cs" />
-    <Compile Include="Service\OrganizerSqlService.cs" />
+    <Compile Include="Services\OrganizerSqlAsyncService.cs" />
+    <Compile Include="Services\OrganizerSqlService.cs" />
     <Compile Include="User Controls\EventItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -1,5 +1,4 @@
-﻿using Organizer_Project.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Organizer_Project.Interfaces
@@ -14,7 +13,7 @@ namespace Organizer_Project.Interfaces
         IEnumerable<T> GetItems();
 
         // LINQ operations
-        void ApplySieve(ItemSieveDTO sieve);
+        void ApplySieve(Models.ItemSieveDTO sieve);
         void Reset();
         void Clear();
         string GetStatistics();

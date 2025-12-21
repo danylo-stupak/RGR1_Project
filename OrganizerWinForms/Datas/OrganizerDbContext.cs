@@ -1,7 +1,6 @@
-﻿using Organizer_Project.Interfaces;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 
-namespace Organizer_Project.Data
+namespace Organizer_Project.Datas
 {
     public class OrganizerDbContext : DbContext
     {
@@ -12,13 +11,13 @@ namespace Organizer_Project.Data
             Database.SetInitializer(new CreateDatabaseIfNotExists<OrganizerDbContext>());
         }
 
-        public DbSet<OrganizerItem> Items { get; set; }
+        public DbSet<Interfaces.OrganizerItem> Items { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Table-per-Hierarchy (TPH) Mapping
             // This tells EF to put both Tasks and Events in one table
-            modelBuilder.Entity<OrganizerItem>()
+            modelBuilder.Entity<Interfaces.OrganizerItem>()
                 .ToTable("OrganizerItems")
                 .HasKey(i => i.Id);
 
