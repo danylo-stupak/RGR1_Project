@@ -9,7 +9,7 @@
         public EventItem() : base()
         {
             Type = Interfaces.ItemType.Event;
-            EndTime = System.DateTime.Now.Date;
+            EndTime = Time.AddHours(1);
             IsAllDay = true;
         }
         public EventItem(

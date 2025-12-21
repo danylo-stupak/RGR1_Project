@@ -53,7 +53,7 @@ namespace Organizer_Project.UserControls
         }
         private void ConfigureDateTimePickers()
         {
-            string format = AllDayCheckBox_Edit.Checked ? "ddd, dd/MM" : "ddd, dd/MM/yy - HH:mm";
+            string format = AllDayCheckBox_Edit.Checked ? "ddd, dd/MMM/yy" : "ddd, dd/MMM/yy - HH:mm";
             MainTimePicker.CustomFormat = format;
             EndTimePicker.CustomFormat = format;
         }
