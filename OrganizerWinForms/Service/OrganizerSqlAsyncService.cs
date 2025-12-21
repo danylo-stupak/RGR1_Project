@@ -1,52 +1,63 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Organizer_Project.Services
 {
-    public class OrganizerSqlService : Interfaces.IManagerService<Interfaces.OrganizerItem>
+    public class OrganizerSqlAsyncService : Interfaces.IManagerAsyncService<Interfaces.OrganizerItem>
     {
         private readonly Data.OrganizerDbContext OrganizerContext = new Data.OrganizerDbContext();
         public BindingSource BindingSource { get; private set; }
-        public OrganizerSqlService()
+        public OrganizerSqlAsyncService()
         {
             BindingSource = new BindingSource();
-            RefreshBinding();
-        }
-        private void RefreshBinding()
-        {
-            // Fetch everything from DB and put into the BindingSource
             BindingSource.DataSource = OrganizerContext.Items.ToList();
         }
-        public void AddItem(Interfaces.OrganizerItem item)
+        private async Task RefreshBindingAsync()
+        {
+            // Fetch everything from DB and put into the BindingSource
+            BindingSource.DataSource = await OrganizerContext.Items.ToListAsync();
+        }
+        public async Task AddItemAsync(Interfaces.OrganizerItem item)
         {
             OrganizerContext.Items.Add(item);
-            OrganizerContext.SaveChanges(); // Writes to SQL
-            RefreshBinding();
+            try
+            {
+                await OrganizerContext.SaveChangesAsync(); // Writes to SQL
+                await RefreshBindingAsync();
+            }
+            catch (System.Exception)
+            {
+                // IMPORTANT: Remove the failed item from memory, 
+                // otherwise the next save will try to insert it again and fail.
+                OrganizerContext.Entry(item).State = EntityState.Detached;
+                throw; // Re-throw to let the UI handle the error message
+            }
         }
-        public void UpdateItem(Interfaces.OrganizerItem item)
+        public async Task UpdateItemAsync(Interfaces.OrganizerItem item)
         {
             var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
                 OrganizerContext.Entry(existing).CurrentValues.SetValues(item);
-                OrganizerContext.SaveChanges();
-                RefreshBinding();
+                await OrganizerContext.SaveChangesAsync();
+                await RefreshBindingAsync();
             }
         }
-        public void DeleteItem(Interfaces.OrganizerItem item)
+        public async Task DeleteItemAsync(Interfaces.OrganizerItem item)
         {
             var existing = OrganizerContext.Items.Find(item.Id);
             if (existing != null)
             {
                 OrganizerContext.Items.Remove(existing);
-                OrganizerContext.SaveChanges();
-                RefreshBinding();
+                await OrganizerContext.SaveChangesAsync();
+                await RefreshBindingAsync();
             }
         }
-        public IEnumerable<Interfaces.OrganizerItem> GetItems() => OrganizerContext.Items.AsNoTracking().ToList();
-        public void ApplySieve(Models.ItemSieveDTO sieve)
+        public async Task<IEnumerable<Interfaces.OrganizerItem>> GetItemsAsync() => await OrganizerContext.Items.AsNoTracking().ToListAsync();
+        public async Task ApplySieveAsync(Models.ItemSieveDTO sieve)
         {
             IQueryable<Interfaces.OrganizerItem> query = OrganizerContext.Items;
             // --- 1. FILTERING (Sequential LINQ Where) ---
@@ -108,21 +119,21 @@ namespace Organizer_Project.Services
             }
             // --- 3. APPLY TO UI ---
             // Update the BindingSource to refresh the dashboard
-            BindingSource.DataSource = query.ToList();
+            BindingSource.DataSource = await query.ToListAsync();
         }
-        public void Reset() => RefreshBinding();
-        public void Clear()
+        public async Task ResetAsync() => await RefreshBindingAsync();
+        public async Task ClearAsync()
         {
             // Efficiently truncates the table
             OrganizerContext.Database.ExecuteSqlCommand("DELETE FROM [OrganizerItems]");
-            OrganizerContext.SaveChanges();
-            RefreshBinding();
+            await OrganizerContext.SaveChangesAsync();
+            await RefreshBindingAsync();
         }
-        public string GetStatistics()
+        public async Task<string> GetStatisticsAsync()
         {
             // Use the context for stats to avoid loading everything into memory
-            int tasks = OrganizerContext.Items.OfType<Models.TaskItem>().Count();
-            int events = OrganizerContext.Items.OfType<Models.EventItem>().Count();
+            int tasks = await OrganizerContext.Items.OfType<Models.TaskItem>().CountAsync();
+            int events = await OrganizerContext.Items.OfType<Models.EventItem>().CountAsync();
             return $"Tasks: {tasks}\nEvents: {events}";
         }
     }

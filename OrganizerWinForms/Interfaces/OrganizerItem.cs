@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Organizer_Project.Interfaces
+﻿namespace Organizer_Project.Interfaces
 {
     public enum ItemType
     {
@@ -16,34 +13,35 @@ namespace Organizer_Project.Interfaces
     }
     public abstract class OrganizerItem
     {
-        public Guid Id { get; set; }
+        public System.Guid Id { get; set; }
         public ItemType? Type { get; set; }
         public Priority Priority { get; set; }
         public string Title { get; set; }
         public string Notes { get; set; }
-        public DateTime Time { get; set; }
+        public System.DateTime Time { get; set; }
         // Constructors
         public OrganizerItem()
         {
+            Id = System.Guid.NewGuid();
             Type = null;
             Priority = Priority.Low;
             Title = null;
             Notes = null;
-            Time = DateTime.MinValue.Date;
+            Time = System.DateTime.Today;
         }
         public OrganizerItem(
             ItemType type,
             string title = null,
             Priority priority = Priority.Medium,
-            DateTime? time = null,
+            System.DateTime? time = null,
             string notes = null
         )
         {
-            Id = Guid.NewGuid();
+            Id = System.Guid.NewGuid();
             Type = type;
-            Title = title ?? "New " + Enum.GetName(typeof(ItemType), type);
+            Title = title ?? "New " + System.Enum.GetName(typeof(ItemType), type);
             Priority = priority;
-            Time = time ?? DateTime.Today.AddHours(1);
+            Time = time ?? System.DateTime.Today;
             Notes = notes;
         }
         public OrganizerItem(OrganizerItem item)
@@ -59,7 +57,7 @@ namespace Organizer_Project.Interfaces
         {
             if (item == null || item.Id != Id)
             {
-                throw new ArgumentException("Invalid item to update from.");
+                throw new System.ArgumentException("Invalid item to update from.");
             }
             Title = item.Title;
             Priority = item.Priority;

@@ -16,6 +16,7 @@ namespace Organizer_Project.Interfaces
         // LINQ operations
         void ApplySieve(ItemSieveDTO sieve);
         void Reset();
+        void Clear();
         string GetStatistics();
     }
 }

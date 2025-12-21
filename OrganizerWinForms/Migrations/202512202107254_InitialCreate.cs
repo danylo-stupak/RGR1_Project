@@ -7,12 +7,10 @@
     {
         public override void Up()
         {
-            AlterColumn("dbo.OrganizerItems", "Type", c => c.Int());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.OrganizerItems", "Type", c => c.Int(nullable: false));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Organizer_Project.User_Controls
+﻿namespace Organizer_Project.UserControls
 {
     partial class TaskItemControl
     {
@@ -164,7 +164,7 @@
             // 
             // MainTimePicker
             // 
-            this.MainTimePicker.CustomFormat = "ddd, dd MMM";
+            this.MainTimePicker.CustomFormat = "ddd, dd MMM yyyy";
             this.MainTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.MainTimePicker.Location = new System.Drawing.Point(89, 91);

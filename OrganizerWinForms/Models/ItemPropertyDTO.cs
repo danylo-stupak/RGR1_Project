@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Organizer_Project.Models
+﻿namespace Organizer_Project.Models
 {
     public enum PropertyControlType
     {
@@ -10,11 +8,11 @@ namespace Organizer_Project.Models
     }
     public class ItemPropertyDTO
     {
-        public User_Controls.ItemPropertyControl control { private get; set; }
+        public UserControls.ItemPropertyControl control { private get; set; }
         public bool IsEnabled { get; set; }
         public PropertyControlType Type { get; set; }
         public object Value { get; set; }
-        public event EventHandler GetData;
+        public event System.EventHandler GetData;
         public ItemPropertyDTO(PropertyControlType type, bool isEnabled = false)
         {
             Value = null;
@@ -33,14 +31,7 @@ namespace Organizer_Project.Models
                 return false;
             }
         }
-        public void GetItem()
-        {
-            GetData?.DynamicInvoke(control, EventArgs.Empty);
-        }
-
-        public override int GetHashCode()
-        {
-            return 2049151605 + Type.GetHashCode();
-        }
+        public void GetItem() => GetData?.DynamicInvoke(control, System.EventArgs.Empty);
+        public override int GetHashCode() => 2049151605 + Type.GetHashCode();
     }
 }

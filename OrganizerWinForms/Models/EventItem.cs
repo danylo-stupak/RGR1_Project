@@ -1,35 +1,33 @@
-﻿using System;
-using Organizer_Project.Interfaces;
-namespace Organizer_Project.Models
+﻿namespace Organizer_Project.Models
 {
-    public class EventItem : OrganizerItem
+    public class EventItem : Interfaces.OrganizerItem
     {
         // Additional properties for Event
-        public DateTime? EndTime { get; set; }
+        public System.DateTime? EndTime { get; set; }
         public bool IsAllDay { get; set; }
         // Constructors
         public EventItem() : base()
         {
-            Type = ItemType.Event;
-            EndTime = DateTime.Now.Date;
+            Type = Interfaces.ItemType.Event;
+            EndTime = Time.AddHours(1);
             IsAllDay = true;
         }
         public EventItem(
             string title = null, 
-            Priority priority = Priority.Medium, 
-            DateTime? startTime = null, 
-            DateTime? endTime = null,
+            Interfaces.Priority priority = Interfaces.Priority.Medium, 
+            System.DateTime? startTime = null, 
+            System.DateTime? endTime = null,
             string notes = null,
             bool isAllDay = false
         ) : base(
-            ItemType.Event, 
+            Interfaces.ItemType.Event, 
             title, 
             priority,
             startTime, 
             notes
         )
         {
-            EndTime = endTime ?? DateTime.Today.AddHours(5);
+            EndTime = endTime ?? System.DateTime.Today.AddHours(5);
             IsAllDay = isAllDay;
         }
         public EventItem(EventItem eventItem) : base(eventItem)
@@ -37,7 +35,7 @@ namespace Organizer_Project.Models
             EndTime = eventItem.EndTime;
             IsAllDay = eventItem.IsAllDay;
         }
-        public override void UpdateFrom(OrganizerItem item)
+        public override void UpdateFrom(Interfaces.OrganizerItem item)
         {
             base.UpdateFrom(item);
             if (item is EventItem eventItem)

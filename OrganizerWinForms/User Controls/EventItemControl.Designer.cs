@@ -1,4 +1,4 @@
-﻿namespace Organizer_Project.User_Controls
+﻿namespace Organizer_Project.UserControls
 {
     partial class EventItemControl
     {
@@ -158,7 +158,7 @@
             // 
             // MainTimePicker
             // 
-            this.MainTimePicker.CustomFormat = "ddd, dd MMM";
+            this.MainTimePicker.CustomFormat = "ddd, dd/MMM/yy";
             this.MainTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.MainTimePicker.Location = new System.Drawing.Point(85, 90);
@@ -197,7 +197,7 @@
             // 
             // EndTimePicker
             // 
-            this.EndTimePicker.CustomFormat = "ddd, dd MMM";
+            this.EndTimePicker.CustomFormat = "ddd, dd/MMM/yy";
             this.EndTimePicker.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.EndTimePicker.Location = new System.Drawing.Point(85, 131);
