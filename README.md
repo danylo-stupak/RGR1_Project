@@ -56,3 +56,114 @@ Press `F5` to Run in Debug Mode. Or click green 'play' button in Visual Studio.
 - **Constructors:** All items are automatically assigned a new `Guid` and default `DateTime.Today` upon creation to prevent SQL MinDate crashes.  
 - **Async Logic:** When calling service methods, always `await` them in `async void` event handlers to ensure the `RerenderDashboardLayout()` call waits for the database to finish.  
 - **Cleanup:** If you want to start with a fresh database, use the `ClearAsync()` method in the service or manually delete the `.mdf` file in your build directory.  
+
+## UML Diagram
+```mermaid
+classDiagram
+    %% --- Data Models Layer ---
+    namespace Interfaces {
+        class OrganizerItem {
+            <<abstract>>
+            +Guid Id
+            +string Title
+            +string Notes
+            +Priority Priority
+            +DateTime Time
+            +ItemType? Type
+        }
+        class Priority { <<enumeration>> }
+        class ItemType { <<enumeration>> }
+    }
+
+    namespace Models {
+        class TaskItem {
+            +TaskStatus Status
+            +string Group
+        }
+        class EventItem {
+            +DateTime EndTime
+            +bool IsAllDay
+        }
+        class TaskStatus { <<enumeration>> }
+    }
+
+    OrganizerItem <|-- TaskItem : Inherits
+    OrganizerItem <|-- EventItem : Inherits
+    OrganizerItem --> Priority
+    OrganizerItem --> ItemType
+    TaskItem --> TaskStatus
+
+    %% --- Data Access Layer ---
+    namespace Data {
+        class OrganizerDbContext {
+            +DbSet<OrganizerItem> Items
+            +Task<int> SaveChangesAsync()
+        }
+    }
+    OrganizerDbContext "1" --> "*" OrganizerItem : Manages
+
+    %% --- Service Layer ---
+    namespace Service {
+        class IManagerService {
+            <<interface>>
+            +BindingSource BindingSource
+            +Task AddItemAsync(OrganizerItem item)
+            +Task UpdateItemAsync(OrganizerItem item)
+            +Task DeleteItemAsync(OrganizerItem item)
+            +Task ApplySieveAsync(ItemSieveDTO sieve)
+            +Task ClearAsync()
+        }
+
+        class OrganizerSqlAsyncService {
+            -OrganizerDbContext _context
+            +BindingSource BindingSource
+            +Task AddItemAsync(...)
+            +Task UpdateItemAsync(...)
+            +Task DeleteItemAsync(...)
+        }
+        class ItemSieveDTO {
+            +string SearchText
+            +ItemType? Type
+            +DateTime? MinDate
+        }
+    }
+
+    IManagerService <|.. OrganizerSqlAsyncService : Implements
+    OrganizerSqlAsyncService --> OrganizerDbContext : Uses
+    IManagerService ..> ItemSieveDTO : Uses dependency
+    OrganizerSqlAsyncService ..> OrganizerItem : Manipulates
+
+    %% --- Presentation Layer (Forms & Controls) ---
+    namespace Forms {
+        class ItemMainForm {
+            -IManagerService _service
+            -void RerenderDashboardLayout()
+            -async btnRefresh_Click()
+        }
+        class ItemCreateForm {
+        }
+        class ItemDetailsForm {
+        }
+        class ItemSieveForm {
+        }
+    }
+    namespace UserControls {
+        class ItemControl {
+            +OrganizerItem GetItem()
+            +void SetItem(OrganizerItem item)
+        }
+        class ItemCard {
+        }
+    }
+
+    ItemMainForm --> IManagerService : Injects/Uses
+    ItemMainForm ..> ItemCreateForm : Creates
+    ItemMainForm ..> ItemDetailsForm : Creates
+    ItemMainForm ..> ItemSieveForm : Creates
+    ItemMainForm --> "*" ItemCard : Displays many
+    
+    ItemCreateForm *-- ItemControl : Contains
+    ItemDetailsForm *-- ItemControl : Contains
+    ItemControl ..> OrganizerItem : Depends on structure
+  
+```
