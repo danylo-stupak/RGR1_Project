@@ -4,7 +4,7 @@
     public class TaskItem : Interfaces.OrganizerItem
     {
         // Additional properties for Task
-        public TaskStatus? Status { get; set; } = TaskStatus.New;
+        public TaskStatus Status { get; set; } = TaskStatus.New;
         public string Group { get; set; }
         public bool IsOverdue 
         {
