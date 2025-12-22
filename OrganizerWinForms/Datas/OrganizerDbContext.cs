@@ -7,6 +7,7 @@ namespace Organizer_Project.Datas
         // "OrganizerDb" matches the name in your App.config
         public OrganizerDbContext() : base("name=OrganizerDb")
         {
+            System.AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
             // Ensures the database is created if it doesn't exist
             Database.SetInitializer(new CreateDatabaseIfNotExists<OrganizerDbContext>());
         }
