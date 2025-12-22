@@ -4,13 +4,12 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Datas.OrganizerDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Organizer_Project.Datas.OrganizerDbContext>
     {
-        private readonly int SEED_SAMPLE_SIZE = 5;
+        private readonly int SEED_SAMPLE_SIZE = 20;
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "Organizer_Project.Data.OrganizerDbContext";
+            AutomaticMigrationsEnabled = true;
         }
         protected override void Seed(Datas.OrganizerDbContext context)
         {
